@@ -3,16 +3,14 @@ const webpack = require('webpack');
 const HTMLWebpackPlugin = require('html-webpack-plugin')
 const {CleanWebpackPlugin} = require('clean-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-
+const CopyWebpackPlugin = require('copy-webpack-plugin')
 const isDev = process.env.NODE_ENV === 'development'
 const isProd = !isDev
-
 const filename = (ext) => isDev ? `[name].${ext}` : `[name].[contenthash].${ext}`
-
 const pluginConfig = {
   context: path.resolve(__dirname, 'src'),
   mode: 'development',
-  entry: './js/RangeSlider/RangeSlider.js',
+  entry: './js/RangeSlider.js',
   output: {
     filename: `plugin/js/range-slider.js`,
     path: path.resolve(__dirname, 'dist'),
@@ -21,7 +19,6 @@ const pluginConfig = {
     new CleanWebpackPlugin()
   ],
 }
-
 const demoConfig = {
   context: path.resolve(__dirname, 'src'),
   mode: 'production',
@@ -29,6 +26,14 @@ const demoConfig = {
   output: {
     filename: `${filename('js')}`,
     path: path.resolve(__dirname, 'dist'),
+  },
+  devServer: {
+    historyApiFallback: true,
+    contentBase: path.resolve(__dirname, 'dist'),
+    open: true,
+    compress: true,
+    hot: true,
+    port: 3000
   },
   plugins: [
     new webpack.ProvidePlugin({
@@ -42,8 +47,17 @@ const demoConfig = {
     }),
     new MiniCssExtractPlugin({
       filename: `plugin/css/[name].css`
-    })
+    }),
+    new CopyWebpackPlugin({
+      patterns : [
+        {
+          from: path.resolve(__dirname, 'src/assets'),
+          to: path.resolve(__dirname, 'dist')
+        }
+      ]
+    }),
   ],
+  devtool: isProd ? false : 'source-map',
   module: {
     rules: [
       {
@@ -52,7 +66,15 @@ const demoConfig = {
       },
       {
         test: /\.css$/i,
-        use: [MiniCssExtractPlugin.loader, 'css-loader'],
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+              hmr: isDev
+            },
+          },
+          'css-loader'
+        ],
       },
       {
         test: /\.s[ac]ss$/,
@@ -61,5 +83,4 @@ const demoConfig = {
     ]
   }
 }
-
 module.exports = [demoConfig, pluginConfig]

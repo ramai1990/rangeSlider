@@ -5,24 +5,34 @@
   "main": "index.js",
   "scripts": {
     "build": "cross-env NODE_ENV=production webpack --mode production",
-    "dev": "cross-env NODE_ENV=development webpack --mode development"
+    "dev": "cross-env NODE_ENV=development webpack --mode development",
+    "start": "cross-env NODE_ENV=development webpack serve --mode development"
   },
   "author": "Ramil Yarullin",
   "license": "ISC",
   "devDependencies": {
     "clean-webpack-plugin": "^3.0.0",
+    "copy-webpack-plugin": "^8.1.1",
     "cross-env": "^7.0.3",
     "css-loader": "^5.2.1",
     "html-webpack-plugin": "^5.3.1",
+    "jasmine": "^3.7.0",
+    "karma": "^6.3.2",
+    "karma-chrome-launcher": "^3.1.0",
+    "karma-jasmine": "^4.0.1",
+    "karma-mocha-reporter": "^2.2.5",
+    "karma-webpack": "^5.0.0",
     "mini-css-extract-plugin": "^1.4.1",
     "node-sass": "^5.0.0",
     "pug": "^2.0.4",
     "pug-loader": "^2.4.0",
     "sass-loader": "^11.0.1",
     "webpack": "^5.31.2",
-    "webpack-cli": "^4.6.0"
+    "webpack-cli": "^4.6.0",
+    "webpack-dev-server": "^3.11.2"
   },
   "dependencies": {
+    "-": "^0.0.1",
     "jquery": "^3.6.0",
     "normalize.css": "^8.0.1"
   }
