@@ -9,9 +9,6 @@ mixin slider-block()
 				span.slider-block__option-name max
 				input.slider-block__max.js-slider-block__max(type="text")
 			label.slider-block__option
-				span.slider-block__option-name range
-				input.slider-block__range.js-slider-block__range(type="checkbox")
-			label.slider-block__option
 				span.slider-block__option-name from
 				input.slider-block__from.js-slider-block__from(type="text")
 			label.slider-block__option
@@ -20,15 +17,18 @@ mixin slider-block()
 			label.slider-block__option
 				span.slider-block__option-name step
 				input.slider-block__step.js-slider-block__step(type="text")
-			label.slider-block__option
-				span.slider-block__option-name vertical
-				input.slider-block__vertical.js-slider-block__vertical(type="checkbox")
-			label.slider-block__option
-				span.slider-block__option-name tip
-				input.slider-block__tip.js-slider-block__tip(type="checkbox")
-			label.slider-block__option
-				span.slider-block__option-name bar
-				input.slider-block__bar.js-slider-block__bar(type="checkbox")
-			label.slider-block__option
-				span.slider-block__option-name scale
-				input.slider-block__scale.js-slider-block__scale(type="checkbox")
+			label.slider-block__option.slider-block__toogle
+				input.slider-block__range.js-slider-block__range.toogle__input(type="checkbox")
+				span.slider-block__option-name.toogle range
+			label.slider-block__option.slider-block__toogle
+				input.slider-block__vertical.js-slider-block__vertical.toogle__input(type="checkbox")
+				span.slider-block__option-name.toogle vertical
+			label.slider-block__option.slider-block__toogle
+				input.slider-block__display-hint.js-slider-block__display-hint.toogle__input(type="checkbox")
+				span.slider-block__option-name.toogle tip
+			label.slider-block__option.slider-block__toogle
+				input.slider-block__display-tracker.js-slider-block__display-tracker.toogle__input(type="checkbox")
+				span.slider-block__option-name.toogle bar
+			label.slider-block__option.slider-block__toogle
+				input.slider-block__display-grid.js-slider-block__display-grid.toogle__input(type="checkbox")
+				span.slider-block__option-name.toogle scale

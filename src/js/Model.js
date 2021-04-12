@@ -121,7 +121,7 @@ class Model {
   _initConfig(configs) {
     this._config = {
       min: 0,
-      max: 100,
+      max: 50,
       range: false,
       from: 0,
       to: 10,
@@ -130,7 +130,7 @@ class Model {
       displayHint: false,
       displayTracker: false,
       displayGrid: false,
-      gridStep: 25,
+      gridStep: 10,
       disabled: false,
       onInit: null,
       onStart: null,

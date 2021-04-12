@@ -4,12 +4,18 @@ import './index.pug'
 import SliderBlock from './components/slider-block/slider-block';
 
 const configs = [
-  {},
+  {
+    min: -50,
+    max: 50,
+    displayHint: true,
+    displayGrid: true,
+  },
 
   {
     range: true,
     displayHint: true,
     displayTracker: true,
+    displayGrid: true,
   },
 
   {
@@ -18,7 +24,15 @@ const configs = [
     from: 1,
     displayHint: true,
     displayTracker: true,
+    displayGrid: true,
   },
+
+  {
+    vertical: true,
+    displayGrid: true
+  },
+
+  {displayGrid: true}
 ];
 
 const $sliderBlocks = $('.js-slider-block');

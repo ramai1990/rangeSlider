@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
 html {
   box-sizing: border-box;
 }
@@ -10,8 +12,7 @@ html {
 
 body {
   overflow-anchor: none;
-  font-family: "notosans", sans-serif;
-  background-color: var(--color-white);
+  font-family: 'Roboto', sans-serif;
   scroll-behavior: smooth;
 }
 

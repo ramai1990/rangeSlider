@@ -18,9 +18,9 @@ class SliderBlock {
     const $to = $sliderBlock.find('.js-slider-block__to');
     const $step = $sliderBlock.find('.js-slider-block__step');
     const $vertical = $sliderBlock.find('.js-slider-block__vertical');
-    const $displayHint = $sliderBlock.find('.js-slider-block__tip');
-    const $displayTracker = $sliderBlock.find('.js-slider-block__bar');
-    const $displayGrid = $sliderBlock.find('.js-slider-block__scale');
+    const $displayHint = $sliderBlock.find('.js-slider-block__display-hint');
+    const $displayTracker = $sliderBlock.find('.js-slider-block__display-tracker');
+    const $displayGrid = $sliderBlock.find('.js-slider-block__display-grid');
 
     const rangeSlider = $slider.rangeSlider({
       ...config,

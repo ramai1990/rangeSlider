@@ -1,15 +1,27 @@
 doctype html
 html(lang="en")
-    head
-        meta(charset="UTF-8")
-        meta(http-equiv="X-UA-Compatible" content="IE=edge")
-        meta(name="viewport" content="width=device-width, initial-scale=1.0")
-        link(rel="shortcut icon" type="image/x-icon" href="./favicon.ico")
-        title Document
-    body
-        include components/slider-block/slider-block
-        main.wrapper
-            h1.wrapper__title Range-Slider
-            section.wrapper__slider-block-wrapper
-                h2.wrapper__slider-block-title Демо 1
-                +slider-block()
+	head
+		meta(charset="UTF-8")
+		meta(http-equiv="X-UA-Compatible" content="IE=edge")
+		meta(name="viewport" content="width=device-width, initial-scale=1.0")
+		link(rel="shortcut icon" type="image/x-icon" href="./favicon.ico")
+		title Document
+	body
+		include components/slider-block/slider-block
+		main.wrapper
+			h1.wrapper__title Range-Slider
+			section.wrapper__slider-block-wrapper
+				h2.wrapper__slider-block-title Демо 1
+				+slider-block()
+			section.wrapper__slider-block-wrapper
+				h2.wrapper__slider-block-title Демо 2
+				+slider-block()
+			section.wrapper__slider-block-wrapper
+				h2.wrapper__slider-block-title Демо 3
+				+slider-block()
+			section.wrapper__slider-block-wrapper
+				h2.wrapper__slider-block-title Демо 4
+				+slider-block()
+			section.wrapper__slider-block-wrapper
+				h2.wrapper__slider-block-title Демо 5
+				+slider-block()
