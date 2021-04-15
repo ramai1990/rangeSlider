@@ -99,6 +99,7 @@ slider.slide(slider.handle.TO, 7);
 // 6. Возвращаем слайдер к начальным настройкам
 slider.reset();
 ```
+
 ## Архитектура
 
 Все приложение построено по принципу MVC (Model-View-Controller) и разделено на несколько слоев. Ниже представлено описание структуры и их взаимодействия между собой.
@@ -180,7 +181,7 @@ slider.reset();
 ### Диаграмма классов
 
 <div align="center">
-    <img width="1024" height="640" src="src/assets/uml.png">
+    <img width="1061" height="1009" src="src/assets/class-diagram.png">
 </div>
 
 ### Взаимодействие слоев
