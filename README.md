@@ -1,7 +1,7 @@
 # Range Slider
 
 Плагин для jQuery, реализующий слайдер. \
-[Демо](https://ramai1990.github.io/rangeSlider/blob/master/dist/index.html)
+[Демо](https://ramai1990.github.io/rangeSlider/index.html)
 
 ## Сборка проекта
 
