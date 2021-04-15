@@ -1,21 +1,21 @@
 module.exports = (config) => {
   config.set({
-    file: ['src/test/**/*.test.js'],
+    files: ['src/test/**/*.test.js'],
     frameworks: ['jasmine'],
-    reporter: ['mocha'],
+    reporters: ['mocha'],
     preprocessors: {
       'src/test/**/*.test.js': ['webpack'],
     },
     plugins: [
       'karma-jasmine',
-      'karma-mocha-repoter',
+      'karma-mocha-reporter',
       'karma-chrome-launcher',
-      'karma-webpack',
+      'karma-webpack'
     ],
     browsers: ['Chrome'],
     singleRun: true,
     webpack: {
       mode: 'development'
-    }
+    },
   })
 }

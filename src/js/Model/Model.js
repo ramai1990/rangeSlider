@@ -1,4 +1,4 @@
-import ConfigNormalizer from './ConfigNormalizer';
+import ConfigNormalizer from '../ConfigNormalizer/ConfigNormalizer';
 
 class Model {
   constructor(...configs) {

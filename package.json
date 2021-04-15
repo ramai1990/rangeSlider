@@ -6,7 +6,8 @@
   "scripts": {
     "build": "cross-env NODE_ENV=production webpack --mode production",
     "dev": "cross-env NODE_ENV=development webpack --mode development",
-    "start": "cross-env NODE_ENV=development webpack serve --mode development"
+    "start": "cross-env NODE_ENV=development webpack serve --mode development",
+    "test": "karma start"
   },
   "author": "Ramil Yarullin",
   "license": "ISC",
@@ -20,9 +21,11 @@
     "karma": "^6.3.2",
     "karma-chrome-launcher": "^3.1.0",
     "karma-jasmine": "^4.0.1",
+    "karma-mocha": "^2.0.1",
     "karma-mocha-reporter": "^2.2.5",
     "karma-webpack": "^5.0.0",
     "mini-css-extract-plugin": "^1.4.1",
+    "mocha": "^8.3.2",
     "node-sass": "^5.0.0",
     "pug": "^2.0.4",
     "pug-loader": "^2.4.0",
@@ -32,7 +35,6 @@
     "webpack-dev-server": "^3.11.2"
   },
   "dependencies": {
-    "-": "^0.0.1",
     "jquery": "^3.6.0",
     "normalize.css": "^8.0.1"
   }
