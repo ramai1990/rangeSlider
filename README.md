@@ -192,5 +192,5 @@ slider.reset();
 - Подписчики обновляются исходя из новой конфигурации модели
 
 <div align="center">
-    <img width="491" height="321" src="src/assets/interaction.png">
+    <img width="561" height="331" src="src/assets/interaction.png">
 </div>
