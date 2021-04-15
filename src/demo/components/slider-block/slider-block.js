@@ -1,4 +1,4 @@
-import RangeSlider from '../../../js/RangeSlider';
+import RangeSlider from '../../../js/RangeSlider/RangeSlider';
 
 RangeSlider.init($);
 

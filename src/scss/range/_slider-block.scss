@@ -79,6 +79,9 @@
     background-color: #bc9cff;
     right: -66px;
   }
+  &:checked + .toogle{
+    color: #000;
+  }
 }
 .toogle {
   color: rgba(31, 32, 65, 0.75);

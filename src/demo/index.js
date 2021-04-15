@@ -13,6 +13,8 @@ const configs = [
 
   {
     range: true,
+    from: 20,
+    to: 30,
     displayHint: true,
     displayTracker: true,
     displayGrid: true,

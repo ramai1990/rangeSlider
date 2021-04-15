@@ -10,7 +10,7 @@ const filename = (ext) => isDev ? `[name].${ext}` : `[name].[contenthash].${ext}
 const pluginConfig = {
   context: path.resolve(__dirname, 'src'),
   mode: 'development',
-  entry: './js/RangeSlider.js',
+  entry: './js/RangeSlider/RangeSlider.js',
   output: {
     filename: `plugin/js/range-slider.js`,
     path: path.resolve(__dirname, 'dist'),
