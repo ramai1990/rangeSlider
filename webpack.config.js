@@ -1,30 +1,21 @@
 const path = require('path')
 const webpack = require('webpack');
 const HTMLWebpackPlugin = require('html-webpack-plugin')
-const {CleanWebpackPlugin} = require('clean-webpack-plugin')
+const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const isDev = process.env.NODE_ENV === 'development'
 const isProd = !isDev
 const filename = (ext) => isDev ? `[name].${ext}` : `[name].[contenthash].${ext}`
-const pluginConfig = {
-  context: path.resolve(__dirname, 'src'),
-  mode: 'development',
-  entry: './js/RangeSlider/RangeSlider.js',
-  output: {
-    filename: `plugin/js/range-slider.js`,
-    path: path.resolve(__dirname, 'dist'),
-  },
-  plugins: [
-    new CleanWebpackPlugin()
-  ],
-}
-const demoConfig = {
-  context: path.resolve(__dirname, 'src'),
+
+const config = {
   mode: 'production',
-  entry: './demo/index.js',
+  entry: {
+    'jquery.range': './src/app/ts/jquery.range.ts',
+    demo: './src/demo/index.ts'
+  },
   output: {
-    filename: `${filename('js')}`,
+    filename: `plugin/js/${filename('js')}`,
     path: path.resolve(__dirname, 'dist'),
   },
   devServer: {
@@ -34,6 +25,9 @@ const demoConfig = {
     compress: true,
     hot: true,
     port: 3000
+  },
+  resolve: {
+    extensions: ['.tsx', '.ts', '.js'],
   },
   plugins: [
     new webpack.ProvidePlugin({
@@ -49,17 +43,23 @@ const demoConfig = {
       filename: `plugin/css/[name].css`
     }),
     new CopyWebpackPlugin({
-      patterns : [
+      patterns: [
         {
           from: path.resolve(__dirname, 'src/assets'),
           to: path.resolve(__dirname, 'dist')
         }
       ]
     }),
+    new CleanWebpackPlugin()
   ],
   devtool: isProd ? false : 'source-map',
   module: {
     rules: [
+      {
+        test: /\.tsx?$/,
+        use: 'ts-loader',
+        exclude: /node_modules/,
+      },
       {
         test: /\.pug$/,
         loader: 'pug-loader',
@@ -83,4 +83,4 @@ const demoConfig = {
     ]
   }
 }
-module.exports = [demoConfig, pluginConfig]
+module.exports = config

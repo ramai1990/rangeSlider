@@ -1,21 +1,26 @@
+const webpackConfig = require('./webpack.config');
+
 module.exports = (config) => {
   config.set({
-    files: ['src/test/**/*.test.js'],
+    browsers: ['ChromeHeadless'],
     frameworks: ['jasmine'],
-    reporters: ['mocha'],
-    preprocessors: {
-      'src/test/**/*.test.js': ['webpack'],
-    },
-    plugins: [
-      'karma-jasmine',
-      'karma-mocha-reporter',
-      'karma-chrome-launcher',
-      'karma-webpack'
+    reporters: ['spec'],
+    files: [
+      { pattern: 'src/**/*.spec.ts', watched: false },
+      { pattern: 'node_modules/jquery/dist/jquery.min.js', watched: false },
     ],
-    browsers: ['Chrome'],
-    singleRun: true,
-    webpack: {
-      mode: 'development'
+    preprocessors: {
+      'src/**/*.ts': ['webpack'],
     },
-  })
-}
+    webpack: webpackConfig,
+    webpackMiddleware: {
+      noInfo: true,
+    },
+    logLevel: config.LOG_INFO,
+    coverageIstanbulReporter: {
+      reports: ['text', 'text-summary'],
+      fixWebpackSourcePaths: true,
+    },
+    singleRun: true,
+  });
+};

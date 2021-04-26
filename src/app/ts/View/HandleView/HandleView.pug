@@ -1,0 +1,10 @@
+-
+	const handleClasses = [
+		'range-slider__handle',
+		'js-range-slider__handle',
+		`range-slider__handle_type_${type}`,
+		`js-range-slider__handle_type_${type}`,
+	];
+	const { value, value2, showBubble } = state;
+
+a(class=handleClasses data-value= type === 'from' ? value : value2)
