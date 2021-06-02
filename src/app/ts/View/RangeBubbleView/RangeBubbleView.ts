@@ -2,7 +2,7 @@ import $ from 'jquery';
 import State from '../../Interfaces/State';
 import BubbleView from '../BubbleView/BubbleView';
 
-const template = require('./RangeBubbleView.pug');
+import template from './RangeBubbleView.pug';
 
 class RangeBubbleView extends BubbleView {
   update(state: State): void {

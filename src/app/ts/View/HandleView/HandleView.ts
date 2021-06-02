@@ -4,7 +4,7 @@ import Observer from '../../Observer/Observer';
 import BubbleView from '../BubbleView/BubbleView';
 import RangeBubbleView from '../RangeBubbleView/RangeBubbleView';
 
-const template = require('./HandleView.pug');
+import template from './HandleView.pug';
 
 class HandleView {
   private announcer: Observer;

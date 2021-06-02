@@ -80,6 +80,7 @@ describe('App', () => {
   });
 
   it('правильно обрабатывает щелчок 1/2 дорожки', () => {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const app: App = new App($('input[type="range"]'), defaultOptions);
 
     const $track = $('.js-range-slider .js-range-slider__track');
@@ -100,6 +101,7 @@ describe('App', () => {
   });
 
   it('Правильно обрабатывает щелчок на 1/4 дорожки c двумя ручками', () => {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const app: App = new App($('input[type="range"]'), { ...defaultOptions, isRange: true });
 
     const $track = $('.js-range-slider .js-range-slider__track');
@@ -122,6 +124,7 @@ describe('App', () => {
   });
 
   it('Правильно обрабатывает щелчок на 3/4 дорожки c двумя ручками', () => {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const app: App = new App($('input[type="range"]'), { ...defaultOptions, isRange: true });
 
     const $track = $('.js-range-slider .js-range-slider__track');
@@ -144,6 +147,7 @@ describe('App', () => {
   });
 
   it('Правильно обрабатывает щелчок на 1/4 дорожки c двумя ручками', () => {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const app: App = new App($('input[type="range"]'), { ...defaultOptions, isRange: true });
 
     const $track = $('.js-range-slider .js-range-slider__track');
@@ -212,6 +216,7 @@ describe('App', () => {
       isVertical: true,
       gridDensity: 5,
     };
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const app = new App($('input[type="range"]'), options);
     const { tickLabels, tickPositions } = getTicks();
 

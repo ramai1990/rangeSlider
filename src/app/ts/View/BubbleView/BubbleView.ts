@@ -1,7 +1,7 @@
 import $ from 'jquery';
 import State from '../../Interfaces/State';
 
-const template = require('./BubbleView.pug');
+import template from './BubbleView.pug';
 
 class BubbleView {
   protected $handle: JQuery;

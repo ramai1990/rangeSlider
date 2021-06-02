@@ -1,6 +1,6 @@
 import $ from 'jquery';
 
-const template = require('./BarView.pug');
+import template from './BarView.pug';
 
 class BarView {
   private $slider: JQuery;

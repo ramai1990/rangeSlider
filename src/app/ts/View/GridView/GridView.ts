@@ -2,7 +2,7 @@ import State from '../../Interfaces/State';
 import Observer from '../../Observer/Observer';
 import Observable from '../../Interfaces/Observable';
 
-const template = require('./GridView.pug');
+import template from './GridView.pug';
 
 interface Tick {
   position: string,

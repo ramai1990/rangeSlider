@@ -12,7 +12,7 @@ import HandleView from '../HandleView/HandleView';
 import BarView from '../BarView/BarView';
 import GridView from '../GridView/GridView';
 
-const template = require('./MainView.pug');
+import template from './MainView.pug';
 
 class MainView implements SliderView, LayerObservable {
   announcer: Observable;
