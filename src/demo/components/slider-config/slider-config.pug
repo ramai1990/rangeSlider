@@ -1,38 +1,38 @@
 mixin slider-config(fields)
-	-
-		const defaultFields = {
-			min: 0,
-			max: 100,
-			step: 1,
-			value: 0,
-			value2: null,
-			'grid-density': null,
-			'is-range': false,
-			'is-vertical': false,
-			'show-bubble': false,
-			'show-grid': false,
-			'show-bar': false,
-		};
-		const toCamelCase = (s) => s.replace(/([-][a-z])/ig, ($1) => $1.toUpperCase().replace('-', ''));
+  -
+    const defaultFields = {
+      min: 0,
+      max: 100,
+      step: 1,
+      value: 0,
+      value2: null,
+      'grid-density': null,
+      'is-range': false,
+      'is-vertical': false,
+      'show-bubble': false,
+      'show-grid': false,
+      'show-bar': false,
+    };
+    const toCamelCase = (s) => s.replace(/([-][a-z])/ig, ($1) => $1.toUpperCase().replace('-', ''));
 
-	form.slider-config.js-slider-config
-		-
-			const checkboxInputClasses = [
-				'slider-config__input',
-				'js-slider-config__input',
-				'slider-config__input_type_checkbox',
-				'js-slider-config__input_type_checkbox',
-			];
-			const textInputClasses = [
-				'slider-config__input',
-				'js-slider-config__input',
-				'slider-config__input_type_text',
-				'js-slider-config__input_type_text',
-			];
-		each val, key in Object.assign({}, defaultFields, fields)
-			p.slider-config__input-group.js-slider-config__input-group
-				label.slider-config__label= toCamelCase(key)
-				if typeof val === 'boolean'
-					input(name=key type='checkbox' checked=val class=checkboxInputClasses)
-				else
-					input(name=key type='number' value=val class=textInputClasses)
+  form.slider-config.js-slider-config
+    -
+      const checkboxInputClasses = [
+        'slider-config__input',
+        'js-slider-config__input',
+        'slider-config__input_type_checkbox',
+        'js-slider-config__input_type_checkbox',
+      ];
+      const textInputClasses = [
+        'slider-config__input',
+        'js-slider-config__input',
+        'slider-config__input_type_text',
+        'js-slider-config__input_type_text',
+      ];
+    each val, key in Object.assign({}, defaultFields, fields)
+      p.slider-config__input-group.js-slider-config__input-group
+        label.slider-config__label= toCamelCase(key)
+        if typeof val === 'boolean'
+          input(name=key type='checkbox' checked=val class=checkboxInputClasses)
+        else
+          input(name=key type='number' value=val class=textInputClasses)

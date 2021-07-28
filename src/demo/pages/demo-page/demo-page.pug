@@ -2,27 +2,27 @@ include ../../components/slider-group/slider-group
 include ../../components/slider-config/slider-config
 
 mixin demo-page()
-	.demo-page
-		h1.demo-page__title= 'Range slider'
-		+slider-group({
-			title: 'Demo 1',
-			attr: { value: 42, 'show-bubble': true, 'show-grid': true, 'grid-density': 10, 'show-bar': true }
-		})
-		+slider-group({
-			title: 'Demo 2',
-			attr: { step: 10 },
-			reverse: true,
-		})
-		+slider-group({
-			title: 'Demo 3',
-			attr: { 'is-range': true, value: 30, value2: 70},
-		})
-		+slider-group({
-			title: 'Demo 4',
-			attr: { 'is-vertical': true, value: 42 },
-			reverse: true,
-		})
-		+slider-group({
-			title: 'Demo 5',
-			attr: { value: 30, value2: 70, 'show-bubble': true, 'is-vertical': true, 'is-range': true },
-		})
+  .demo-page
+    h1.demo-page__title= 'Range slider'
+    +slider-group({
+      title: 'Demo 1',
+      attr: { value: 42, 'show-bubble': true, 'show-grid': true, 'grid-density': 10, 'show-bar': true }
+    })
+    +slider-group({
+      title: 'Demo 2',
+      attr: { step: 10 },
+      reverse: true,
+    })
+    +slider-group({
+      title: 'Demo 3',
+      attr: { 'is-range': true, value: 30, value2: 70},
+    })
+      +slider-group({
+        title: 'Demo 4',
+        attr: { 'is-vertical': true, value: 42 },
+        reverse: true,
+    })
+    +slider-group({
+      title: 'Demo 5',
+      attr: { value: 30, value2: 70, 'show-bubble': true, 'is-vertical': true, 'is-range': true },
+    })
