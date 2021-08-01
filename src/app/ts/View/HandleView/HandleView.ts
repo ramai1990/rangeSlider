@@ -1,4 +1,3 @@
-import $ from 'jquery';
 import State from '../../Interfaces/State';
 import Observer from '../../Observer/Observer';
 import BubbleView from '../BubbleView/BubbleView';

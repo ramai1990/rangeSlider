@@ -11590,11 +11590,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _BarView_pug__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./BarView.pug */ "./src/app/ts/View/BarView/BarView.pug");
-/* harmony import */ var _BarView_pug__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_BarView_pug__WEBPACK_IMPORTED_MODULE_1__);
-
+/* harmony import */ var _BarView_pug__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./BarView.pug */ "./src/app/ts/View/BarView/BarView.pug");
+/* harmony import */ var _BarView_pug__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_BarView_pug__WEBPACK_IMPORTED_MODULE_0__);
+/* provided dependency */ var $ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
 
 class BarView {
     constructor($slider) {
@@ -11608,7 +11606,7 @@ class BarView {
         this.$element.css({ [fromProp]: `${fromPosition}%`, [toProp]: `${100 - toPosition}%` });
     }
     init() {
-        this.$element = jquery__WEBPACK_IMPORTED_MODULE_0___default()(_BarView_pug__WEBPACK_IMPORTED_MODULE_1___default()());
+        this.$element = $(_BarView_pug__WEBPACK_IMPORTED_MODULE_0___default()());
         this.$track.append(this.$element);
     }
     isVertical() {
@@ -11631,11 +11629,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _BubbleView_pug__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./BubbleView.pug */ "./src/app/ts/View/BubbleView/BubbleView.pug");
-/* harmony import */ var _BubbleView_pug__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_BubbleView_pug__WEBPACK_IMPORTED_MODULE_1__);
-
+/* harmony import */ var _BubbleView_pug__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./BubbleView.pug */ "./src/app/ts/View/BubbleView/BubbleView.pug");
+/* harmony import */ var _BubbleView_pug__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_BubbleView_pug__WEBPACK_IMPORTED_MODULE_0__);
+/* provided dependency */ var $ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
 
 class BubbleView {
     constructor($handle, state) {
@@ -11676,7 +11672,7 @@ class BubbleView {
     }
     init(state) {
         this.type = this.$handle.hasClass('js-range-slider__handle_type_to') ? 'to' : 'from';
-        this.$element = jquery__WEBPACK_IMPORTED_MODULE_0___default()(_BubbleView_pug__WEBPACK_IMPORTED_MODULE_1___default()({ state, type: this.type }));
+        this.$element = $(_BubbleView_pug__WEBPACK_IMPORTED_MODULE_0___default()({ state, type: this.type }));
         this.$handle.append(this.$element);
     }
 }
@@ -11765,21 +11761,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _Observer_Observer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../Observer/Observer */ "./src/app/ts/Observer/Observer.ts");
-/* harmony import */ var _BubbleView_BubbleView__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../BubbleView/BubbleView */ "./src/app/ts/View/BubbleView/BubbleView.ts");
-/* harmony import */ var _RangeBubbleView_RangeBubbleView__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../RangeBubbleView/RangeBubbleView */ "./src/app/ts/View/RangeBubbleView/RangeBubbleView.ts");
-/* harmony import */ var _HandleView_pug__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./HandleView.pug */ "./src/app/ts/View/HandleView/HandleView.pug");
-/* harmony import */ var _HandleView_pug__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_HandleView_pug__WEBPACK_IMPORTED_MODULE_4__);
-
+/* harmony import */ var _Observer_Observer__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../Observer/Observer */ "./src/app/ts/Observer/Observer.ts");
+/* harmony import */ var _BubbleView_BubbleView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../BubbleView/BubbleView */ "./src/app/ts/View/BubbleView/BubbleView.ts");
+/* harmony import */ var _RangeBubbleView_RangeBubbleView__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../RangeBubbleView/RangeBubbleView */ "./src/app/ts/View/RangeBubbleView/RangeBubbleView.ts");
+/* harmony import */ var _HandleView_pug__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./HandleView.pug */ "./src/app/ts/View/HandleView/HandleView.pug");
+/* harmony import */ var _HandleView_pug__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_HandleView_pug__WEBPACK_IMPORTED_MODULE_3__);
+/* provided dependency */ var $ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
 
 
 
 
 class HandleView {
     constructor($slider, state) {
-        this.announcer = new _Observer_Observer__WEBPACK_IMPORTED_MODULE_1__.default();
+        this.announcer = new _Observer_Observer__WEBPACK_IMPORTED_MODULE_0__.default();
         this.$slider = $slider;
         this.$track = this.$slider.find('.js-range-slider__track');
         this.init(state);
@@ -11806,11 +11800,11 @@ class HandleView {
         this.type = this.$track.find('.js-range-slider__handle').length === 0
             ? 'from'
             : 'to';
-        this.$element = jquery__WEBPACK_IMPORTED_MODULE_0___default()(_HandleView_pug__WEBPACK_IMPORTED_MODULE_4___default()({ state, type: this.type }));
+        this.$element = $(_HandleView_pug__WEBPACK_IMPORTED_MODULE_3___default()({ state, type: this.type }));
         const { showBubble, isRange } = state;
-        this.bubbleView = showBubble === true ? new _BubbleView_BubbleView__WEBPACK_IMPORTED_MODULE_2__.default(this.$element, state) : null;
+        this.bubbleView = showBubble === true ? new _BubbleView_BubbleView__WEBPACK_IMPORTED_MODULE_1__.default(this.$element, state) : null;
         const showRangeBubble = isRange && this.type === 'from';
-        this.rangeBubbleView = showRangeBubble ? new _RangeBubbleView_RangeBubbleView__WEBPACK_IMPORTED_MODULE_3__.default(this.$element, state) : null;
+        this.rangeBubbleView = showRangeBubble ? new _RangeBubbleView_RangeBubbleView__WEBPACK_IMPORTED_MODULE_2__.default(this.$element, state) : null;
         this.$track.append(this.$element);
     }
     move(position) {
@@ -11841,15 +11835,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _Observer_Observer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../Observer/Observer */ "./src/app/ts/Observer/Observer.ts");
-/* harmony import */ var _HandleView_HandleView__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../HandleView/HandleView */ "./src/app/ts/View/HandleView/HandleView.ts");
-/* harmony import */ var _BarView_BarView__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../BarView/BarView */ "./src/app/ts/View/BarView/BarView.ts");
-/* harmony import */ var _GridView_GridView__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../GridView/GridView */ "./src/app/ts/View/GridView/GridView.ts");
-/* harmony import */ var _MainView_pug__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./MainView.pug */ "./src/app/ts/View/MainView/MainView.pug");
-/* harmony import */ var _MainView_pug__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_MainView_pug__WEBPACK_IMPORTED_MODULE_5__);
-
+/* harmony import */ var _Observer_Observer__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../Observer/Observer */ "./src/app/ts/Observer/Observer.ts");
+/* harmony import */ var _HandleView_HandleView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../HandleView/HandleView */ "./src/app/ts/View/HandleView/HandleView.ts");
+/* harmony import */ var _BarView_BarView__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../BarView/BarView */ "./src/app/ts/View/BarView/BarView.ts");
+/* harmony import */ var _GridView_GridView__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../GridView/GridView */ "./src/app/ts/View/GridView/GridView.ts");
+/* harmony import */ var _MainView_pug__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./MainView.pug */ "./src/app/ts/View/MainView/MainView.pug");
+/* harmony import */ var _MainView_pug__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_MainView_pug__WEBPACK_IMPORTED_MODULE_4__);
+/* provided dependency */ var $ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
 
 
 
@@ -11861,7 +11853,7 @@ class MainView {
         this.handleDragStart = (e) => this.announceJump(e);
         this.handleDrag = (e) => this.announceDrag(e);
         this.handleDragEnd = (e) => this.dragEnd(e);
-        this.announcer = new _Observer_Observer__WEBPACK_IMPORTED_MODULE_1__.default();
+        this.announcer = new _Observer_Observer__WEBPACK_IMPORTED_MODULE_0__.default();
         this.$target = $target;
         this.init(state);
     }
@@ -11886,14 +11878,14 @@ class MainView {
         if (this.$element) {
             this.$element.remove();
         }
-        this.$element = jquery__WEBPACK_IMPORTED_MODULE_0___default()(_MainView_pug__WEBPACK_IMPORTED_MODULE_5___default()({ state }));
+        this.$element = $(_MainView_pug__WEBPACK_IMPORTED_MODULE_4___default()({ state }));
         this.$target.after(this.$element).hide();
-        this.handleFromView = new _HandleView_HandleView__WEBPACK_IMPORTED_MODULE_2__.default(this.$element, state);
+        this.handleFromView = new _HandleView_HandleView__WEBPACK_IMPORTED_MODULE_1__.default(this.$element, state);
         const { isRange, showGrid, showBar } = state;
-        this.handleToView = isRange === true ? new _HandleView_HandleView__WEBPACK_IMPORTED_MODULE_2__.default(this.$element, state) : null;
-        this.barView = showBar === true ? new _BarView_BarView__WEBPACK_IMPORTED_MODULE_3__.default(this.$element) : null;
+        this.handleToView = isRange === true ? new _HandleView_HandleView__WEBPACK_IMPORTED_MODULE_1__.default(this.$element, state) : null;
+        this.barView = showBar === true ? new _BarView_BarView__WEBPACK_IMPORTED_MODULE_2__.default(this.$element) : null;
         if (showGrid) {
-            this.gridView = new _GridView_GridView__WEBPACK_IMPORTED_MODULE_4__.default(this.$element, state);
+            this.gridView = new _GridView_GridView__WEBPACK_IMPORTED_MODULE_3__.default(this.$element, state);
             this.gridView.onClickTick((value) => this.announceClickTick(value));
         }
         else {
@@ -11959,7 +11951,7 @@ class MainView {
         return (cursorPositionPx - trackOffsetPx + this.handleCenterOffset) / percentUnitPx;
     }
     setHandleCenterOffset(e) {
-        const $handle = jquery__WEBPACK_IMPORTED_MODULE_0___default()(e.target).closest('.js-range-slider__handle');
+        const $handle = $(e.target).closest('.js-range-slider__handle');
         if ($handle.length === 1) {
             const cursorPositionPx = this.isVertical() ? e.pageY : e.pageX;
             const handleOffsetPx = this.isVertical() ? $handle.offset().top : $handle.offset().left;
@@ -11972,7 +11964,7 @@ class MainView {
     }
     bindDocumentEvents() {
         this.$track.on('mousedown', this.handleDragStart);
-        jquery__WEBPACK_IMPORTED_MODULE_0___default()(document)
+        $(document)
             .off('mouseup', this.handleDragEnd)
             .on('mouseup', this.handleDragEnd)
             .off('mousemove', this.handleDrag)
@@ -12003,22 +11995,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _BubbleView_BubbleView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../BubbleView/BubbleView */ "./src/app/ts/View/BubbleView/BubbleView.ts");
-/* harmony import */ var _RangeBubbleView_pug__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./RangeBubbleView.pug */ "./src/app/ts/View/RangeBubbleView/RangeBubbleView.pug");
-/* harmony import */ var _RangeBubbleView_pug__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_RangeBubbleView_pug__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _BubbleView_BubbleView__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../BubbleView/BubbleView */ "./src/app/ts/View/BubbleView/BubbleView.ts");
+/* harmony import */ var _RangeBubbleView_pug__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./RangeBubbleView.pug */ "./src/app/ts/View/RangeBubbleView/RangeBubbleView.pug");
+/* harmony import */ var _RangeBubbleView_pug__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_RangeBubbleView_pug__WEBPACK_IMPORTED_MODULE_1__);
+/* provided dependency */ var $ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
 
 
-
-class RangeBubbleView extends _BubbleView_BubbleView__WEBPACK_IMPORTED_MODULE_1__.default {
+class RangeBubbleView extends _BubbleView_BubbleView__WEBPACK_IMPORTED_MODULE_0__.default {
     update(state) {
         const { value, value2 } = state;
         this.$element.text(value === value2 ? value : `${value}-${value2}`);
     }
     init(state) {
         this.type = 'range';
-        this.$element = jquery__WEBPACK_IMPORTED_MODULE_0___default()(_RangeBubbleView_pug__WEBPACK_IMPORTED_MODULE_2___default()({ state }));
+        this.$element = $(_RangeBubbleView_pug__WEBPACK_IMPORTED_MODULE_1___default()({ state }));
         this.$handle.append(this.$element);
     }
 }
@@ -12079,36 +12069,34 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _App_App__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./App/App */ "./src/app/ts/App/App.ts");
-/* harmony import */ var _const__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./const */ "./src/app/ts/const.ts");
-/* harmony import */ var _styles_jquery_range_scss__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../styles/jquery.range.scss */ "./src/app/styles/jquery.range.scss");
-
+/* harmony import */ var _App_App__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./App/App */ "./src/app/ts/App/App.ts");
+/* harmony import */ var _const__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./const */ "./src/app/ts/const.ts");
+/* harmony import */ var _styles_jquery_range_scss__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../styles/jquery.range.scss */ "./src/app/styles/jquery.range.scss");
+/* provided dependency */ var $ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
 
 
 
 const fetchOptionsFromDataAttr = (attr) => Object.assign({}, ...Object.keys(attr).map((key) => ({ [key]: attr[key] === '' ? true : attr[key] })));
-(jquery__WEBPACK_IMPORTED_MODULE_0___default().fn.range) = function range(options) {
+$.fn.range = function range(options) {
     const defaults = {
-        min: _const__WEBPACK_IMPORTED_MODULE_2__.DEFAULT_MIN,
-        max: _const__WEBPACK_IMPORTED_MODULE_2__.DEFAULT_MAX,
-        step: _const__WEBPACK_IMPORTED_MODULE_2__.DEFAULT_STEP,
-        value: _const__WEBPACK_IMPORTED_MODULE_2__.DEFAULT_VALUE,
-        value2: _const__WEBPACK_IMPORTED_MODULE_2__.DEFAULT_VALUE_2,
-        gridDensity: _const__WEBPACK_IMPORTED_MODULE_2__.DEFAULT_GRID_DENSITY,
-        isRange: _const__WEBPACK_IMPORTED_MODULE_2__.DEFAULT_RANGE,
-        isVertical: _const__WEBPACK_IMPORTED_MODULE_2__.DEFAULT_VERTICAL,
-        showBubble: _const__WEBPACK_IMPORTED_MODULE_2__.DEFAULT_SHOW_BUBBLE,
-        showGrid: _const__WEBPACK_IMPORTED_MODULE_2__.DEFAULT_SHOW_GRID,
-        showBar: _const__WEBPACK_IMPORTED_MODULE_2__.DEFAULT_SHOW_BAR,
+        min: _const__WEBPACK_IMPORTED_MODULE_1__.DEFAULT_MIN,
+        max: _const__WEBPACK_IMPORTED_MODULE_1__.DEFAULT_MAX,
+        step: _const__WEBPACK_IMPORTED_MODULE_1__.DEFAULT_STEP,
+        value: _const__WEBPACK_IMPORTED_MODULE_1__.DEFAULT_VALUE,
+        value2: _const__WEBPACK_IMPORTED_MODULE_1__.DEFAULT_VALUE_2,
+        gridDensity: _const__WEBPACK_IMPORTED_MODULE_1__.DEFAULT_GRID_DENSITY,
+        isRange: _const__WEBPACK_IMPORTED_MODULE_1__.DEFAULT_RANGE,
+        isVertical: _const__WEBPACK_IMPORTED_MODULE_1__.DEFAULT_VERTICAL,
+        showBubble: _const__WEBPACK_IMPORTED_MODULE_1__.DEFAULT_SHOW_BUBBLE,
+        showGrid: _const__WEBPACK_IMPORTED_MODULE_1__.DEFAULT_SHOW_GRID,
+        showBar: _const__WEBPACK_IMPORTED_MODULE_1__.DEFAULT_SHOW_BAR,
     };
     const dataAttrOptions = fetchOptionsFromDataAttr(this.data());
     return this.each((_, element) => {
-        jquery__WEBPACK_IMPORTED_MODULE_0___default()(element).data('api', new _App_App__WEBPACK_IMPORTED_MODULE_1__.default(jquery__WEBPACK_IMPORTED_MODULE_0___default()(element), { ...defaults, ...options, ...dataAttrOptions }));
+        $(element).data('api', new _App_App__WEBPACK_IMPORTED_MODULE_0__.default($(element), { ...defaults, ...options, ...dataAttrOptions }));
     });
 };
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((jquery__WEBPACK_IMPORTED_MODULE_0___default().fn.range));
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ($.fn.range);
 
 
 /***/ }),
@@ -12121,36 +12109,34 @@ const fetchOptionsFromDataAttr = (attr) => Object.assign({}, ...Object.keys(attr
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _app_ts_jquery_range__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../app/ts/jquery.range */ "./src/app/ts/jquery.range.ts");
-
+/* harmony import */ var _app_ts_jquery_range__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../app/ts/jquery.range */ "./src/app/ts/jquery.range.ts");
+/* provided dependency */ var $ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
 
 const toCamelCase = (s) => s.replace(/([-][a-z])/ig, ($1) => $1.toUpperCase().replace('-', ''));
 const updateForm = ($form, state) => {
     const $textInputs = $form.find('.js-slider-config__input_type_text');
     $textInputs.each((_, configInput) => {
-        const name = toCamelCase(jquery__WEBPACK_IMPORTED_MODULE_0___default()(configInput).attr('name'));
-        jquery__WEBPACK_IMPORTED_MODULE_0___default()(configInput).val(state[name]);
+        const name = toCamelCase($(configInput).attr('name'));
+        $(configInput).val(state[name]);
     });
 };
 const handleConfigInputChange = (event, api) => {
-    const propName = toCamelCase(jquery__WEBPACK_IMPORTED_MODULE_0___default()(event.target).attr('name'));
-    const propValue = jquery__WEBPACK_IMPORTED_MODULE_0___default()(event.target).hasClass('js-slider-config__input_type_checkbox')
-        ? jquery__WEBPACK_IMPORTED_MODULE_0___default()(event.target).is(':checked')
-        : Number(jquery__WEBPACK_IMPORTED_MODULE_0___default()(event.target).val());
+    const propName = toCamelCase($(event.target).attr('name'));
+    const propValue = $(event.target).hasClass('js-slider-config__input_type_checkbox')
+        ? $(event.target).is(':checked')
+        : Number($(event.target).val());
     api.update({
         [propName]: propValue,
     });
 };
 const setEventListeners = ($form, api) => {
     $form.find('.js-slider-config__input').each((_, input) => {
-        jquery__WEBPACK_IMPORTED_MODULE_0___default()(input).on('change', (event) => handleConfigInputChange(event, api));
+        $(input).on('change', (event) => handleConfigInputChange(event, api));
     });
 };
 const init = ($targets) => {
     $targets.each((_, target) => {
-        const $target = jquery__WEBPACK_IMPORTED_MODULE_0___default()(target);
+        const $target = $(target);
         const $configForm = $target.closest('.js-slider-group').find('.js-slider-config');
         const sliderApi = $target.range({
             onChange(state) {
@@ -12163,7 +12149,7 @@ const init = ($targets) => {
         setEventListeners($configForm, sliderApi);
     });
 };
-init(jquery__WEBPACK_IMPORTED_MODULE_0___default()('.js-slider-group__target-input'));
+init($('.js-slider-group__target-input'));
 
 
 /***/ }),

@@ -1,4 +1,3 @@
-import $ from 'jquery';
 import App from './App/App';
 import State from './Interfaces/State';
 import {

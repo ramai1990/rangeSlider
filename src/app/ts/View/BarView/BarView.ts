@@ -1,5 +1,3 @@
-import $ from 'jquery';
-
 import template from './BarView.pug';
 
 class BarView {

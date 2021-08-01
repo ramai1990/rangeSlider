@@ -1,4 +1,3 @@
-import $ from 'jquery';
 import '../../../app/ts/jquery.range';
 
 const toCamelCase = (s): string => s.replace(/([-][a-z])/ig, ($1) => $1.toUpperCase().replace('-', ''));

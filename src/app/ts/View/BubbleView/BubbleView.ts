@@ -1,4 +1,3 @@
-import $ from 'jquery';
 import State from '../../Interfaces/State';
 
 import template from './BubbleView.pug';

@@ -1,5 +1,3 @@
-import $ from 'jquery';
-
 import Observer from '../../Observer/Observer';
 
 import State from '../../Interfaces/State';
