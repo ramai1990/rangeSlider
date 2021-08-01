@@ -15,7 +15,7 @@ class BubbleView {
     this.init(state);
   }
 
-  update(state: State): void {
+  public update(state: State): void {
     const { value, value2 } = state;
 
     this.$element.text(this.type === 'from' ? value : value2);

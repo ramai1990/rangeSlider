@@ -22,15 +22,15 @@ class Model implements SliderModel, LayerObservable {
     this.init(state);
   }
 
-  get(key: string): null|number|boolean {
+  public get(key: string): null|number|boolean {
     return this.state[key];
   }
 
-  getState(): State {
+  public getState(): State {
     return this.state;
   }
 
-  setState(state: State): void {
+  public setState(state: State): void {
     this.init(state);
     const extra: SliderModelExtraData = { redraw: true };
 
@@ -41,7 +41,7 @@ class Model implements SliderModel, LayerObservable {
     );
   }
 
-  update(state: State, viewExtra?: SliderViewExtraData): this {
+  public update(state: State, viewExtra?: SliderViewExtraData): this {
     const [stateProperty, stateValue] = Object.entries(state)[0];
     const thisState: State = { ...this.state };
     const modelExtra: SliderModelExtraData = { redraw: true };
@@ -82,7 +82,7 @@ class Model implements SliderModel, LayerObservable {
     return this;
   }
 
-  emitChangeState(): void {
+  public emitChangeState(): void {
     const state: State = { ...this.state };
     const extra: SliderModelExtraData = { redraw: true };
 
@@ -93,7 +93,7 @@ class Model implements SliderModel, LayerObservable {
     );
   }
 
-  onChange(callback: (state: State, extra?: SliderModelExtraData) => void): void {
+  public onChange(callback: (state: State, extra?: SliderModelExtraData) => void): void {
     this.announcer.on('change.state', callback);
   }
 

@@ -4,7 +4,7 @@ import BubbleView from '../BubbleView/BubbleView';
 import template from './RangeBubbleView.pug';
 
 class RangeBubbleView extends BubbleView {
-  update(state: State): void {
+  public update(state: State): void {
     const { value, value2 } = state;
 
     this.$element.text(value === value2 ? value : `${value}-${value2}`);

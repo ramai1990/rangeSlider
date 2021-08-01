@@ -51,7 +51,7 @@ class MainView implements SliderView, LayerObservable {
     this.init(state);
   }
 
-  update(state: State, extra: SliderModelExtraData): this {
+  public update(state: State, extra: SliderModelExtraData): this {
     const { redraw, fromPosition, toPosition } = extra;
 
     if (redraw === true) {
@@ -73,7 +73,7 @@ class MainView implements SliderView, LayerObservable {
     return this;
   }
 
-  onChange(callback: (state: State, extra?: SliderViewExtraData) => void): void {
+  public onChange(callback: (state: State, extra?: SliderViewExtraData) => void): void {
     this.announcer.on('change.view', callback);
   }
 

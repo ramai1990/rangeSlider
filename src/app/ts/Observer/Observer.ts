@@ -6,7 +6,7 @@ import SliderViewExtraData from '../Interfaces/SliderViewExtraData';
 class Observer implements Observable {
   callbacks: { [name: string]: Array<(data: State|number) => void> } = {};
 
-  on(events: string, fn: (data: State|number) => void): void {
+  public on(events: string, fn: (data: State|number) => void): void {
     events.replace(/\S+/g, (name): string => {
       this.callbacks[name] = this.callbacks[name] || [];
       this.callbacks[name].push(fn);
@@ -14,7 +14,7 @@ class Observer implements Observable {
     });
   }
 
-  trigger(
+  public trigger(
     name: string,
     data?: State|number,
     extra?: SliderModelExtraData|SliderViewExtraData,

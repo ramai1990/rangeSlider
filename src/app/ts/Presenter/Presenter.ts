@@ -19,7 +19,7 @@ class Presenter {
     this.model.emitChangeState();
   }
 
-  update(state: State): void {
+  public update(state: State): void {
     this.model.setState(state);
   }
 

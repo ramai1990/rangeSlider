@@ -27,7 +27,7 @@ class HandleView {
     this.init(state);
   }
 
-  update(state: State, position: number): void {
+  public update(state: State, position: number): void {
     this.move(position);
     this.updateDataset(state);
 
@@ -41,13 +41,13 @@ class HandleView {
     }
   }
 
-  getCurrentPosition(): number {
+  public getCurrentPosition(): number {
     const prop = this.isVertical() ? 'top' : 'left';
 
     return parseInt(this.$element.prop('style')[prop], 10);
   }
 
-  getCurrentValue(): number {
+  public getCurrentValue(): number {
     return Number(this.$element.attr('data-value'));
   }
 

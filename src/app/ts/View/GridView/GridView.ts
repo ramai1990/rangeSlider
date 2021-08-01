@@ -22,7 +22,7 @@ class GridView {
     this.init(state);
   }
 
-  onClickTick(callback: (number) => void): void {
+  public onClickTick(callback: (number) => void): void {
     this.announcer.on('click.tick', callback);
   }
 

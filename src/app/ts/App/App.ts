@@ -13,7 +13,7 @@ class App {
     );
   }
 
-  update(state: State): void {
+  public update(state: State): void {
     this.presenter.update(state);
   }
 }

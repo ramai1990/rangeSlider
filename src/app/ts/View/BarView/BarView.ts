@@ -13,7 +13,7 @@ class BarView {
     this.init();
   }
 
-  update(fromPosition: number, toPosition: number): void {
+  public update(fromPosition: number, toPosition: number): void {
     const fromProp = this.isVertical() ? 'top' : 'left';
     const toProp = this.isVertical() ? 'bottom' : 'right';
 
