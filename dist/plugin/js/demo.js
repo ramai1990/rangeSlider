@@ -11357,9 +11357,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _const__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../const */ "./src/app/ts/const.ts");
 
 
-class Model {
+class Model extends _Observer_Observer__WEBPACK_IMPORTED_MODULE_0__.default {
     constructor(state) {
-        this.announcer = new _Observer_Observer__WEBPACK_IMPORTED_MODULE_0__.default();
+        super();
         this.init(state);
     }
     get(key) {
@@ -11371,7 +11371,7 @@ class Model {
     setState(state) {
         this.init(state);
         const extra = { redraw: true };
-        this.announcer.trigger('change.state', { ...this.state }, this.updateModelExtraPosition(extra));
+        this.trigger('change.state', { ...this.state }, this.updateModelExtraPosition(extra));
     }
     update(state, viewExtra) {
         const [stateProperty, stateValue] = Object.entries(state)[0];
@@ -11399,7 +11399,7 @@ class Model {
                 thisState[stateProperty] = newValue;
         }
         this.state = Model.validateState(thisState);
-        this.announcer.trigger('change.state', { ...this.state }, this.updateModelExtraPosition(modelExtra));
+        this.trigger('change.state', { ...this.state }, this.updateModelExtraPosition(modelExtra));
         if (typeof this.state.onChange === 'function')
             this.state.onChange(this.state);
         return this;
@@ -11407,10 +11407,10 @@ class Model {
     emitChangeState() {
         const state = { ...this.state };
         const extra = { redraw: true };
-        this.announcer.trigger('change.state', state, this.updateModelExtraPosition(extra));
+        this.trigger('change.state', state, this.updateModelExtraPosition(extra));
     }
     onChange(callback) {
-        this.announcer.on('change.state', callback);
+        this.on('change.state', callback);
     }
     static percentToValue(min, max, percent) {
         const range = Number(max) - Number(min);

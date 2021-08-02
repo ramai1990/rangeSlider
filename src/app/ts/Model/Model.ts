@@ -7,18 +7,14 @@ import {
 
 import State from '../Interfaces/State';
 import SliderViewExtraData from '../Interfaces/SliderViewExtraData';
-import Observable from '../Interfaces/Observable';
 import SliderModel from '../Interfaces/SliderModel';
-import LayerObservable from '../Interfaces/LayerObservable';
 import SliderModelExtraData from '../Interfaces/SliderModelExtraData';
 
-class Model implements SliderModel, LayerObservable {
-  announcer: Observable;
-
+class Model extends Observer implements SliderModel {
   private state: State;
 
   constructor(state: State) {
-    this.announcer = new Observer();
+    super();
     this.init(state);
   }
 
@@ -34,7 +30,7 @@ class Model implements SliderModel, LayerObservable {
     this.init(state);
     const extra: SliderModelExtraData = { redraw: true };
 
-    this.announcer.trigger(
+    this.trigger(
       'change.state',
       { ...this.state },
       this.updateModelExtraPosition(extra),
@@ -71,7 +67,7 @@ class Model implements SliderModel, LayerObservable {
 
     this.state = Model.validateState(thisState);
 
-    this.announcer.trigger(
+    this.trigger(
       'change.state',
       { ...this.state },
       this.updateModelExtraPosition(modelExtra),
@@ -86,7 +82,7 @@ class Model implements SliderModel, LayerObservable {
     const state: State = { ...this.state };
     const extra: SliderModelExtraData = { redraw: true };
 
-    this.announcer.trigger(
+    this.trigger(
       'change.state',
       state,
       this.updateModelExtraPosition(extra),
@@ -94,7 +90,7 @@ class Model implements SliderModel, LayerObservable {
   }
 
   public onChange(callback: (state: State, extra?: SliderModelExtraData) => void): void {
-    this.announcer.on('change.state', callback);
+    this.on('change.state', callback);
   }
 
   static percentToValue(min: number, max: number, percent: number): number {
