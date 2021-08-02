@@ -12112,44 +12112,53 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _app_ts_jquery_range__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../app/ts/jquery.range */ "./src/app/ts/jquery.range.ts");
 /* provided dependency */ var $ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
 
-const toCamelCase = (s) => s.replace(/([-][a-z])/ig, ($1) => $1.toUpperCase().replace('-', ''));
-const updateForm = ($form, state) => {
-    const $textInputs = $form.find('.js-slider-config__input_type_text');
-    $textInputs.each((_, configInput) => {
-        const name = toCamelCase($(configInput).attr('name'));
-        $(configInput).val(state[name]);
-    });
-};
-const handleConfigInputChange = (event, api) => {
-    const propName = toCamelCase($(event.target).attr('name'));
-    const propValue = $(event.target).hasClass('js-slider-config__input_type_checkbox')
-        ? $(event.target).is(':checked')
-        : Number($(event.target).val());
-    api.update({
-        [propName]: propValue,
-    });
-};
-const setEventListeners = ($form, api) => {
-    $form.find('.js-slider-config__input').each((_, input) => {
-        $(input).on('change', (event) => handleConfigInputChange(event, api));
-    });
-};
-const init = ($targets) => {
-    $targets.each((_, target) => {
-        const $target = $(target);
-        const $configForm = $target.closest('.js-slider-group').find('.js-slider-config');
-        const sliderApi = $target.range({
-            onChange(state) {
-                updateForm($configForm, state);
-            },
-            onCreate(state) {
-                updateForm($configForm, state);
-            },
-        }).data('api');
-        setEventListeners($configForm, sliderApi);
-    });
-};
-init($('.js-slider-group__target-input'));
+class DemoPage {
+    constructor() {
+        this.toCamelCase = (s) => s.replace(/([-][a-z])/ig, ($1) => $1.toUpperCase()
+            .replace('-', ''));
+        this.render();
+    }
+    handleConfigInputChange(event, api) {
+        const propName = this.toCamelCase($(event.target).attr('name'));
+        const propValue = $(event.target).hasClass('js-slider-config__input_type_checkbox')
+            ? $(event.target).is(':checked')
+            : Number($(event.target).val());
+        api.update({
+            [propName]: propValue,
+        });
+    }
+    setEventListeners($form, api) {
+        $form.find('.js-slider-config__input').each((_, input) => {
+            $(input).on('change', (event) => this.handleConfigInputChange(event, api));
+        });
+    }
+    render() {
+        const updateForm = ($form, state) => {
+            const $textInputs = $form.find('.js-slider-config__input_type_text');
+            $textInputs.each((_, configInput) => {
+                const name = this.toCamelCase($(configInput).attr('name'));
+                $(configInput).val(state[name]);
+            });
+        };
+        const init = ($targets) => {
+            $targets.each((_, target) => {
+                const $target = $(target);
+                const $configForm = $target.closest('.js-slider-group').find('.js-slider-config');
+                const sliderApi = $target.range({
+                    onChange(state) {
+                        updateForm($configForm, state);
+                    },
+                    onCreate(state) {
+                        updateForm($configForm, state);
+                    },
+                }).data('api');
+                this.setEventListeners($configForm, sliderApi);
+            });
+        };
+        init($('.js-slider-group__target-input'));
+    }
+}
+const demoPage = new DemoPage();
 
 
 /***/ }),
