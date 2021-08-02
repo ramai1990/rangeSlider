@@ -5,10 +5,10 @@ class DemoPage {
     this.render();
   }
 
-  toCamelCase = (s): string => s.replace(/([-][a-z])/ig, ($1) => $1.toUpperCase()
+  public toCamelCase = (s): string => s.replace(/([-][a-z])/ig, ($1) => $1.toUpperCase()
     .replace('-', ''));
 
-  handleConfigInputChange(event, api) {
+  public handleConfigInputChange(event, api) {
     const propName: string = this.toCamelCase($(event.target).attr('name'));
     const propValue: number|boolean = $(event.target).hasClass('js-slider-config__input_type_checkbox')
       ? $(event.target).is(':checked')
@@ -19,13 +19,13 @@ class DemoPage {
     });
   }
 
-  setEventListeners($form, api): void {
+  public setEventListeners($form, api): void {
     $form.find('.js-slider-config__input').each((_, input) => {
       $(input).on('change', (event) => this.handleConfigInputChange(event, api));
     });
   }
 
-  render() {
+  public render() {
     const updateForm = ($form, state): void => {
       const $textInputs = $form.find('.js-slider-config__input_type_text');
       $textInputs.each((_, configInput) => {
