@@ -35,7 +35,9 @@ class GridView {
   }
 
   private bindDocumentEvents(): void {
-    this.$element.find('.js-range-slider__grid-label').on('click', this.handleTickClick);
+    this.$element.find('.js-range-slider__grid-label')
+      .on('click', this.handleTickClick)
+      .addClass('disabled');
   }
 
   private handleTickClick = (e): void => {
