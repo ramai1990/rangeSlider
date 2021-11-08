@@ -157,8 +157,8 @@ class Model extends Observer implements SliderModel {
     max = Number(max);
 
     return {
-      min: min > max ? Math.round(Math.min(max, min)) : min,
-      max: min > max ? Math.round(Math.max(max, min)) : max,
+      min: Math.round(min),
+      max: Math.round(max),
     };
   }
 
@@ -185,9 +185,10 @@ class Model extends Observer implements SliderModel {
     if (isRange) {
       const valueAlignedToStep = Model.snapToStep(min, max, step, value);
       const value2AlignedToStep = Model.snapToStep(min, max, step, value2);
-
-      if (prop === 'value' && outValue > value2AlignedToStep) outValue = value2AlignedToStep;
-      if (prop === 'value2' && outValue < valueAlignedToStep) outValue = valueAlignedToStep;
+      const validateStep = prop === 'value' && outValue > value2AlignedToStep;
+      const validateStep2 = prop === 'value2' && outValue < valueAlignedToStep;
+      if (validateStep) outValue = value2AlignedToStep;
+      if (validateStep2) outValue = valueAlignedToStep;
     }
 
     outValue = outValue > max ? max : outValue;
