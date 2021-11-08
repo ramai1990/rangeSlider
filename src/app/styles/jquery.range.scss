@@ -87,10 +87,6 @@
     font-size: 0.75rem;
     color: $color-primary-50;
     cursor: pointer;
-    &.disabled {
-      cursor: default;
-      pointer-events: none;
-    }
   }
   &_orientation {
     &_vertical {

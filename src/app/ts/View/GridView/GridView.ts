@@ -36,8 +36,7 @@ class GridView {
 
   private bindDocumentEvents(): void {
     this.$element.find('.js-range-slider__grid-label')
-      .on('click', this.handleTickClick)
-      .addClass('disabled');
+      .on('click', this.handleTickClick);
   }
 
   private handleTickClick = (e): void => {
@@ -47,13 +46,13 @@ class GridView {
 
   private getTicks(state: State): Array<Tick> {
     const {
-      min, max, gridDensity,
+      min, max, gridDensity, step,
     } = state;
     const ticks = [];
-    const delta = Math.round((max - min) / gridDensity);
+    const delta = Math.round((max - min) / (gridDensity * step));
     const cssProp = this.isVertical() ? 'top' : 'left';
 
-    for (let currentValue = min; currentValue < max; currentValue += delta) {
+    for (let currentValue = min; currentValue < max; currentValue += delta * step) {
       const position = GridView.valueToPercent(min, max, currentValue);
       ticks.push({
         position: `${cssProp}:${position}%`,
