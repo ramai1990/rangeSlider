@@ -166,10 +166,10 @@ class Model extends Observer implements SliderModel {
     const {
       value, value2, max, isRange,
     } = state;
-
+    const result = isRange && value2 === null;
     return {
       value: this.validateValue('value', value, state),
-      value2: isRange && value2 === null ? max : this.validateValue('value2', value2, state),
+      value2: result ? max : this.validateValue('value2', value2, state),
     };
   }
 
