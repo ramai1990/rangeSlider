@@ -11373,11 +11373,11 @@ class Model extends _Observer_Observer__WEBPACK_IMPORTED_MODULE_0__.default {
         const extra = { redraw: true };
         this.trigger('change.state', { ...this.state }, this.updateModelExtraPosition(extra));
     }
-    update(state, viewExtra) {
+    update(state, viewExtra = {}) {
         const [stateProperty, stateValue] = Object.entries(state)[0];
         const thisState = { ...this.state };
         const modelExtra = { redraw: true };
-        const { percent } = viewExtra || {};
+        const { percent } = viewExtra;
         let newValue = stateValue;
         switch (stateProperty) {
             case 'value':
@@ -11551,13 +11551,13 @@ class Observer {
     }
     on(events, fn) {
         events.replace(/\S+/g, (name) => {
-            this.callbacks[name] = this.callbacks[name] || [];
+            this.callbacks[name] = [];
             this.callbacks[name].push(fn);
             return '';
         });
     }
     trigger(name, data, extra) {
-        const fns = this.callbacks[name] || [];
+        const fns = this.callbacks[name];
         fns.map((fn) => fn.apply(this, [data, extra]));
     }
 }
