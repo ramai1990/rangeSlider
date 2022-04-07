@@ -1,3 +1,4 @@
+/* eslint-disable quotes */
 module.exports = {
   root: true,
   parser: "@typescript-eslint/parser",
@@ -46,5 +47,6 @@ module.exports = {
         tsx: "never",
       },
     ],
+    'linebreak-style': 0,
   },
 };
