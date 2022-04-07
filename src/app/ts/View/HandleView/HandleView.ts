@@ -12,13 +12,13 @@ class HandleView {
 
   private $track: JQuery;
 
-  private $element: JQuery;
+  private $element!: JQuery;
 
-  private bubbleView: BubbleView;
+  private bubbleView!: BubbleView | null;
 
-  private rangeBubbleView: RangeBubbleView;
+  private rangeBubbleView!: RangeBubbleView | null;
 
-  private type: 'from' | 'to';
+  private type!: 'from' | 'to';
 
   constructor($slider: JQuery, state: State) {
     this.announcer = new Observer();
@@ -34,9 +34,9 @@ class HandleView {
     const { showBubble, isRange } = state;
 
     if (showBubble) {
-      this.bubbleView.update(state);
+      this.bubbleView?.update(state);
       if (isRange && this.type === 'from') {
-        this.rangeBubbleView.update(state);
+        this.rangeBubbleView?.update(state);
       }
     }
   }
@@ -74,7 +74,7 @@ class HandleView {
   private updateDataset(state: State): void {
     const { value, value2 } = state;
 
-    this.$element.attr('data-value', this.type === 'from' ? value : value2);
+    this.$element.attr('data-value', this.type === 'from' ? <number>value : <number>value2);
   }
 
   private isVertical(): boolean {

@@ -1,24 +1,21 @@
 import Observer from '../Observer/Observer';
-import {
-  DEFAULT_STEP,
-  GRID_DENSITY_MIN,
-  GRID_DENSITY_MAX,
-} from '../const';
+import { DEFAULT_STEP, GRID_DENSITY_MIN, GRID_DENSITY_MAX } from '../const';
 
 import State from '../Interfaces/State';
 import SliderViewExtraData from '../Interfaces/SliderViewExtraData';
 import SliderModel from '../Interfaces/SliderModel';
 import SliderModelExtraData from '../Interfaces/SliderModelExtraData';
+import Key from '../types';
 
 class Model extends Observer implements SliderModel {
-  private state: State;
+  private state!: State;
 
   constructor(state: State) {
     super();
     this.init(state);
   }
 
-  public get(key: string): null|number|boolean {
+  public get(key: Key): State[Key] {
     return this.state[key];
   }
 
@@ -39,7 +36,7 @@ class Model extends Observer implements SliderModel {
 
   public update(state: State, viewExtra?: SliderViewExtraData): this {
     const [stateProperty, stateValue] = Object.entries(state)[0];
-    const thisState: State = { ...this.state };
+    const thisState = { ...this.state };
     const modelExtra: SliderModelExtraData = { redraw: true };
 
     const { percent } = viewExtra || {};
@@ -51,9 +48,13 @@ class Model extends Observer implements SliderModel {
         modelExtra.redraw = false;
         if (typeof percent !== 'undefined') {
           const { min, max } = thisState;
-          newValue = Model.percentToValue(min, max, percent);
+          newValue = Model.percentToValue(<number>min, <number>max, percent);
         }
-        thisState[stateProperty] = Model.validateValue(stateProperty, Number(newValue), thisState);
+        thisState[stateProperty as unknown as number] = Model.validateValue(
+          stateProperty,
+          Number(newValue),
+          thisState,
+        );
         break;
       case 'min':
       case 'max':
@@ -73,7 +74,9 @@ class Model extends Observer implements SliderModel {
       this.updateModelExtraPosition(modelExtra),
     );
 
-    if (typeof this.state.onChange === 'function') this.state.onChange(this.state);
+    if (typeof this.state.onChange === 'function') {
+      this.state.onChange(this.state);
+    }
 
     return this;
   }
@@ -82,14 +85,15 @@ class Model extends Observer implements SliderModel {
     const state: State = { ...this.state };
     const extra: SliderModelExtraData = { redraw: true };
 
-    this.trigger(
-      'change.state',
-      state,
-      this.updateModelExtraPosition(extra),
-    );
+    this.trigger('change.state', state, this.updateModelExtraPosition(extra));
   }
 
-  public onChange(callback: (state: State, extra?: SliderModelExtraData) => void): void {
+  public onChange(
+    callback: (
+      state: State | number | undefined,
+      extra?: SliderModelExtraData
+    ) => void,
+  ): void {
     this.on('change.state', callback);
   }
 
@@ -109,7 +113,9 @@ class Model extends Observer implements SliderModel {
   private init(state: State): this {
     this.state = Model.validateState({ ...this.state, ...state });
 
-    if (typeof this.state.onCreate === 'function') this.state.onCreate(this.state);
+    if (typeof this.state.onCreate === 'function') {
+      this.state.onCreate(this.state);
+    }
 
     return this;
   }
@@ -118,14 +124,26 @@ class Model extends Observer implements SliderModel {
     const { min, max } = Model.validateMinMax(state);
     const step = Model.validateStep(state);
     const { value, value2 } = Model.validateValues({
-      ...state, min, max, step,
+      ...state,
+      min,
+      max,
+      step,
     });
     const gridDensity = Model.validateGridDensity({
-      ...state, min, max, step,
+      ...state,
+      min,
+      max,
+      step,
     });
 
     return {
-      ...state, min, max, step, value, value2, gridDensity,
+      ...state,
+      min,
+      max,
+      step,
+      value,
+      value2,
+      gridDensity,
     };
   }
 
@@ -134,9 +152,13 @@ class Model extends Observer implements SliderModel {
       gridDensity, min, max, step,
     } = state;
 
-    const autoGridDensity = Math.round((max - min) / step);
+    const autoGridDensity = Math.round(
+      (<number>max - <number>min) / <number>step,
+    );
 
-    const validatedGridDensity = autoGridDensity < gridDensity ? autoGridDensity : gridDensity;
+    const validatedGridDensity = autoGridDensity < <number>gridDensity
+      ? autoGridDensity
+      : <number>gridDensity;
 
     if (validatedGridDensity < GRID_DENSITY_MIN) return GRID_DENSITY_MIN;
     if (validatedGridDensity > GRID_DENSITY_MAX) return GRID_DENSITY_MAX;
@@ -147,10 +169,10 @@ class Model extends Observer implements SliderModel {
   private static validateStep(state: State): number {
     const { step } = state;
 
-    return Number(step) < DEFAULT_STEP ? DEFAULT_STEP : step;
+    return Number(<number>step) < DEFAULT_STEP ? DEFAULT_STEP : <number>step;
   }
 
-  private static validateMinMax(state: State): State {
+  private static validateMinMax(state: State): Pick<State, 'max' | 'min'> {
     let { min, max } = state;
 
     min = Number(min);
@@ -168,36 +190,62 @@ class Model extends Observer implements SliderModel {
     } = state;
     const isValueNull = isRange && value2 === null;
     return {
-      value: this.validateValue('value', value, state),
-      value2: isValueNull ? max : this.validateValue('value2', value2, state),
+      value: this.validateValue('value', <number>value, state),
+      value2: isValueNull
+        ? max
+        : this.validateValue('value2', <number>value2, state),
     };
   }
 
-  private static validateValue(prop: string, valueToValidate: number, state: State): number {
+  private static validateValue(
+    prop: string,
+    valueToValidate: number,
+    state: State,
+  ): number | null {
     const {
       min, max, value, value2, isRange, step,
     } = state;
 
     if (valueToValidate === null) return null;
 
-    let outValue = Model.snapToStep(min, max, step, valueToValidate);
+    let outValue = Model.snapToStep(
+      <number>min,
+      <number>max,
+      <number>step,
+      valueToValidate,
+    );
 
     if (isRange) {
-      const valueAlignedToStep = Model.snapToStep(min, max, step, value);
-      const value2AlignedToStep = Model.snapToStep(min, max, step, value2);
+      const valueAlignedToStep = Model.snapToStep(
+        <number>min,
+        <number>max,
+        <number>step,
+        <number>value,
+      );
+      const value2AlignedToStep = Model.snapToStep(
+        <number>min,
+        <number>max,
+        <number>step,
+        <number>value2,
+      );
       const validateStep = prop === 'value' && outValue > value2AlignedToStep;
       const validateStep2 = prop === 'value2' && outValue < valueAlignedToStep;
       if (validateStep) outValue = value2AlignedToStep;
       if (validateStep2) outValue = valueAlignedToStep;
     }
 
-    outValue = outValue > max ? max : outValue;
-    outValue = outValue < min ? min : outValue;
+    outValue = outValue > <number>max ? <number>max : outValue;
+    outValue = outValue < <number>min ? <number>min : outValue;
 
     return outValue;
   }
 
-  private static snapToStep(min: number, max: number, step: number, value: number): number {
+  private static snapToStep(
+    min: number,
+    max: number,
+    step: number,
+    value: number,
+  ): number {
     return value >= max ? max : Math.round((value - min) / step) * step + min;
   }
 
@@ -211,15 +259,17 @@ class Model extends Observer implements SliderModel {
     return position;
   }
 
-  private updateModelExtraPosition(extra: SliderModelExtraData): SliderModelExtraData {
+  private updateModelExtraPosition(
+    extra: SliderModelExtraData,
+  ): SliderModelExtraData {
     const {
       min, max, value, value2,
     } = this.state;
 
     return {
       redraw: extra.redraw,
-      fromPosition: Model.valueToPercent(min, max, value),
-      toPosition: Model.valueToPercent(min, max, value2),
+      fromPosition: Model.valueToPercent(<number>min, <number>max, <number>value),
+      toPosition: Model.valueToPercent(<number>min, <number>max, <number>value2),
     };
   }
 }

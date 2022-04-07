@@ -1,16 +1,22 @@
+import State from '../../../app/ts/Interfaces/State';
 import '../../../app/ts/jquery.range';
 
 class DemoPage {
-  constructor() {
-    this.render();
-  }
+  public toCamelCase = (s: string | undefined): string => {
+    if (typeof s !== 'undefined') {
+      return s.replace(/([-][a-z])/gi, ($1) => $1.toUpperCase().replace('-', ''));
+    }
+    return '';
+  };
 
-  public toCamelCase = (s): string => s.replace(/([-][a-z])/ig, ($1) => $1.toUpperCase()
-    .replace('-', ''));
-
-  public handleConfigInputChange(event, api) {
+  public handleConfigInputChange(
+    event: JQuery.ChangeEvent,
+    api: { update: (arg0: { [x: string]: number | boolean }) => void },
+  ) {
     const propName: string = this.toCamelCase($(event.target).attr('name'));
-    const propValue: number|boolean = $(event.target).hasClass('js-slider-config__input_type_checkbox')
+    const propValue: number | boolean = $(event.target).hasClass(
+      'js-slider-config__input_type_checkbox',
+    )
       ? $(event.target).is(':checked')
       : Number($(event.target).val());
 
@@ -19,34 +25,41 @@ class DemoPage {
     });
   }
 
-  public setEventListeners($form, api): void {
+  public setEventListeners(
+    $form: JQuery<HTMLElement>,
+    api: { update: (arg0: { [x: string]: number | boolean }) => void },
+  ): void {
     $form.find('.js-slider-config__input').each((_, input) => {
       $(input).on('change', (event) => this.handleConfigInputChange(event, api));
     });
   }
 
   public render() {
-    const updateForm = ($form, state): void => {
+    const updateForm = ($form: JQuery<HTMLElement>, state: State): void => {
       const $textInputs = $form.find('.js-slider-config__input_type_text');
       $textInputs.each((_, configInput) => {
         const name: string = this.toCamelCase($(configInput).attr('name'));
-        $(configInput).val(state[name]);
+        $(configInput).val(state[name] as keyof State);
       });
     };
 
-    const init = ($targets): void => {
+    const init = ($targets: JQuery<HTMLElement>): void => {
       $targets.each((_, target) => {
         const $target = $(target);
-        const $configForm = $target.closest('.js-slider-group').find('.js-slider-config');
+        const $configForm = $target
+          .closest('.js-slider-group')
+          .find('.js-slider-config');
 
-        const sliderApi = $target.range({
-          onChange(state) {
-            updateForm($configForm, state);
-          },
-          onCreate(state) {
-            updateForm($configForm, state);
-          },
-        }).data('api');
+        const sliderApi = $target
+          .range({
+            onChange(state) {
+              updateForm($configForm, state);
+            },
+            onCreate(state) {
+              updateForm($configForm, state);
+            },
+          })
+          .data('api');
 
         this.setEventListeners($configForm, sliderApi);
       });
@@ -57,3 +70,4 @@ class DemoPage {
 }
 
 const demoPage = new DemoPage();
+demoPage.render();

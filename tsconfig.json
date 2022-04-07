@@ -1,16 +1,11 @@
 {
   "compilerOptions": {
+    "strict": true,
     "target": "esnext",
     "allowSyntheticDefaultImports": true,
-    "sourceMap": true,
+    "sourceMap": true
   },
-  "include": [
-    "src/**/*"
-  ],
-  "exclude": [
-    "node_modules"
-  ],
-  "typeRoots": [
-    "node_modules/@types"
-  ]
+  "include": ["src/**/*"],
+  "exclude": ["node_modules"],
+  "typeRoots": ["node_modules/@types"]
 }

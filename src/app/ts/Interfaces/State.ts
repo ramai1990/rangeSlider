@@ -1,9 +1,12 @@
+import Key from '../types';
+
 interface State {
+  [index: string]: State[Key];
   min?: number;
   max?: number;
   step?: number;
-  value?: number;
-  value2?: null|number;
+  value?: null|number;
+  value2?: null|number|undefined;
   isRange?: boolean;
   isVertical?: boolean;
   showBubble?: boolean;

@@ -5,9 +5,9 @@ import template from './BubbleView.pug';
 class BubbleView {
   protected $handle: JQuery;
 
-  protected $element: JQuery;
+  protected $element!: JQuery;
 
-  protected type: 'from' | 'to' | 'range';
+  protected type!: 'from' | 'to' | 'range';
 
   constructor($handle: JQuery, state: State) {
     this.$handle = $handle;
@@ -15,10 +15,11 @@ class BubbleView {
     this.init(state);
   }
 
-  public update(state: State): void {
+  public update(state: Pick<State, 'value'|'value2'>): void {
     const { value, value2 } = state;
 
-    this.$element.text(this.type === 'from' ? value : value2);
+    this.$element.text(this.type === 'from' ? <number>value : <number>value2);
+
     if (this.type !== 'range') {
       this.handleCollision();
     }

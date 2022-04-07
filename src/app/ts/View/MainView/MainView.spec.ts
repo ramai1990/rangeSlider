@@ -52,7 +52,7 @@ describe('View', () => {
     expect($slider.hasClass('js-range-slider_orientation_vertical')).toBeTruthy();
   });
 
-  it('правильно представленный с диапозоном "range"', () => {
+  it('правильно представленный с диапазоном "range"', () => {
     const options = { ...defaultOptions, isRange: true };
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const view = new MainView($('input[type="range"]'), options);

@@ -6,7 +6,10 @@ import SliderViewExtraData from './SliderViewExtraData';
 interface LayerObservable {
   announcer: Observable;
   onChange: (
-    callback: (state: State, extra?: SliderModelExtraData|SliderViewExtraData) => void
+    callback: (
+      state: State | number | undefined,
+      extra?: SliderModelExtraData | SliderViewExtraData
+    ) => void
   ) => void;
 }
 

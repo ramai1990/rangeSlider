@@ -21,14 +21,14 @@ declare global {
   }
 }
 
-const fetchOptionsFromDataAttr = (attr: State): State => Object.assign(
+const fetchOptionsFromDataAttr = (attr: JQuery.PlainObject<string>): State => Object.assign(
   {}, ...Object.keys(attr).map((key) => (
     { [key]: attr[key] === '' ? true : attr[key] }
   )),
 );
 
 $.fn.range = function range(this: JQuery, options?: State): JQuery {
-  const defaults: State = {
+  const defaults = {
     min: DEFAULT_MIN,
     max: DEFAULT_MAX,
     step: DEFAULT_STEP,

@@ -1,3 +1,4 @@
+import State from '../Interfaces/State';
 import Observer from './Observer';
 
 describe('Observer', () => {
@@ -5,7 +6,9 @@ describe('Observer', () => {
     const observer = new Observer();
 
     let counter = 0;
-    const callback = (): void => { counter += 1; };
+    const callback = (): void => {
+      counter += 1;
+    };
 
     observer.on('some.event', callback);
 
@@ -20,7 +23,9 @@ describe('Observer', () => {
     const observer = new Observer();
 
     let counter = 0;
-    const callback = (delta): void => { counter += delta; };
+    const callback = (delta: number | State | undefined): void => {
+      counter += <number>delta;
+    };
 
     observer.on('some.event', callback);
 

@@ -220,7 +220,7 @@ describe('Model', () => {
   it('вызов обратного вызова " onCreate` при инициализации', () => {
     let callbackAffectedNumber = 0;
     const callback = (state: State) => {
-      callbackAffectedNumber += state.max;
+      callbackAffectedNumber += <number>state.max;
     };
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const model: Model = new Model({ ...defaultOptions, onCreate: callback });
@@ -232,7 +232,7 @@ describe('Model', () => {
     let callbackAffectedNumber = 0;
     const value = 23;
     const callback = (state: State) => {
-      callbackAffectedNumber += state.value;
+      callbackAffectedNumber += <number>state.value;
     };
     const model: Model = new Model({ ...defaultOptions, onChange: callback });
     model.update({ value });

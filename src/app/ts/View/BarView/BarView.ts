@@ -5,7 +5,7 @@ class BarView {
 
   private $track: JQuery;
 
-  private $element: JQuery;
+  private $element!: JQuery;
 
   constructor($slider: JQuery) {
     this.$slider = $slider;

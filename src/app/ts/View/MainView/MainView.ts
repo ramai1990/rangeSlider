@@ -17,33 +17,33 @@ class MainView implements SliderView, LayerObservable {
 
   private $target: JQuery;
 
-  private $element: JQuery;
+  private $element!: JQuery;
 
-  private $track: JQuery;
+  private $track!: JQuery;
 
-  private $handleFrom: JQuery;
+  private $handleFrom!: JQuery;
 
-  private $handleTo: JQuery;
+  private $handleTo!: JQuery;
 
-  private $selection: JQuery;
+  private $selection!: JQuery;
 
-  private $draggingHandle: JQuery;
+  private $draggingHandle!: JQuery | null;
 
-  private handleFromView: HandleView;
+  private handleFromView!: HandleView;
 
-  private handleToView: HandleView;
+  private handleToView!: HandleView | null;
 
-  private barView: BarView;
+  private barView!: BarView | null;
 
-  private gridView: GridView;
+  private gridView!: GridView | null;
 
   private handleCenterOffset = 0;
 
-  private handleDragStart = (e): void => this.announceJump(e);
+  private handleDragStart = (e: JQuery.Event): void => this.announceJump(e);
 
-  private handleDrag = (e): void => this.announceDrag(e);
+  private handleDrag = (e: JQuery.Event): void => this.announceDrag(e);
 
-  private handleDragEnd = (e): void => this.dragEnd(e);
+  private handleDragEnd = (e: JQuery.Event): void => this.dragEnd(e);
 
   constructor($target: JQuery, state: State) {
     this.announcer = new Observer();
@@ -58,22 +58,27 @@ class MainView implements SliderView, LayerObservable {
       this.init(state);
     }
 
-    this.handleFromView.update(state, fromPosition);
+    this.handleFromView.update(state, <number>fromPosition);
     if (this.handleToView) {
-      this.handleToView.update(state, toPosition);
+      this.handleToView.update(state, <number>toPosition);
     }
 
     if (this.barView) {
       this.barView.update(
-        this.handleToView ? fromPosition : 0,
-        this.handleToView ? toPosition : fromPosition,
+        this.handleToView ? <number>fromPosition : 0,
+        this.handleToView ? <number>toPosition : <number>fromPosition,
       );
     }
 
     return this;
   }
 
-  public onChange(callback: (state: State, extra?: SliderViewExtraData) => void): void {
+  public onChange(
+    callback: (
+      state: State | number | undefined,
+      extra?: SliderViewExtraData | SliderModelExtraData
+    ) => void,
+  ): void {
     this.announcer.on('change.view', callback);
   }
 
@@ -93,7 +98,7 @@ class MainView implements SliderView, LayerObservable {
 
     if (showGrid) {
       this.gridView = new GridView(this.$element, state);
-      this.gridView.onClickTick((value) => this.announceClickTick(value));
+      this.gridView.onClickTick((value) => this.announceClickTick(<number>value));
     } else {
       this.gridView = null;
     }
@@ -106,9 +111,9 @@ class MainView implements SliderView, LayerObservable {
     this.bindDocumentEvents();
   }
 
-  private announceJump(e: MouseEvent): void {
-    this.setHandleCenterOffset(e);
-    const cursorPosition = this.getCursorPosition(e);
+  private announceJump(e: MouseEvent | JQuery.Event): void {
+    this.setHandleCenterOffset(e as MouseEvent);
+    const cursorPosition = this.getCursorPosition(e as MouseEvent);
 
     let statePropName = 'value';
 
@@ -121,41 +126,59 @@ class MainView implements SliderView, LayerObservable {
     }
     this.$draggingHandle = statePropName === 'value' ? this.$handleFrom : this.$handleTo;
 
-    this.$handleFrom.removeClass('range-slider__handle_active js-range-slider__handle_active');
-    this.$handleTo.removeClass('range-slider__handle_active js-range-slider__handle_active');
-    this.$draggingHandle.addClass('range-slider__handle_active js-range-slider__handle_active');
+    this.$handleFrom.removeClass(
+      'range-slider__handle_active js-range-slider__handle_active',
+    );
+    this.$handleTo.removeClass(
+      'range-slider__handle_active js-range-slider__handle_active',
+    );
+    this.$draggingHandle.addClass(
+      'range-slider__handle_active js-range-slider__handle_active',
+    );
 
-    const state: State = { [statePropName]: null };
+    const state: Omit<State, 'value' | 'value2'> | number = {
+      [statePropName]: null,
+    };
     const extra: SliderViewExtraData = { percent: cursorPosition };
 
-    this.announcer.trigger('change.view', state, extra);
+    this.announcer.trigger('change.view', state as State, extra);
   }
 
-  private announceDrag(e: MouseEvent): void {
+  private announceDrag(
+    e: JQuery.Event | (MouseEvent & JQuery.ClickEvent),
+  ): void {
     e.preventDefault();
     if (this.$draggingHandle) {
-      const statePropName = this.$draggingHandle.hasClass('js-range-slider__handle_type_to')
+      const statePropName = this.$draggingHandle.hasClass(
+        'js-range-slider__handle_type_to',
+      )
         ? 'value2'
         : 'value';
 
-      const state: State = { [statePropName]: null };
-      const extra: SliderViewExtraData = { percent: this.getCursorPosition(e) };
+      const state: Omit<State, 'value' | 'value2'> | number = {
+        [statePropName]: null,
+      };
+      const extra: SliderViewExtraData = {
+        percent: this.getCursorPosition(e as MouseEvent),
+      };
 
-      this.announcer.trigger('change.view', state, extra);
+      this.announcer.trigger('change.view', state as State, extra);
     }
   }
 
   private announceClickTick(value: number): void {
     const statePropName = this.handleToView
-      ? MainView.getClosestValuePropName(value,
+      ? MainView.getClosestValuePropName(
+        value,
         this.handleFromView.getCurrentValue(),
-        this.handleToView.getCurrentValue())
+        this.handleToView.getCurrentValue(),
+      )
       : 'value';
-    const state: State = { [statePropName]: value };
-    this.announcer.trigger('change.view', state);
+    const state: Partial<State> = { [statePropName]: value };
+    this.announcer.trigger('change.view', state as State);
   }
 
-  private dragEnd(e: MouseEvent): void {
+  private dragEnd(e: JQuery.Event | MouseEvent): void {
     e.preventDefault();
     if (this.$draggingHandle) {
       this.$draggingHandle = null;
@@ -166,27 +189,36 @@ class MainView implements SliderView, LayerObservable {
   private getCursorPosition(e: MouseEvent): number {
     const $track = this.$element.find('.range-slider__track');
 
-    const cursorPositionPx = this.isVertical()
-      ? e.pageY
-      : e.pageX;
+    const cursorPositionPx = this.isVertical() ? e.pageY : e.pageX;
     const trackOffsetPx = this.isVertical()
-      ? $track.offset().top
-      : $track.offset().left;
+      ? ($track.offset() as JQueryCoordinates).top
+      : ($track.offset() as JQueryCoordinates).left;
     const percentUnitPx = this.isVertical()
-      ? $track.outerHeight() / 100
-      : $track.outerWidth() / 100;
+      ? ($track.outerHeight() as number) / 100
+      : ($track.outerWidth() as number) / 100;
 
-    return (cursorPositionPx - trackOffsetPx + this.handleCenterOffset) / percentUnitPx;
+    return (
+      (<number>cursorPositionPx - trackOffsetPx + this.handleCenterOffset)
+      / percentUnitPx
+    );
   }
 
   private setHandleCenterOffset(e: MouseEvent): void {
-    const $handle = $(e.target).closest('.js-range-slider__handle');
+    const $handle = $(e.target as EventTarget).closest(
+      '.js-range-slider__handle',
+    );
     if ($handle.length === 1) {
       const cursorPositionPx = this.isVertical() ? e.pageY : e.pageX;
-      const handleOffsetPx = this.isVertical() ? $handle.offset().top : $handle.offset().left;
-      const handleDimensionPx = this.isVertical() ? $handle.outerHeight() : $handle.outerWidth();
+      const handleOffsetPx = this.isVertical()
+        ? ($handle.offset() as JQueryCoordinates).top
+        : ($handle.offset() as JQueryCoordinates).left;
+      const handleDimensionPx = this.isVertical()
+        ? $handle.outerHeight()
+        : $handle.outerWidth();
 
-      this.handleCenterOffset = handleOffsetPx - cursorPositionPx + handleDimensionPx / 2;
+      this.handleCenterOffset = handleOffsetPx
+        - <number>cursorPositionPx
+        + <number>handleDimensionPx / 2;
     }
   }
 
@@ -204,7 +236,11 @@ class MainView implements SliderView, LayerObservable {
       .on('mousemove', this.handleDrag);
   }
 
-  private static getClosestValuePropName(target: number, from: number, to: number): string {
+  private static getClosestValuePropName(
+    target: number,
+    from: number,
+    to: number,
+  ): string {
     const distFrom = Math.abs(target - from);
     const distTo = Math.abs(target - to);
 

@@ -31,15 +31,15 @@ const defaultOptions: State = {
 };
 
 interface Ticks {
-  tickLabels: Array<number>,
-  tickPositions: Array<string>,
+  tickLabels: Array<number>;
+  tickPositions: Array<string>;
 }
 
 const getTicks = (): Ticks => {
   const $ticks = $('.js-range-slider .js-range-slider__grid-point');
 
-  const tickLabels = [];
-  const tickPositions = [];
+  const tickLabels: number[] = [];
+  const tickPositions: string[] = [];
   $ticks.each((_, tick) => {
     const $tick = $(tick);
     const $label = $tick.find('.js-range-slider__grid-label');
@@ -61,7 +61,7 @@ describe('App', () => {
 
   it('инициализированные с настройками по умолчанию', () => {
     const app: App = new App($('input[type="range"]'), defaultOptions);
-    const $rangeSlider:JQuery = $('.js-range-slider');
+    const $rangeSlider: JQuery = $('.js-range-slider');
 
     expect($rangeSlider.length).toEqual(1);
 
@@ -85,8 +85,10 @@ describe('App', () => {
 
     const $track = $('.js-range-slider .js-range-slider__track');
 
-    const halfTrackClickX = $track.outerWidth() / 2 + $track.offset().left;
-    const halfTrackClickY = $track.outerHeight() / 2 + $track.offset().top;
+    const halfTrackClickX = ($track.outerWidth() as number) / 2
+      + ($track.offset() as JQueryCoordinates).left;
+    const halfTrackClickY = ($track.outerHeight() as number) / 2
+      + ($track.offset() as JQueryCoordinates).top;
 
     const event = $.Event('mousedown');
 
@@ -102,12 +104,17 @@ describe('App', () => {
 
   it('Правильно обрабатывает щелчок на 1/4 дорожки c двумя ручками', () => {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const app: App = new App($('input[type="range"]'), { ...defaultOptions, isRange: true });
+    const app: App = new App($('input[type="range"]'), {
+      ...defaultOptions,
+      isRange: true,
+    });
 
     const $track = $('.js-range-slider .js-range-slider__track');
 
-    const quarterTrackClickX = $track.outerWidth() / 4 + $track.offset().left;
-    const halfTrackClickY = $track.outerHeight() / 2 + $track.offset().top;
+    const quarterTrackClickX = ($track.outerWidth() as number) / 4
+      + ($track.offset() as JQueryCoordinates).left;
+    const halfTrackClickY = ($track.outerHeight() as number) / 2
+      + ($track.offset() as JQueryCoordinates).top;
 
     const event = $.Event('mousedown');
 
@@ -116,7 +123,9 @@ describe('App', () => {
 
     $track.trigger(event);
 
-    const $handleFrom = $('.js-range-slider .js-range-slider__handle_type_from');
+    const $handleFrom = $(
+      '.js-range-slider .js-range-slider__handle_type_from',
+    );
     const $handleTo = $('.js-range-slider .js-range-slider__handle_type_to');
 
     expect($handleFrom.css('left')).toEqual('25%');
@@ -125,12 +134,17 @@ describe('App', () => {
 
   it('Правильно обрабатывает щелчок на 3/4 дорожки c двумя ручками', () => {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const app: App = new App($('input[type="range"]'), { ...defaultOptions, isRange: true });
+    const app: App = new App($('input[type="range"]'), {
+      ...defaultOptions,
+      isRange: true,
+    });
 
     const $track = $('.js-range-slider .js-range-slider__track');
 
-    const threeQuartersTrackClickX = ($track.outerWidth() / 4) * 3 + $track.offset().left;
-    const halfTrackClickY = $track.outerHeight() / 2 + $track.offset().top;
+    const threeQuartersTrackClickX = (($track.outerWidth() as number) / 4) * 3
+      + ($track.offset() as JQueryCoordinates).left;
+    const halfTrackClickY = ($track.outerHeight() as number) / 2
+      + ($track.offset() as JQueryCoordinates).top;
 
     const event = $.Event('mousedown');
 
@@ -139,7 +153,9 @@ describe('App', () => {
 
     $track.trigger(event);
 
-    const $handleFrom = $('.js-range-slider .js-range-slider__handle_type_from');
+    const $handleFrom = $(
+      '.js-range-slider .js-range-slider__handle_type_from',
+    );
     const $handleTo = $('.js-range-slider .js-range-slider__handle_type_to');
 
     expect($handleFrom.css('left')).toEqual('0%');
@@ -148,12 +164,17 @@ describe('App', () => {
 
   it('Правильно обрабатывает щелчок на 1/4 дорожки c двумя ручками', () => {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const app: App = new App($('input[type="range"]'), { ...defaultOptions, isRange: true });
+    const app: App = new App($('input[type="range"]'), {
+      ...defaultOptions,
+      isRange: true,
+    });
 
     const $track = $('.js-range-slider .js-range-slider__track');
 
-    const halfTrackClickX = $track.outerWidth() / 2 + $track.offset().left;
-    const halfTrackClickY = $track.outerHeight() / 2 + $track.offset().top;
+    const halfTrackClickX = ($track.outerWidth() as number) / 2
+      + ($track.offset() as JQueryCoordinates).left;
+    const halfTrackClickY = ($track.outerHeight() as number) / 2
+      + ($track.offset() as JQueryCoordinates).top;
 
     const event = $.Event('mousedown');
 
@@ -172,9 +193,12 @@ describe('App', () => {
     $(document).trigger('mousemove');
     $(document).trigger('mouseup');
 
-    expect($(handleFrom).hasClass('js-range-slider__handle_active')).toBeTruthy();
+    expect(
+      $(handleFrom).hasClass('js-range-slider__handle_active'),
+    ).toBeTruthy();
 
-    event.pageX = ($track.outerWidth() / 4) * 3 + $track.offset().left;
+    event.pageX = (($track.outerWidth() as number) / 4) * 3
+      + ($track.offset() as JQueryCoordinates).left;
     event.pageY = halfTrackClickY;
 
     $track.trigger(event);
@@ -191,7 +215,9 @@ describe('App', () => {
       showBubble: true,
     };
     const app: App = new App($('input[type="range"]'), options);
-    const $tickLabel = $('.js-range-slider').find('.js-range-slider__grid-label:eq(2)');
+    const $tickLabel = $('.js-range-slider').find(
+      '.js-range-slider__grid-label:eq(2)',
+    );
     const $bubble = $('.js-range-slider .js-range-slider__bubble');
 
     $tickLabel.trigger('click');
@@ -199,13 +225,21 @@ describe('App', () => {
 
     app.update({ ...options, isRange: true });
 
-    const $tickLabelFirstQuarter = $('.js-range-slider').find('.js-range-slider__grid-label:eq(1)');
+    const $tickLabelFirstQuarter = $('.js-range-slider').find(
+      '.js-range-slider__grid-label:eq(1)',
+    );
     $tickLabelFirstQuarter.trigger('click');
-    expect($('.js-range-slider .js-range-slider__bubble_type_from').text()).toEqual('20');
+    expect(
+      $('.js-range-slider .js-range-slider__bubble_type_from').text(),
+    ).toEqual('20');
 
-    const $tickLabelLastQuarter = $('.js-range-slider').find('.js-range-slider__grid-label:eq(4)');
+    const $tickLabelLastQuarter = $('.js-range-slider').find(
+      '.js-range-slider__grid-label:eq(4)',
+    );
     $tickLabelLastQuarter.trigger('click');
-    expect($('.js-range-slider .js-range-slider__bubble_type_to').text()).toEqual('80');
+    expect(
+      $('.js-range-slider .js-range-slider__bubble_type_to').text(),
+    ).toEqual('80');
   });
 
   it('правильно отображает вертикальную сетку', () => {
@@ -245,7 +279,9 @@ describe('App', () => {
 
     expect(tickLabelsAfterUpdate).toEqual([-3, 0, 3, 6, 9, 10]);
 
-    const $tickLabel = $('.js-range-slider').find('.js-range-slider__grid-label:last-child');
+    const $tickLabel = $('.js-range-slider').find(
+      '.js-range-slider__grid-label:last-child',
+    );
     const $bubble = $('.js-range-slider .js-range-slider__bubble');
 
     $tickLabel.trigger('click');
@@ -266,7 +302,10 @@ describe('App', () => {
     expect($(barSelector).css('bottom')).toEqual('50%');
 
     app.update({
-      ...options, isRange: true, value: 50, value2: 100,
+      ...options,
+      isRange: true,
+      value: 50,
+      value2: 100,
     });
     expect($(barSelector).css('left')).toEqual('50%');
     expect($(barSelector).css('right')).toEqual('0%');

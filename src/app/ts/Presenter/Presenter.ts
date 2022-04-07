@@ -23,12 +23,18 @@ class Presenter {
     this.model.setState(state);
   }
 
-  private updateState(state: State, extra?: SliderViewExtraData): void {
-    this.model.update(state, extra);
+  private updateState(
+    state: number | State | undefined,
+    extra?: SliderViewExtraData | SliderModelExtraData,
+  ): void {
+    this.model.update(state as State, extra as SliderViewExtraData);
   }
 
-  private updateView(state: State, extra?: SliderModelExtraData): void {
-    this.view.update(state, extra);
+  private updateView(
+    state: number | State | undefined,
+    extra?: SliderModelExtraData,
+  ): void {
+    this.view.update(state as State, <SliderModelExtraData>extra);
   }
 }
 
