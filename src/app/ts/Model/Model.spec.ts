@@ -135,10 +135,10 @@ describe('Model', () => {
     expect(model.get('min')).toEqual(100);
     expect(model.get('max')).toEqual(200);
 
-    model.update({ min: 300 });
+    model.update({ max: 200, min: 500 });
 
-    expect(model.get('min')).toEqual(200);
-    expect(model.get('max')).toEqual(300);
+    expect(model.get('min')).toEqual(100);
+    expect(model.get('max')).toEqual(200);
   });
 
   it('не может содержать значений больше, чем `max`.', () => {

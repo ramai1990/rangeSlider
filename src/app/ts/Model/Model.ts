@@ -48,9 +48,9 @@ class Model extends Observer implements SliderModel {
         modelExtra.redraw = false;
         if (typeof percent !== 'undefined') {
           const { min, max } = thisState;
-          newValue = Model.percentToValue(<number>min, <number>max, percent);
+          newValue = Model.percentToValue(min as number, max as number, percent);
         }
-        thisState[stateProperty as unknown as number] = Model.validateValue(
+        thisState[stateProperty] = Model.validateValue(
           stateProperty,
           Number(newValue),
           thisState,

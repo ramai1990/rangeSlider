@@ -259,7 +259,8 @@ describe('App', () => {
   });
 
   it('правильно визуализирует сетку с отрицательным minmax и шагом > 1', () => {
-    const options: State = {
+    const app = new App($('input[type="range"]'), defaultOptions);
+    app.update({
       ...defaultOptions,
       min: -1,
       max: 10,
@@ -267,14 +268,20 @@ describe('App', () => {
       showGrid: true,
       showBubble: true,
       gridDensity: 10,
-    };
-
-    const app = new App($('input[type="range"]'), options);
+    });
     const { tickLabels } = getTicks();
 
     expect(tickLabels).toEqual([-1, 2, 5, 8, 10]);
 
-    app.update({ ...options, min: -3 });
+    app.update({
+      ...defaultOptions,
+      min: -3,
+      max: 10,
+      step: 3,
+      showGrid: true,
+      showBubble: true,
+      gridDensity: 10,
+    });
     const { tickLabels: tickLabelsAfterUpdate } = getTicks();
 
     expect(tickLabelsAfterUpdate).toEqual([-3, 0, 3, 6, 9, 10]);

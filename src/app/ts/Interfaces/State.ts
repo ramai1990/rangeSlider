@@ -6,7 +6,7 @@ interface State {
   max?: number;
   step?: number;
   value?: null|number;
-  value2?: null|number|undefined;
+  value2?: null|number;
   isRange?: boolean;
   isVertical?: boolean;
   showBubble?: boolean;
