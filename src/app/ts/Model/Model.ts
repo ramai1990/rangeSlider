@@ -34,12 +34,12 @@ class Model extends Observer implements SliderModel {
     );
   }
 
-  public update(state: State, viewExtra?: SliderViewExtraData): this {
+  public update(state: State, viewExtra: SliderViewExtraData = {}): this {
     const [stateProperty, stateValue] = Object.entries(state)[0];
     const thisState = { ...this.state };
     const modelExtra: SliderModelExtraData = { redraw: true };
 
-    const { percent } = viewExtra || {};
+    const { percent } = viewExtra;
     let newValue = stateValue;
 
     switch (stateProperty) {

@@ -14,7 +14,7 @@ class Observer implements Observable {
 
   public on(events: string, fn: (data: State | number | undefined) => void): void {
     events.replace(/\S+/g, (name): string => {
-      this.callbacks[name] = this.callbacks[name] || [];
+      this.callbacks[name] = [];
       this.callbacks[name].push(fn);
       return '';
     });
@@ -25,7 +25,7 @@ class Observer implements Observable {
     data?: State | number,
     extra?: SliderModelExtraData | SliderViewExtraData,
   ): void {
-    const fns = this.callbacks[name] || [];
+    const fns = this.callbacks[name];
 
     fns.map((fn) => fn.apply(this, [data, extra]));
   }
