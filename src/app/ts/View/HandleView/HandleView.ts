@@ -1,13 +1,10 @@
 import State from '../../Interfaces/State';
-import Observer from '../../Observer/Observer';
 import BubbleView from '../BubbleView/BubbleView';
 import RangeBubbleView from '../RangeBubbleView/RangeBubbleView';
 
 import template from './HandleView.pug';
 
 class HandleView {
-  private announcer: Observer;
-
   private $slider: JQuery;
 
   private $track: JQuery;
@@ -21,7 +18,6 @@ class HandleView {
   private type!: 'from' | 'to';
 
   constructor($slider: JQuery, state: State) {
-    this.announcer = new Observer();
     this.$slider = $slider;
     this.$track = this.$slider.find('.js-range-slider__track');
     this.init(state);

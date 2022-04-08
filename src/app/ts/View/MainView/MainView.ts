@@ -25,8 +25,6 @@ class MainView implements SliderView, LayerObservable {
 
   private $handleTo!: JQuery;
 
-  private $selection!: JQuery;
-
   private $draggingHandle!: JQuery | null;
 
   private handleFromView!: HandleView;
@@ -106,7 +104,6 @@ class MainView implements SliderView, LayerObservable {
     this.$track = this.$element.find('.js-range-slider__track');
     this.$handleFrom = this.$element.find('.js-range-slider__handle_type_from');
     this.$handleTo = this.$element.find('.js-range-slider__handle_type_to');
-    this.$selection = this.$element.find('.js-range-slider__bar');
 
     this.bindDocumentEvents();
   }
