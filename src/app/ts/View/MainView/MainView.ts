@@ -10,8 +10,6 @@ import HandleView from '../HandleView/HandleView';
 import BarView from '../BarView/BarView';
 import GridView from '../GridView/GridView';
 
-import template from './MainView.pug';
-
 class MainView implements SliderView, LayerObservable {
   announcer: Observable;
 
@@ -81,10 +79,18 @@ class MainView implements SliderView, LayerObservable {
   }
 
   private init(state: State): void {
+    const { isVertical } = state;
     if (this.$element) {
       this.$element.remove();
     }
-    this.$element = $(template({ state }));
+    const rangeSlider = $('<div class="range-slider js-range-slider">');
+    if (isVertical) {
+      rangeSlider
+        .addClass('range-slider_orientation_vertical js-range-slider_orientation_vertical');
+    }
+    this.$element = rangeSlider
+      .append($('<div class="range-slider__track js-range-slider__track">'));
+
     this.$target.after(this.$element).hide();
 
     this.handleFromView = new HandleView(this.$element, state);

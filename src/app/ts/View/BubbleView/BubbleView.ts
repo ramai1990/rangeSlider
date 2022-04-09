@@ -1,7 +1,5 @@
 import State from '../../Interfaces/State';
 
-import template from './BubbleView.pug';
-
 class BubbleView {
   protected $handle: JQuery;
 
@@ -15,7 +13,7 @@ class BubbleView {
     this.init(state);
   }
 
-  public update(state: Pick<State, 'value'|'value2'>): void {
+  public update(state: Pick<State, 'value' | 'value2'>): void {
     const { value, value2 } = state;
 
     this.$element.text(this.type === 'from' ? <number>value : <number>value2);
@@ -28,7 +26,9 @@ class BubbleView {
   private handleCollision(): void {
     const oppositeType = this.type === 'from' ? 'to' : 'from';
     const $track = this.$handle.closest('.js-range-slider__track');
-    const $oppositeBubble = $track.find(`.js-range-slider__bubble_type_${oppositeType}`);
+    const $oppositeBubble = $track.find(
+      `.js-range-slider__bubble_type_${oppositeType}`,
+    );
 
     if ($oppositeBubble.length === 0) {
       return;
@@ -56,8 +56,18 @@ class BubbleView {
   }
 
   protected init(state: State): void {
-    this.type = this.$handle.hasClass('js-range-slider__handle_type_to') ? 'to' : 'from';
-    this.$element = $(template({ state, type: this.type }));
+    this.type = this.$handle.hasClass('js-range-slider__handle_type_to')
+      ? 'to'
+      : 'from';
+    const { value, value2 } = state;
+    const bubbleValue = this.type === 'from' ? value : value2;
+    const bubbleClasses = [
+      'range-slider__bubble',
+      'js-range-slider__bubble',
+      `range-slider__bubble_type_${this.type}`,
+      `js-range-slider__bubble_type_${this.type}`,
+    ];
+    this.$element = $(`<span class='${bubbleClasses.join(' ')}'>${bubbleValue}</span>`);
     this.$handle.append(this.$element);
   }
 }

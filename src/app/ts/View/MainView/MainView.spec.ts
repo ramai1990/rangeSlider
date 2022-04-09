@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import $ from 'jquery';
 import State from '../../Interfaces/State';
 import MainView from './MainView';
@@ -32,7 +33,6 @@ describe('View', () => {
   });
 
   it('предоставляемые опции по умолчанию', () => {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const view = new MainView($('input[type="range"]'), defaultOptions);
 
     const $slider = $('.js-range-slider');
@@ -44,7 +44,6 @@ describe('View', () => {
 
   it('правильно представленный с вертикальным вариантом', () => {
     const options = { ...defaultOptions, isVertical: true };
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const view = new MainView($('input[type="range"]'), options);
 
     const $slider = $('.js-range-slider');
@@ -54,7 +53,6 @@ describe('View', () => {
 
   it('правильно представленный с диапазоном "range"', () => {
     const options = { ...defaultOptions, isRange: true };
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const view = new MainView($('input[type="range"]'), options);
 
     const $slider = $('.js-range-slider');

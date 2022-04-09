@@ -2,8 +2,6 @@ import State from '../../Interfaces/State';
 import BubbleView from '../BubbleView/BubbleView';
 import RangeBubbleView from '../RangeBubbleView/RangeBubbleView';
 
-import template from './HandleView.pug';
-
 class HandleView {
   private $slider: JQuery;
 
@@ -48,12 +46,22 @@ class HandleView {
   }
 
   private init(state: State): void {
+    const {
+      value, value2, showBubble, isRange,
+    } = state;
+
     this.type = this.$track.find('.js-range-slider__handle').length === 0
       ? 'from'
       : 'to';
-    this.$element = $(template({ state, type: this.type }));
+    const handleClasses = [
+      'range-slider__handle',
+      'js-range-slider__handle',
+      `range-slider__handle_type_${this.type}`,
+      `js-range-slider__handle_type_${this.type}`,
+    ];
+    const handleValue = this.type === 'from' ? value : value2;
+    this.$element = $(`<a class='${handleClasses.join(' ')}' data-value=${handleValue} />`);
 
-    const { showBubble, isRange } = state;
     this.bubbleView = showBubble === true ? new BubbleView(this.$element, state) : null;
 
     const showRangeBubble = isRange && this.type === 'from';

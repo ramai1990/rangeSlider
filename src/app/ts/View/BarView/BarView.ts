@@ -1,5 +1,3 @@
-import template from './BarView.pug';
-
 class BarView {
   private $slider: JQuery;
 
@@ -21,7 +19,7 @@ class BarView {
   }
 
   private init(): void {
-    this.$element = $(template());
+    this.$element = $('<div class="range-slider__bar js-range-slider__bar" />');
     this.$track.append(this.$element);
   }
 

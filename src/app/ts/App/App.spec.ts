@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import $ from 'jquery';
 import App from './App';
 import State from '../Interfaces/State';
@@ -61,15 +62,15 @@ describe('App', () => {
 
   it('инициализированные с настройками по умолчанию', () => {
     const app: App = new App($('input[type="range"]'), defaultOptions);
+
     const $rangeSlider: JQuery = $('.js-range-slider');
 
     expect($rangeSlider.length).toEqual(1);
-
-    app.update({ ...defaultOptions });
   });
 
   it('правильно обновляется', () => {
     const app: App = new App($('input[type="range"]'), defaultOptions);
+
     const handleSelector = '.js-range-slider .js-range-slider__handle';
 
     expect($(handleSelector).length).toEqual(1);
@@ -80,7 +81,6 @@ describe('App', () => {
   });
 
   it('правильно обрабатывает щелчок 1/2 дорожки', () => {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const app: App = new App($('input[type="range"]'), defaultOptions);
 
     const $track = $('.js-range-slider .js-range-slider__track');
@@ -103,11 +103,9 @@ describe('App', () => {
   });
 
   it('Правильно обрабатывает щелчок на 1/4 дорожки c двумя ручками', () => {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const app: App = new App($('input[type="range"]'), {
-      ...defaultOptions,
-      isRange: true,
-    });
+    const app: App = new App($('input[type="range"]'), defaultOptions);
+
+    app.update({ isRange: true });
 
     const $track = $('.js-range-slider .js-range-slider__track');
 
@@ -133,11 +131,9 @@ describe('App', () => {
   });
 
   it('Правильно обрабатывает щелчок на 3/4 дорожки c двумя ручками', () => {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const app: App = new App($('input[type="range"]'), {
-      ...defaultOptions,
-      isRange: true,
-    });
+    const app: App = new App($('input[type="range"]'), defaultOptions);
+
+    app.update({ isRange: true });
 
     const $track = $('.js-range-slider .js-range-slider__track');
 
@@ -163,11 +159,9 @@ describe('App', () => {
   });
 
   it('Правильно обрабатывает щелчок на 1/4 дорожки c двумя ручками', () => {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const app: App = new App($('input[type="range"]'), {
-      ...defaultOptions,
-      isRange: true,
-    });
+    const app: App = new App($('input[type="range"]'), { ...defaultOptions, isRange: true });
+
+    // app.update({ isRange: true });s
 
     const $track = $('.js-range-slider .js-range-slider__track');
 
@@ -250,8 +244,9 @@ describe('App', () => {
       isVertical: true,
       gridDensity: 5,
     };
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const app = new App($('input[type="range"]'), options);
+
+    const app: App = new App($('input[type="range"]'), options);
+
     const { tickLabels, tickPositions } = getTicks();
 
     expect(tickLabels).toEqual([0, 20, 40, 60, 80, 100]);
@@ -259,32 +254,35 @@ describe('App', () => {
   });
 
   it('правильно визуализирует сетку с отрицательным minmax и шагом > 1', () => {
-    const app = new App($('input[type="range"]'), defaultOptions);
+    const app: App = new App($('input[type="range"]'), defaultOptions);
+
     app.update({
       ...defaultOptions,
       min: -1,
-      max: 10,
+      max: 11,
       step: 3,
       showGrid: true,
       showBubble: true,
       gridDensity: 10,
     });
+
     const { tickLabels } = getTicks();
 
-    expect(tickLabels).toEqual([-1, 2, 5, 8, 10]);
+    expect(tickLabels).toEqual([-1, 2, 5, 8, 11]);
 
     app.update({
       ...defaultOptions,
       min: -3,
-      max: 10,
+      max: 11,
       step: 3,
       showGrid: true,
       showBubble: true,
       gridDensity: 10,
     });
+
     const { tickLabels: tickLabelsAfterUpdate } = getTicks();
 
-    expect(tickLabelsAfterUpdate).toEqual([-3, 0, 3, 6, 9, 10]);
+    expect(tickLabelsAfterUpdate).toEqual([-3, 0, 3, 6, 9, 11]);
 
     const $tickLabel = $('.js-range-slider').find(
       '.js-range-slider__grid-label:last-child',
@@ -292,19 +290,21 @@ describe('App', () => {
     const $bubble = $('.js-range-slider .js-range-slider__bubble');
 
     $tickLabel.trigger('click');
-    expect($bubble.text()).toEqual('10');
+    expect($bubble.text()).toEqual('11');
   });
 
   it('правильно отображается с опцией "showBar"', () => {
     const options: State = { ...defaultOptions, showBar: true, value: 50 };
     const app: App = new App($('input[type="range"]'), options);
-
     const barSelector = '.js-range-slider .js-range-slider__bar';
 
     expect($(barSelector).length).toEqual(1);
     expect($(barSelector).css('right')).toEqual('50%');
 
-    app.update({ ...options, isVertical: true });
+    app.update({
+      ...options,
+      isVertical: true,
+    });
 
     expect($(barSelector).css('bottom')).toEqual('50%');
 

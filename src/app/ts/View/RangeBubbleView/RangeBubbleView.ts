@@ -1,20 +1,27 @@
 import State from '../../Interfaces/State';
 import BubbleView from '../BubbleView/BubbleView';
 
-import template from './RangeBubbleView.pug';
-
 class RangeBubbleView extends BubbleView {
   public update(state: State): void {
     const { value, value2 } = state;
 
     this.$element.text(
-      value === <number>value2 ? <number>value : `${value}-${value2}`,
+      value === <number>value2 ? value : `${value}-${value2}`,
     );
   }
 
   protected init(state: State): void {
+    const { value, value2 } = state;
     this.type = 'range';
-    this.$element = $(template({ state }));
+    const rangeClasses = [
+      'range-slider__bubble',
+      'js-range-slider__bubble',
+      'range-slider__bubble_type_range',
+      'js-range-slider__bubble_type_range',
+      'range-slider__bubble_hidden',
+    ];
+    const rangeValue = value === value2 ? value : `${value}-${value2}`;
+    this.$element = $(`<span class='${rangeClasses.join(' ')}'>${rangeValue}</span>`);
     this.$handle.append(this.$element);
   }
 }

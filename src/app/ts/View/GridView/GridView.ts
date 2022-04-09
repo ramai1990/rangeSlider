@@ -2,11 +2,9 @@ import State from '../../Interfaces/State';
 import Observer from '../../Observer/Observer';
 import Observable from '../../Interfaces/Observable';
 
-import template from './GridView.pug';
-
 interface Tick {
   position: string;
-  value: number;
+  value: number | undefined;
 }
 
 class GridView {
@@ -30,7 +28,11 @@ class GridView {
 
   private init(state: State): void {
     const ticks = this.getTicks(state);
-    this.$element = $(template({ ticks }));
+    const grid = $('<div class="range-slider__grid js-range-slider__grid" />');
+    this.$element = grid.append(ticks.map(({ position, value }) => $(`<div class="range-slider__grid-point js-range-slider__grid-point" style=${position}>
+          <span class="range-slider__grid-tick js-range-slider__grid-tick"></span>
+          <span class="range-slider__grid-label js-range-slider__grid-label">${value}</span>
+        `)));
     this.$slider.append(this.$element);
 
     this.bindDocumentEvents();
@@ -47,7 +49,7 @@ class GridView {
     this.announcer.trigger('click.tick', value);
   };
 
-  private getTicks(state: State): Omit<Tick, 'position' | 'value'> {
+  private getTicks(state: State): Tick[] {
     const {
       min, max, gridDensity, step,
     } = state;
