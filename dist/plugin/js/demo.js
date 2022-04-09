@@ -10919,399 +10919,6 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./src/app/ts/View/BarView/BarView.pug":
-/*!*********************************************!*\
-  !*** ./src/app/ts/View/BarView/BarView.pug ***!
-  \*********************************************/
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-var pug = __webpack_require__(/*! !../../../../../node_modules/pug-runtime/index.js */ "./node_modules/pug-runtime/index.js");
-
-function template(locals) {var pug_html = "", pug_mixins = {}, pug_interp;pug_html = pug_html + "\u003Cdiv class=\"range-slider__bar js-range-slider__bar\"\u003E\u003C\u002Fdiv\u003E";;return pug_html;};
-module.exports = template;
-
-/***/ }),
-
-/***/ "./src/app/ts/View/BubbleView/BubbleView.pug":
-/*!***************************************************!*\
-  !*** ./src/app/ts/View/BubbleView/BubbleView.pug ***!
-  \***************************************************/
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-var pug = __webpack_require__(/*! !../../../../../node_modules/pug-runtime/index.js */ "./node_modules/pug-runtime/index.js");
-
-function template(locals) {var pug_html = "", pug_mixins = {}, pug_interp;;var locals_for_with = (locals || {});(function (state, type) {const { value, value2 } = state;
-const classes = [
-  'range-slider__bubble',
-  'js-range-slider__bubble',
-  `range-slider__bubble_type_${type}`,
-  `js-range-slider__bubble_type_${type}`,
-];
-
-pug_html = pug_html + "\u003Cspan" + (pug.attr("class", pug.classes([classes], [true]), false, true)) + "\u003E" + (pug.escape(null == (pug_interp = type === 'from' ? value : value2) ? "" : pug_interp)) + "\u003C\u002Fspan\u003E";}.call(this,"state" in locals_for_with?locals_for_with.state:typeof state!=="undefined"?state:undefined,"type" in locals_for_with?locals_for_with.type:typeof type!=="undefined"?type:undefined));;return pug_html;};
-module.exports = template;
-
-/***/ }),
-
-/***/ "./src/app/ts/View/GridView/GridView.pug":
-/*!***********************************************!*\
-  !*** ./src/app/ts/View/GridView/GridView.pug ***!
-  \***********************************************/
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-var pug = __webpack_require__(/*! !../../../../../node_modules/pug-runtime/index.js */ "./node_modules/pug-runtime/index.js");
-
-function template(locals) {var pug_html = "", pug_mixins = {}, pug_interp;;var locals_for_with = (locals || {});(function (ticks) {pug_html = pug_html + "\u003Cdiv class=\"range-slider__grid js-range-slider__grid\"\u003E";
-// iterate ticks
-;(function(){
-  var $$obj = ticks;
-  if ('number' == typeof $$obj.length) {
-      for (var pug_index0 = 0, $$l = $$obj.length; pug_index0 < $$l; pug_index0++) {
-        var tick = $$obj[pug_index0];
-pug_html = pug_html + "\u003Cdiv" + (" class=\"range-slider__grid-point js-range-slider__grid-point\""+pug.attr("style", pug.style(tick.position), true, true)) + "\u003E\u003Cspan class=\"range-slider__grid-tick js-range-slider__grid-tick\"\u003E\u003C\u002Fspan\u003E\u003Cspan class=\"range-slider__grid-label js-range-slider__grid-label\"\u003E" + (pug.escape(null == (pug_interp = tick.value) ? "" : pug_interp)) + "\u003C\u002Fspan\u003E\u003C\u002Fdiv\u003E";
-      }
-  } else {
-    var $$l = 0;
-    for (var pug_index0 in $$obj) {
-      $$l++;
-      var tick = $$obj[pug_index0];
-pug_html = pug_html + "\u003Cdiv" + (" class=\"range-slider__grid-point js-range-slider__grid-point\""+pug.attr("style", pug.style(tick.position), true, true)) + "\u003E\u003Cspan class=\"range-slider__grid-tick js-range-slider__grid-tick\"\u003E\u003C\u002Fspan\u003E\u003Cspan class=\"range-slider__grid-label js-range-slider__grid-label\"\u003E" + (pug.escape(null == (pug_interp = tick.value) ? "" : pug_interp)) + "\u003C\u002Fspan\u003E\u003C\u002Fdiv\u003E";
-    }
-  }
-}).call(this);
-
-pug_html = pug_html + "\u003C\u002Fdiv\u003E";}.call(this,"ticks" in locals_for_with?locals_for_with.ticks:typeof ticks!=="undefined"?ticks:undefined));;return pug_html;};
-module.exports = template;
-
-/***/ }),
-
-/***/ "./src/app/ts/View/HandleView/HandleView.pug":
-/*!***************************************************!*\
-  !*** ./src/app/ts/View/HandleView/HandleView.pug ***!
-  \***************************************************/
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-var pug = __webpack_require__(/*! !../../../../../node_modules/pug-runtime/index.js */ "./node_modules/pug-runtime/index.js");
-
-function template(locals) {var pug_html = "", pug_mixins = {}, pug_interp;;var locals_for_with = (locals || {});(function (state, type) {const handleClasses = [
-  'range-slider__handle',
-  'js-range-slider__handle',
-  `range-slider__handle_type_${type}`,
-  `js-range-slider__handle_type_${type}`,
-];
-const { value, value2, showBubble } = state;
-
-pug_html = pug_html + "\u003Ca" + (pug.attr("class", pug.classes([handleClasses], [true]), false, true)+pug.attr("data-value", type === 'from' ? value : value2, true, true)) + "\u003E\u003C\u002Fa\u003E";}.call(this,"state" in locals_for_with?locals_for_with.state:typeof state!=="undefined"?state:undefined,"type" in locals_for_with?locals_for_with.type:typeof type!=="undefined"?type:undefined));;return pug_html;};
-module.exports = template;
-
-/***/ }),
-
-/***/ "./src/app/ts/View/MainView/MainView.pug":
-/*!***********************************************!*\
-  !*** ./src/app/ts/View/MainView/MainView.pug ***!
-  \***********************************************/
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-var pug = __webpack_require__(/*! !../../../../../node_modules/pug-runtime/index.js */ "./node_modules/pug-runtime/index.js");
-
-function template(locals) {var pug_html = "", pug_mixins = {}, pug_interp;;var locals_for_with = (locals || {});(function (state) {const blockModifiers = [];
-const { isVertical } = state;
-if (isVertical) {
-blockModifiers.push('range-slider_orientation_vertical')
-blockModifiers.push('js-range-slider_orientation_vertical')
-}
-pug_html = pug_html + "\u003Cdiv" + (pug.attr("class", pug.classes(["range-slider","js-range-slider",blockModifiers], [false,false,true]), false, true)) + "\u003E\u003Cdiv class=\"range-slider__track js-range-slider__track\"\u003E\u003C\u002Fdiv\u003E\u003C\u002Fdiv\u003E";}.call(this,"state" in locals_for_with?locals_for_with.state:typeof state!=="undefined"?state:undefined));;return pug_html;};
-module.exports = template;
-
-/***/ }),
-
-/***/ "./src/app/ts/View/RangeBubbleView/RangeBubbleView.pug":
-/*!*************************************************************!*\
-  !*** ./src/app/ts/View/RangeBubbleView/RangeBubbleView.pug ***!
-  \*************************************************************/
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-var pug = __webpack_require__(/*! !../../../../../node_modules/pug-runtime/index.js */ "./node_modules/pug-runtime/index.js");
-
-function template(locals) {var pug_html = "", pug_mixins = {}, pug_interp;;var locals_for_with = (locals || {});(function (state) {const { value, value2 } = state;
-const classes = [
-  'range-slider__bubble',
-  'js-range-slider__bubble',
-  'range-slider__bubble_type_range',
-  'js-range-slider__bubble_type_range',
-  'range-slider__bubble_hidden',
-];
-
-pug_html = pug_html + "\u003Cspan" + (pug.attr("class", pug.classes([classes], [true]), false, true)) + "\u003E" + (pug.escape(null == (pug_interp = value === value2 ? value : `${value}-${value2}`) ? "" : pug_interp)) + "\u003C\u002Fspan\u003E";}.call(this,"state" in locals_for_with?locals_for_with.state:typeof state!=="undefined"?state:undefined));;return pug_html;};
-module.exports = template;
-
-/***/ }),
-
-/***/ "./node_modules/pug-runtime/index.js":
-/*!*******************************************!*\
-  !*** ./node_modules/pug-runtime/index.js ***!
-  \*******************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
-
-"use strict";
-
-
-var pug_has_own_property = Object.prototype.hasOwnProperty;
-
-/**
- * Merge two attribute objects giving precedence
- * to values in object `b`. Classes are special-cased
- * allowing for arrays and merging/joining appropriately
- * resulting in a string.
- *
- * @param {Object} a
- * @param {Object} b
- * @return {Object} a
- * @api private
- */
-
-exports.merge = pug_merge;
-function pug_merge(a, b) {
-  if (arguments.length === 1) {
-    var attrs = a[0];
-    for (var i = 1; i < a.length; i++) {
-      attrs = pug_merge(attrs, a[i]);
-    }
-    return attrs;
-  }
-
-  for (var key in b) {
-    if (key === 'class') {
-      var valA = a[key] || [];
-      a[key] = (Array.isArray(valA) ? valA : [valA]).concat(b[key] || []);
-    } else if (key === 'style') {
-      var valA = pug_style(a[key]);
-      valA = valA && valA[valA.length - 1] !== ';' ? valA + ';' : valA;
-      var valB = pug_style(b[key]);
-      valB = valB && valB[valB.length - 1] !== ';' ? valB + ';' : valB;
-      a[key] = valA + valB;
-    } else {
-      a[key] = b[key];
-    }
-  }
-
-  return a;
-};
-
-/**
- * Process array, object, or string as a string of classes delimited by a space.
- *
- * If `val` is an array, all members of it and its subarrays are counted as
- * classes. If `escaping` is an array, then whether or not the item in `val` is
- * escaped depends on the corresponding item in `escaping`. If `escaping` is
- * not an array, no escaping is done.
- *
- * If `val` is an object, all the keys whose value is truthy are counted as
- * classes. No escaping is done.
- *
- * If `val` is a string, it is counted as a class. No escaping is done.
- *
- * @param {(Array.<string>|Object.<string, boolean>|string)} val
- * @param {?Array.<string>} escaping
- * @return {String}
- */
-exports.classes = pug_classes;
-function pug_classes_array(val, escaping) {
-  var classString = '', className, padding = '', escapeEnabled = Array.isArray(escaping);
-  for (var i = 0; i < val.length; i++) {
-    className = pug_classes(val[i]);
-    if (!className) continue;
-    escapeEnabled && escaping[i] && (className = pug_escape(className));
-    classString = classString + padding + className;
-    padding = ' ';
-  }
-  return classString;
-}
-function pug_classes_object(val) {
-  var classString = '', padding = '';
-  for (var key in val) {
-    if (key && val[key] && pug_has_own_property.call(val, key)) {
-      classString = classString + padding + key;
-      padding = ' ';
-    }
-  }
-  return classString;
-}
-function pug_classes(val, escaping) {
-  if (Array.isArray(val)) {
-    return pug_classes_array(val, escaping);
-  } else if (val && typeof val === 'object') {
-    return pug_classes_object(val);
-  } else {
-    return val || '';
-  }
-}
-
-/**
- * Convert object or string to a string of CSS styles delimited by a semicolon.
- *
- * @param {(Object.<string, string>|string)} val
- * @return {String}
- */
-
-exports.style = pug_style;
-function pug_style(val) {
-  if (!val) return '';
-  if (typeof val === 'object') {
-    var out = '';
-    for (var style in val) {
-      /* istanbul ignore else */
-      if (pug_has_own_property.call(val, style)) {
-        out = out + style + ':' + val[style] + ';';
-      }
-    }
-    return out;
-  } else {
-    return val + '';
-  }
-};
-
-/**
- * Render the given attribute.
- *
- * @param {String} key
- * @param {String} val
- * @param {Boolean} escaped
- * @param {Boolean} terse
- * @return {String}
- */
-exports.attr = pug_attr;
-function pug_attr(key, val, escaped, terse) {
-  if (val === false || val == null || !val && (key === 'class' || key === 'style')) {
-    return '';
-  }
-  if (val === true) {
-    return ' ' + (terse ? key : key + '="' + key + '"');
-  }
-  var type = typeof val;
-  if ((type === 'object' || type === 'function') && typeof val.toJSON === 'function') {
-    val = val.toJSON();
-  }
-  if (typeof val !== 'string') {
-    val = JSON.stringify(val);
-    if (!escaped && val.indexOf('"') !== -1) {
-      return ' ' + key + '=\'' + val.replace(/'/g, '&#39;') + '\'';
-    }
-  }
-  if (escaped) val = pug_escape(val);
-  return ' ' + key + '="' + val + '"';
-};
-
-/**
- * Render the given attributes object.
- *
- * @param {Object} obj
- * @param {Object} terse whether to use HTML5 terse boolean attributes
- * @return {String}
- */
-exports.attrs = pug_attrs;
-function pug_attrs(obj, terse){
-  var attrs = '';
-
-  for (var key in obj) {
-    if (pug_has_own_property.call(obj, key)) {
-      var val = obj[key];
-
-      if ('class' === key) {
-        val = pug_classes(val);
-        attrs = pug_attr(key, val, false, terse) + attrs;
-        continue;
-      }
-      if ('style' === key) {
-        val = pug_style(val);
-      }
-      attrs += pug_attr(key, val, false, terse);
-    }
-  }
-
-  return attrs;
-};
-
-/**
- * Escape the given string of `html`.
- *
- * @param {String} html
- * @return {String}
- * @api private
- */
-
-var pug_match_html = /["&<>]/;
-exports.escape = pug_escape;
-function pug_escape(_html){
-  var html = '' + _html;
-  var regexResult = pug_match_html.exec(html);
-  if (!regexResult) return _html;
-
-  var result = '';
-  var i, lastIndex, escape;
-  for (i = regexResult.index, lastIndex = 0; i < html.length; i++) {
-    switch (html.charCodeAt(i)) {
-      case 34: escape = '&quot;'; break;
-      case 38: escape = '&amp;'; break;
-      case 60: escape = '&lt;'; break;
-      case 62: escape = '&gt;'; break;
-      default: continue;
-    }
-    if (lastIndex !== i) result += html.substring(lastIndex, i);
-    lastIndex = i + 1;
-    result += escape;
-  }
-  if (lastIndex !== i) return result + html.substring(lastIndex, i);
-  else return result;
-};
-
-/**
- * Re-throw the given `err` in context to the
- * the pug in `filename` at the given `lineno`.
- *
- * @param {Error} err
- * @param {String} filename
- * @param {String} lineno
- * @param {String} str original source
- * @api private
- */
-
-exports.rethrow = pug_rethrow;
-function pug_rethrow(err, filename, lineno, str){
-  if (!(err instanceof Error)) throw err;
-  if ((typeof window != 'undefined' || !filename) && !str) {
-    err.message += ' on line ' + lineno;
-    throw err;
-  }
-  try {
-    str = str || __webpack_require__(/*! fs */ "?8f63").readFileSync(filename, 'utf8')
-  } catch (ex) {
-    pug_rethrow(err, null, lineno)
-  }
-  var context = 3
-    , lines = str.split('\n')
-    , start = Math.max(lineno - context, 0)
-    , end = Math.min(lines.length, lineno + context);
-
-  // Error context
-  var context = lines.slice(start, end).map(function(line, i){
-    var curr = i + start + 1;
-    return (curr == lineno ? '  > ' : '    ')
-      + curr
-      + '| '
-      + line;
-  }).join('\n');
-
-  // Alter exception message
-  err.path = filename;
-  err.message = (filename || 'Pug') + ':' + lineno
-    + '\n' + context + '\n\n' + err.message;
-  throw err;
-};
-
-
-/***/ }),
-
 /***/ "./src/app/ts/App/App.ts":
 /*!*******************************!*\
   !*** ./src/app/ts/App/App.ts ***!
@@ -11611,10 +11218,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _BarView_pug__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./BarView.pug */ "./src/app/ts/View/BarView/BarView.pug");
-/* harmony import */ var _BarView_pug__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_BarView_pug__WEBPACK_IMPORTED_MODULE_0__);
 /* provided dependency */ var $ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
-
 class BarView {
     constructor($slider) {
         this.$slider = $slider;
@@ -11627,7 +11231,7 @@ class BarView {
         this.$element.css({ [fromProp]: `${fromPosition}%`, [toProp]: `${100 - toPosition}%` });
     }
     init() {
-        this.$element = $(_BarView_pug__WEBPACK_IMPORTED_MODULE_0___default()());
+        this.$element = $('<div class="range-slider__bar js-range-slider__bar" />');
         this.$track.append(this.$element);
     }
     isVertical() {
@@ -11650,10 +11254,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _BubbleView_pug__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./BubbleView.pug */ "./src/app/ts/View/BubbleView/BubbleView.pug");
-/* harmony import */ var _BubbleView_pug__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_BubbleView_pug__WEBPACK_IMPORTED_MODULE_0__);
 /* provided dependency */ var $ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
-
 class BubbleView {
     constructor($handle, state) {
         this.$handle = $handle;
@@ -11692,8 +11293,18 @@ class BubbleView {
         }
     }
     init(state) {
-        this.type = this.$handle.hasClass('js-range-slider__handle_type_to') ? 'to' : 'from';
-        this.$element = $(_BubbleView_pug__WEBPACK_IMPORTED_MODULE_0___default()({ state, type: this.type }));
+        this.type = this.$handle.hasClass('js-range-slider__handle_type_to')
+            ? 'to'
+            : 'from';
+        const { value, value2 } = state;
+        const bubbleValue = this.type === 'from' ? value : value2;
+        const bubbleClasses = [
+            'range-slider__bubble',
+            'js-range-slider__bubble',
+            `range-slider__bubble_type_${this.type}`,
+            `js-range-slider__bubble_type_${this.type}`,
+        ];
+        this.$element = $(`<span class='${bubbleClasses.join(' ')}'>${bubbleValue}</span>`);
         this.$handle.append(this.$element);
     }
 }
@@ -11714,10 +11325,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _Observer_Observer__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../Observer/Observer */ "./src/app/ts/Observer/Observer.ts");
-/* harmony import */ var _GridView_pug__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./GridView.pug */ "./src/app/ts/View/GridView/GridView.pug");
-/* harmony import */ var _GridView_pug__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_GridView_pug__WEBPACK_IMPORTED_MODULE_1__);
 /* provided dependency */ var $ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
-
 
 class GridView {
     constructor($slider, state) {
@@ -11734,7 +11342,11 @@ class GridView {
     }
     init(state) {
         const ticks = this.getTicks(state);
-        this.$element = $(_GridView_pug__WEBPACK_IMPORTED_MODULE_1___default()({ ticks }));
+        const grid = $('<div class="range-slider__grid js-range-slider__grid" />');
+        this.$element = grid.append(ticks.map(({ position, value }) => $(`<div class="range-slider__grid-point js-range-slider__grid-point" style=${position}>
+          <span class="range-slider__grid-tick js-range-slider__grid-tick"></span>
+          <span class="range-slider__grid-label js-range-slider__grid-label">${value}</span>
+        `)));
         this.$slider.append(this.$element);
         this.bindDocumentEvents();
     }
@@ -11786,10 +11398,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _BubbleView_BubbleView__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../BubbleView/BubbleView */ "./src/app/ts/View/BubbleView/BubbleView.ts");
 /* harmony import */ var _RangeBubbleView_RangeBubbleView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../RangeBubbleView/RangeBubbleView */ "./src/app/ts/View/RangeBubbleView/RangeBubbleView.ts");
-/* harmony import */ var _HandleView_pug__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./HandleView.pug */ "./src/app/ts/View/HandleView/HandleView.pug");
-/* harmony import */ var _HandleView_pug__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_HandleView_pug__WEBPACK_IMPORTED_MODULE_2__);
 /* provided dependency */ var $ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
-
 
 
 class HandleView {
@@ -11817,11 +11426,18 @@ class HandleView {
         return Number(this.$element.attr('data-value'));
     }
     init(state) {
+        const { value, value2, showBubble, isRange, } = state;
         this.type = this.$track.find('.js-range-slider__handle').length === 0
             ? 'from'
             : 'to';
-        this.$element = $(_HandleView_pug__WEBPACK_IMPORTED_MODULE_2___default()({ state, type: this.type }));
-        const { showBubble, isRange } = state;
+        const handleClasses = [
+            'range-slider__handle',
+            'js-range-slider__handle',
+            `range-slider__handle_type_${this.type}`,
+            `js-range-slider__handle_type_${this.type}`,
+        ];
+        const handleValue = this.type === 'from' ? value : value2;
+        this.$element = $(`<a class='${handleClasses.join(' ')}' data-value=${handleValue} />`);
         this.bubbleView = showBubble === true ? new _BubbleView_BubbleView__WEBPACK_IMPORTED_MODULE_0__.default(this.$element, state) : null;
         const showRangeBubble = isRange && this.type === 'from';
         this.rangeBubbleView = showRangeBubble ? new _RangeBubbleView_RangeBubbleView__WEBPACK_IMPORTED_MODULE_1__.default(this.$element, state) : null;
@@ -11859,10 +11475,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _HandleView_HandleView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../HandleView/HandleView */ "./src/app/ts/View/HandleView/HandleView.ts");
 /* harmony import */ var _BarView_BarView__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../BarView/BarView */ "./src/app/ts/View/BarView/BarView.ts");
 /* harmony import */ var _GridView_GridView__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../GridView/GridView */ "./src/app/ts/View/GridView/GridView.ts");
-/* harmony import */ var _MainView_pug__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./MainView.pug */ "./src/app/ts/View/MainView/MainView.pug");
-/* harmony import */ var _MainView_pug__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_MainView_pug__WEBPACK_IMPORTED_MODULE_4__);
 /* provided dependency */ var $ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
-
 
 
 
@@ -11895,10 +11508,17 @@ class MainView {
         this.announcer.on('change.view', callback);
     }
     init(state) {
+        const { isVertical } = state;
         if (this.$element) {
             this.$element.remove();
         }
-        this.$element = $(_MainView_pug__WEBPACK_IMPORTED_MODULE_4___default()({ state }));
+        const rangeSlider = $('<div class="range-slider js-range-slider">');
+        if (isVertical) {
+            rangeSlider
+                .addClass('range-slider_orientation_vertical js-range-slider_orientation_vertical');
+        }
+        this.$element = rangeSlider
+            .append($('<div class="range-slider__track js-range-slider__track">'));
         this.$target.after(this.$element).hide();
         this.handleFromView = new _HandleView_HandleView__WEBPACK_IMPORTED_MODULE_1__.default(this.$element, state);
         const { isRange, showGrid, showBar } = state;
@@ -12023,10 +11643,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _BubbleView_BubbleView__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../BubbleView/BubbleView */ "./src/app/ts/View/BubbleView/BubbleView.ts");
-/* harmony import */ var _RangeBubbleView_pug__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./RangeBubbleView.pug */ "./src/app/ts/View/RangeBubbleView/RangeBubbleView.pug");
-/* harmony import */ var _RangeBubbleView_pug__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_RangeBubbleView_pug__WEBPACK_IMPORTED_MODULE_1__);
 /* provided dependency */ var $ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
-
 
 class RangeBubbleView extends _BubbleView_BubbleView__WEBPACK_IMPORTED_MODULE_0__.default {
     update(state) {
@@ -12034,8 +11651,17 @@ class RangeBubbleView extends _BubbleView_BubbleView__WEBPACK_IMPORTED_MODULE_0_
         this.$element.text(value === value2 ? value : `${value}-${value2}`);
     }
     init(state) {
+        const { value, value2 } = state;
         this.type = 'range';
-        this.$element = $(_RangeBubbleView_pug__WEBPACK_IMPORTED_MODULE_1___default()({ state }));
+        const rangeClasses = [
+            'range-slider__bubble',
+            'js-range-slider__bubble',
+            'range-slider__bubble_type_range',
+            'js-range-slider__bubble_type_range',
+            'range-slider__bubble_hidden',
+        ];
+        const rangeValue = value === value2 ? value : `${value}-${value2}`;
+        this.$element = $(`<span class='${rangeClasses.join(' ')}'>${rangeValue}</span>`);
         this.$handle.append(this.$element);
     }
 }
@@ -12196,16 +11822,6 @@ const demoPage = new DemoPage();
 demoPage.render();
 
 
-/***/ }),
-
-/***/ "?8f63":
-/*!********************!*\
-  !*** fs (ignored) ***!
-  \********************/
-/***/ (() => {
-
-/* (ignored) */
-
 /***/ })
 
 /******/ 	});
@@ -12235,18 +11851,6 @@ demoPage.render();
 /******/ 	}
 /******/ 	
 /************************************************************************/
-/******/ 	/* webpack/runtime/compat get default export */
-/******/ 	(() => {
-/******/ 		// getDefaultExport function for compatibility with non-harmony modules
-/******/ 		__webpack_require__.n = (module) => {
-/******/ 			var getter = module && module.__esModule ?
-/******/ 				() => (module['default']) :
-/******/ 				() => (module);
-/******/ 			__webpack_require__.d(getter, { a: getter });
-/******/ 			return getter;
-/******/ 		};
-/******/ 	})();
-/******/ 	
 /******/ 	/* webpack/runtime/define property getters */
 /******/ 	(() => {
 /******/ 		// define getter functions for harmony exports
