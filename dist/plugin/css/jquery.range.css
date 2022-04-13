@@ -48,7 +48,7 @@
     .range-slider__bubble_hidden {
       visibility: hidden; }
   .range-slider__grid {
-    font-family: 'Roboto', sans-serif;
+    font-family: "Roboto", sans-serif;
     position: relative;
     margin-top: 1rem;
     display: flex;
@@ -63,6 +63,16 @@
     display: flex;
     justify-content: center;
     flex-direction: column; }
+  .range-slider__grid-point:first-child {
+    top: -12px; }
+    .range-slider__grid-point:first-child .range-slider__grid-label {
+      position: absolute;
+      right: 7px; }
+  .range-slider__grid-point:last-child {
+    top: -12px; }
+    .range-slider__grid-point:last-child .range-slider__grid-label {
+      position: absolute;
+      left: 7px; }
   .range-slider__grid-tick {
     height: 0.75rem;
     width: 0.0625rem;
@@ -96,6 +106,13 @@
     .range-slider_orientation_vertical .range-slider__grid-point {
       transform: translateY(-50%);
       flex-direction: row; }
+      .range-slider_orientation_vertical .range-slider__grid-point:first-child {
+        left: -12px; }
+        .range-slider_orientation_vertical .range-slider__grid-point:first-child .range-slider__grid-label {
+          right: -7px;
+          bottom: 0; }
+      .range-slider_orientation_vertical .range-slider__grid-point:last-child {
+        left: -12px; }
     .range-slider_orientation_vertical .range-slider__grid-tick {
       height: 0.0625rem;
       width: 0.75rem;

@@ -11063,7 +11063,9 @@ class Model extends _Observer_Observer__WEBPACK_IMPORTED_MODULE_0__.default {
     }
     static validateGridDensity(state) {
         const { gridDensity, min, max, step, } = state;
-        const autoGridDensity = Math.round((max - min) / step);
+        const autoGridDensity = Math.round(
+        // step * 2
+        (max - min) / step);
         const validatedGridDensity = autoGridDensity < gridDensity
             ? autoGridDensity
             : gridDensity;
@@ -11071,6 +11073,7 @@ class Model extends _Observer_Observer__WEBPACK_IMPORTED_MODULE_0__.default {
             return _const__WEBPACK_IMPORTED_MODULE_1__.GRID_DENSITY_MIN;
         if (validatedGridDensity > _const__WEBPACK_IMPORTED_MODULE_1__.GRID_DENSITY_MAX)
             return _const__WEBPACK_IMPORTED_MODULE_1__.GRID_DENSITY_MAX;
+        // if (validatedGridDensity > 20) return 20;
         return validatedGridDensity;
     }
     static validateStep(state) {
@@ -11296,6 +11299,10 @@ class BubbleView {
         this.type = this.$handle.hasClass('js-range-slider__handle_type_to')
             ? 'to'
             : 'from';
+        this.bubbleElementInit(state);
+        this.$handle.append(this.$element);
+    }
+    bubbleElementInit(state) {
         const { value, value2 } = state;
         const bubbleValue = this.type === 'from' ? value : value2;
         const bubbleClasses = [
@@ -11305,7 +11312,6 @@ class BubbleView {
             `js-range-slider__bubble_type_${this.type}`,
         ];
         this.$element = $(`<span class='${bubbleClasses.join(' ')}'>${bubbleValue}</span>`);
-        this.$handle.append(this.$element);
     }
 }
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (BubbleView);
@@ -11341,14 +11347,26 @@ class GridView {
         this.announcer.on('click.tick', callback);
     }
     init(state) {
-        const ticks = this.getTicks(state);
-        const grid = $('<div class="range-slider__grid js-range-slider__grid" />');
-        this.$element = grid.append(ticks.map(({ position, value }) => $(`<div class="range-slider__grid-point js-range-slider__grid-point" style=${position}>
-          <span class="range-slider__grid-tick js-range-slider__grid-tick"></span>
-          <span class="range-slider__grid-label js-range-slider__grid-label">${value}</span>
-        `)));
+        this.gridInit(state);
         this.$slider.append(this.$element);
         this.bindDocumentEvents();
+    }
+    gridInit(state) {
+        const { max, gridDensity } = state;
+        const ticks = this.getTicks(state);
+        const grid = $('<div class="range-slider__grid js-range-slider__grid" />');
+        const hideALabel = (value) => {
+            if (value === max) {
+                return max;
+            }
+            return '';
+        };
+        this.$element = grid.append(ticks.map(({ position, value }) => $(`<div class="range-slider__grid-point js-range-slider__grid-point" style=${position}>
+          <span class="range-slider__grid-tick js-range-slider__grid-tick"></span>
+          <span class="range-slider__grid-label js-range-slider__grid-label">
+            ${value % 4 && gridDensity > 25 ? hideALabel(value) : value}
+          </span>
+        `)));
     }
     bindDocumentEvents() {
         this.$element
@@ -11426,10 +11444,18 @@ class HandleView {
         return Number(this.$element.attr('data-value'));
     }
     init(state) {
-        const { value, value2, showBubble, isRange, } = state;
+        const { showBubble, isRange } = state;
         this.type = this.$track.find('.js-range-slider__handle').length === 0
             ? 'from'
             : 'to';
+        this.handleElementInit(state);
+        this.bubbleView = showBubble === true ? new _BubbleView_BubbleView__WEBPACK_IMPORTED_MODULE_0__.default(this.$element, state) : null;
+        const showRangeBubble = isRange && this.type === 'from';
+        this.rangeBubbleView = showRangeBubble ? new _RangeBubbleView_RangeBubbleView__WEBPACK_IMPORTED_MODULE_1__.default(this.$element, state) : null;
+        this.$track.append(this.$element);
+    }
+    handleElementInit(state) {
+        const { value, value2 } = state;
         const handleClasses = [
             'range-slider__handle',
             'js-range-slider__handle',
@@ -11438,10 +11464,6 @@ class HandleView {
         ];
         const handleValue = this.type === 'from' ? value : value2;
         this.$element = $(`<a class='${handleClasses.join(' ')}' data-value=${handleValue} />`);
-        this.bubbleView = showBubble === true ? new _BubbleView_BubbleView__WEBPACK_IMPORTED_MODULE_0__.default(this.$element, state) : null;
-        const showRangeBubble = isRange && this.type === 'from';
-        this.rangeBubbleView = showRangeBubble ? new _RangeBubbleView_RangeBubbleView__WEBPACK_IMPORTED_MODULE_1__.default(this.$element, state) : null;
-        this.$track.append(this.$element);
     }
     move(position) {
         const prop = this.isVertical() ? 'top' : 'left';
@@ -11508,17 +11530,10 @@ class MainView {
         this.announcer.on('change.view', callback);
     }
     init(state) {
-        const { isVertical } = state;
         if (this.$element) {
             this.$element.remove();
         }
-        const rangeSlider = $('<div class="range-slider js-range-slider">');
-        if (isVertical) {
-            rangeSlider
-                .addClass('range-slider_orientation_vertical js-range-slider_orientation_vertical');
-        }
-        this.$element = rangeSlider
-            .append($('<div class="range-slider__track js-range-slider__track">'));
+        this.rangeSliderInit(state);
         this.$target.after(this.$element).hide();
         this.handleFromView = new _HandleView_HandleView__WEBPACK_IMPORTED_MODULE_1__.default(this.$element, state);
         const { isRange, showGrid, showBar } = state;
@@ -11535,6 +11550,16 @@ class MainView {
         this.$handleFrom = this.$element.find('.js-range-slider__handle_type_from');
         this.$handleTo = this.$element.find('.js-range-slider__handle_type_to');
         this.bindDocumentEvents();
+    }
+    rangeSliderInit(state) {
+        const { isVertical } = state;
+        const rangeSlider = $('<div class="range-slider js-range-slider">');
+        if (isVertical) {
+            rangeSlider
+                .addClass('range-slider_orientation_vertical js-range-slider_orientation_vertical');
+        }
+        this.$element = rangeSlider
+            .append($('<div class="range-slider__track js-range-slider__track">'));
     }
     announceJump(e) {
         this.setHandleCenterOffset(e);
@@ -11651,6 +11676,10 @@ class RangeBubbleView extends _BubbleView_BubbleView__WEBPACK_IMPORTED_MODULE_0_
         this.$element.text(value === value2 ? value : `${value}-${value2}`);
     }
     init(state) {
+        this.rangeElementInit(state);
+        this.$handle.append(this.$element);
+    }
+    rangeElementInit(state) {
         const { value, value2 } = state;
         this.type = 'range';
         const rangeClasses = [
@@ -11662,7 +11691,6 @@ class RangeBubbleView extends _BubbleView_BubbleView__WEBPACK_IMPORTED_MODULE_0_
         ];
         const rangeValue = value === value2 ? value : `${value}-${value2}`;
         this.$element = $(`<span class='${rangeClasses.join(' ')}'>${rangeValue}</span>`);
-        this.$handle.append(this.$element);
     }
 }
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (RangeBubbleView);
