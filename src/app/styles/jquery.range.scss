@@ -1,4 +1,4 @@
-@import './vars';
+@import "./vars";
 
 .range-slider {
   $blockClass: &;
@@ -59,7 +59,7 @@
     }
   }
   &__grid {
-    font-family: 'Roboto', sans-serif;
+    font-family: "Roboto", sans-serif;
     position: relative;
     margin-top: 1rem;
     display: flex;
@@ -76,6 +76,20 @@
     justify-content: center;
     flex-direction: column;
   }
+  &__grid-point:first-child {
+    top: -12px;
+    .range-slider__grid-label {
+      position: absolute;
+      right: 7px;
+    }
+  }
+  &__grid-point:last-child {
+    top: -12px;
+    .range-slider__grid-label {
+      position: absolute;
+      left: 7px;
+    }
+  }
   &__grid-tick {
     height: 0.75rem;
     width: 0.0625rem;
@@ -83,6 +97,7 @@
     display: block;
     margin: 0 auto;
   }
+
   &__grid-label {
     font-size: 0.75rem;
     color: $color-primary-50;
@@ -117,6 +132,16 @@
       #{$blockClass}__grid-point {
         transform: translateY(-50%);
         flex-direction: row;
+        &:first-child {
+          left: -12px;
+          .range-slider__grid-label {
+            right: -7px;
+            bottom: 0;
+          }
+        }
+        &:last-child {
+          left: -12px;
+        }
       }
       #{$blockClass}__grid-tick {
         height: 0.0625rem;
