@@ -11,6 +11,11 @@ class RangeBubbleView extends BubbleView {
   }
 
   protected init(state: State): void {
+    this.rangeElementInit(state);
+    this.$handle.append(this.$element);
+  }
+
+  protected rangeElementInit(state: State): void {
     const { value, value2 } = state;
     this.type = 'range';
     const rangeClasses = [
@@ -22,7 +27,6 @@ class RangeBubbleView extends BubbleView {
     ];
     const rangeValue = value === value2 ? value : `${value}-${value2}`;
     this.$element = $(`<span class='${rangeClasses.join(' ')}'>${rangeValue}</span>`);
-    this.$handle.append(this.$element);
   }
 }
 

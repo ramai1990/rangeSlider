@@ -59,6 +59,11 @@ class BubbleView {
     this.type = this.$handle.hasClass('js-range-slider__handle_type_to')
       ? 'to'
       : 'from';
+    this.bubbleElementInit(state);
+    this.$handle.append(this.$element);
+  }
+
+  protected bubbleElementInit(state: State): void {
     const { value, value2 } = state;
     const bubbleValue = this.type === 'from' ? value : value2;
     const bubbleClasses = [
@@ -68,7 +73,6 @@ class BubbleView {
       `js-range-slider__bubble_type_${this.type}`,
     ];
     this.$element = $(`<span class='${bubbleClasses.join(' ')}'>${bubbleValue}</span>`);
-    this.$handle.append(this.$element);
   }
 }
 

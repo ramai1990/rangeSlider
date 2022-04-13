@@ -79,17 +79,11 @@ class MainView implements SliderView, LayerObservable {
   }
 
   private init(state: State): void {
-    const { isVertical } = state;
     if (this.$element) {
       this.$element.remove();
     }
-    const rangeSlider = $('<div class="range-slider js-range-slider">');
-    if (isVertical) {
-      rangeSlider
-        .addClass('range-slider_orientation_vertical js-range-slider_orientation_vertical');
-    }
-    this.$element = rangeSlider
-      .append($('<div class="range-slider__track js-range-slider__track">'));
+
+    this.rangeSliderInit(state);
 
     this.$target.after(this.$element).hide();
 
@@ -112,6 +106,18 @@ class MainView implements SliderView, LayerObservable {
     this.$handleTo = this.$element.find('.js-range-slider__handle_type_to');
 
     this.bindDocumentEvents();
+  }
+
+  protected rangeSliderInit(state: State): void {
+    const { isVertical } = state;
+
+    const rangeSlider = $('<div class="range-slider js-range-slider">');
+    if (isVertical) {
+      rangeSlider
+        .addClass('range-slider_orientation_vertical js-range-slider_orientation_vertical');
+    }
+    this.$element = rangeSlider
+      .append($('<div class="range-slider__track js-range-slider__track">'));
   }
 
   private announceJump(e: MouseEvent | JQuery.Event): void {

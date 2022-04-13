@@ -46,13 +46,24 @@ class HandleView {
   }
 
   private init(state: State): void {
-    const {
-      value, value2, showBubble, isRange,
-    } = state;
+    const { showBubble, isRange } = state;
 
     this.type = this.$track.find('.js-range-slider__handle').length === 0
       ? 'from'
       : 'to';
+
+    this.handleElementInit(state);
+
+    this.bubbleView = showBubble === true ? new BubbleView(this.$element, state) : null;
+
+    const showRangeBubble = isRange && this.type === 'from';
+    this.rangeBubbleView = showRangeBubble ? new RangeBubbleView(this.$element, state) : null;
+
+    this.$track.append(this.$element);
+  }
+
+  protected handleElementInit(state: State): void {
+    const { value, value2 } = state;
     const handleClasses = [
       'range-slider__handle',
       'js-range-slider__handle',
@@ -61,13 +72,6 @@ class HandleView {
     ];
     const handleValue = this.type === 'from' ? value : value2;
     this.$element = $(`<a class='${handleClasses.join(' ')}' data-value=${handleValue} />`);
-
-    this.bubbleView = showBubble === true ? new BubbleView(this.$element, state) : null;
-
-    const showRangeBubble = isRange && this.type === 'from';
-    this.rangeBubbleView = showRangeBubble ? new RangeBubbleView(this.$element, state) : null;
-
-    this.$track.append(this.$element);
   }
 
   private move(position: number): void {
