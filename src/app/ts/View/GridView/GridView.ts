@@ -27,15 +27,29 @@ class GridView {
   }
 
   private init(state: State): void {
+    this.gridInit(state);
+    this.$slider.append(this.$element);
+    this.bindDocumentEvents();
+  }
+
+  protected gridInit(state: State): void {
+    const { max, gridDensity } = state;
     const ticks = this.getTicks(state);
     const grid = $('<div class="range-slider__grid js-range-slider__grid" />');
+
+    const hideALabel = (value: number | undefined) => {
+      if (value === max) {
+        return max;
+      }
+      return '';
+    };
+
     this.$element = grid.append(ticks.map(({ position, value }) => $(`<div class="range-slider__grid-point js-range-slider__grid-point" style=${position}>
           <span class="range-slider__grid-tick js-range-slider__grid-tick"></span>
-          <span class="range-slider__grid-label js-range-slider__grid-label">${value}</span>
+          <span class="range-slider__grid-label js-range-slider__grid-label">
+            ${<number>value % 4 && <number > gridDensity > 25 ? hideALabel(value) : value}
+          </span>
         `)));
-    this.$slider.append(this.$element);
-
-    this.bindDocumentEvents();
   }
 
   private bindDocumentEvents(): void {
