@@ -169,6 +169,10 @@ class Model extends Observer implements SliderModel {
   private static validateStep(state: State): number {
     const { step } = state;
 
+    if (!Number.isInteger(step)) {
+      return parseFloat(<string>step?.toFixed(1));
+    }
+
     return Number(<number>step) < DEFAULT_STEP ? DEFAULT_STEP : <number>step;
   }
 
@@ -237,7 +241,7 @@ class Model extends Observer implements SliderModel {
     outValue = outValue > <number>max ? <number>max : outValue;
     outValue = outValue < <number>min ? <number>min : outValue;
 
-    return outValue;
+    return parseFloat(<string>outValue?.toFixed(1));
   }
 
   private static snapToStep(

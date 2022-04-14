@@ -47,7 +47,7 @@ class GridView {
     this.$element = grid.append(ticks.map(({ position, value }) => $(`<div class="range-slider__grid-point js-range-slider__grid-point" style=${position}>
           <span class="range-slider__grid-tick js-range-slider__grid-tick"></span>
           <span class="range-slider__grid-label js-range-slider__grid-label">
-            ${<number>value % 4 && <number > gridDensity > 25 ? hideALabel(value) : value}
+            ${<number>value % 4 && <number > gridDensity > 20 ? hideALabel(value) : parseFloat(<string>value?.toFixed(1))}
           </span>
         `)));
   }
