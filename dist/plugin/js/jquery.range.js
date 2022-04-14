@@ -11050,9 +11050,7 @@ class Model extends _Observer_Observer__WEBPACK_IMPORTED_MODULE_0__.default {
     }
     static validateGridDensity(state) {
         const { gridDensity, min, max, step, } = state;
-        const autoGridDensity = Math.round(
-        // step * 2
-        (max - min) / step);
+        const autoGridDensity = Math.round((max - min) / step);
         const validatedGridDensity = autoGridDensity < gridDensity
             ? autoGridDensity
             : gridDensity;
@@ -11060,11 +11058,13 @@ class Model extends _Observer_Observer__WEBPACK_IMPORTED_MODULE_0__.default {
             return _const__WEBPACK_IMPORTED_MODULE_1__.GRID_DENSITY_MIN;
         if (validatedGridDensity > _const__WEBPACK_IMPORTED_MODULE_1__.GRID_DENSITY_MAX)
             return _const__WEBPACK_IMPORTED_MODULE_1__.GRID_DENSITY_MAX;
-        // if (validatedGridDensity > 20) return 20;
         return validatedGridDensity;
     }
     static validateStep(state) {
         const { step } = state;
+        if (!Number.isInteger(step)) {
+            return parseFloat(step?.toFixed(1));
+        }
         return Number(step) < _const__WEBPACK_IMPORTED_MODULE_1__.DEFAULT_STEP ? _const__WEBPACK_IMPORTED_MODULE_1__.DEFAULT_STEP : step;
     }
     static validateMinMax(state) {
@@ -11103,7 +11103,7 @@ class Model extends _Observer_Observer__WEBPACK_IMPORTED_MODULE_0__.default {
         }
         outValue = outValue > max ? max : outValue;
         outValue = outValue < min ? min : outValue;
-        return outValue;
+        return parseFloat(outValue?.toFixed(1));
     }
     static snapToStep(min, max, step, value) {
         return value >= max ? max : Math.round((value - min) / step) * step + min;
@@ -11252,7 +11252,7 @@ class BubbleView {
     }
     update(state) {
         const { value, value2 } = state;
-        this.$element.text(this.type === 'from' ? value : value2);
+        this.$element.text(this.type === 'from' ? parseFloat(value?.toFixed(1)) : parseFloat(value2?.toFixed(1)));
         if (this.type !== 'range') {
             this.handleCollision();
         }
@@ -11291,14 +11291,14 @@ class BubbleView {
     }
     bubbleElementInit(state) {
         const { value, value2 } = state;
-        const bubbleValue = this.type === 'from' ? value : value2;
+        const bubbleValue = this.type === 'from' ? parseFloat(value?.toFixed(1)) : parseFloat(value2?.toFixed(1));
         const bubbleClasses = [
             'range-slider__bubble',
             'js-range-slider__bubble',
             `range-slider__bubble_type_${this.type}`,
             `js-range-slider__bubble_type_${this.type}`,
         ];
-        this.$element = $(`<span class='${bubbleClasses.join(' ')}'>${bubbleValue}</span>`);
+        this.$element = $(`<span class='${bubbleClasses.join(' ')}'>${parseFloat(bubbleValue?.toFixed(1))}</span>`);
     }
 }
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (BubbleView);
@@ -11351,7 +11351,7 @@ class GridView {
         this.$element = grid.append(ticks.map(({ position, value }) => $(`<div class="range-slider__grid-point js-range-slider__grid-point" style=${position}>
           <span class="range-slider__grid-tick js-range-slider__grid-tick"></span>
           <span class="range-slider__grid-label js-range-slider__grid-label">
-            ${value % 4 && gridDensity > 25 ? hideALabel(value) : value}
+            ${value % 4 && gridDensity > 20 ? hideALabel(value) : parseFloat(value?.toFixed(1))}
           </span>
         `)));
     }
@@ -11635,6 +11635,10 @@ class MainView {
     static getClosestValuePropName(target, from, to) {
         const distFrom = Math.abs(target - from);
         const distTo = Math.abs(target - to);
+        const isEqual = distFrom === distTo && from === to;
+        if (isEqual && target > from) {
+            return 'value2';
+        }
         return distFrom > distTo ? 'value2' : 'value';
     }
 }
