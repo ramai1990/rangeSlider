@@ -133,6 +133,7 @@ class MainView implements SliderView, LayerObservable {
         this.handleToView.getCurrentPosition(),
       );
     }
+
     this.$draggingHandle = statePropName === 'value' ? this.$handleFrom : this.$handleTo;
 
     this.$handleFrom.removeClass(
@@ -148,6 +149,7 @@ class MainView implements SliderView, LayerObservable {
     const state: Omit<State, 'value' | 'value2'> | number = {
       [statePropName]: null,
     };
+
     const extra: SliderViewExtraData = { percent: cursorPosition };
 
     this.announcer.trigger('change.view', state as State, extra);
@@ -252,6 +254,11 @@ class MainView implements SliderView, LayerObservable {
   ): string {
     const distFrom = Math.abs(target - from);
     const distTo = Math.abs(target - to);
+    const isEqual = distFrom === distTo && from === to;
+
+    if (isEqual && target > from) {
+      return 'value2';
+    }
 
     return distFrom > distTo ? 'value2' : 'value';
   }
