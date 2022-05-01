@@ -34,24 +34,35 @@ class Model extends Observer implements SliderModel {
     );
   }
 
-  public update(state: State, viewExtra: SliderViewExtraData = {}): this {
-    const [stateProperty, stateValue] = Object.entries(state)[0];
+  public update(
+    event: Pick<
+      State,
+      'value' | 'value2' | 'min' | 'max' | 'step' | 'gridDensity'
+    >,
+    viewExtra: SliderViewExtraData = {},
+  ): this {
+    const [eventProperty, eventValue] = Object.entries(event)[0];
+
     const thisState = { ...this.state };
     const modelExtra: SliderModelExtraData = { redraw: true };
 
     const { percent } = viewExtra;
-    let newValue = stateValue;
+    let newValue = eventValue;
 
-    switch (stateProperty) {
+    switch (eventProperty) {
       case 'value':
       case 'value2':
         modelExtra.redraw = false;
         if (typeof percent !== 'undefined') {
           const { min, max } = thisState;
-          newValue = Model.percentToValue(min as number, max as number, percent);
+          newValue = Model.percentToValue(
+            min as number,
+            max as number,
+            percent,
+          );
         }
-        thisState[stateProperty] = Model.validateValue(
-          stateProperty,
+        thisState[eventProperty] = Model.validateValue(
+          eventProperty,
           Number(newValue),
           thisState,
         );
@@ -60,10 +71,10 @@ class Model extends Observer implements SliderModel {
       case 'max':
       case 'step':
       case 'gridDensity':
-        thisState[stateProperty] = Number(newValue);
+        thisState[eventProperty] = Number(newValue);
         break;
       default:
-        thisState[stateProperty] = newValue;
+        thisState[eventProperty] = newValue;
     }
 
     this.state = Model.validateState(thisState);
@@ -272,8 +283,16 @@ class Model extends Observer implements SliderModel {
 
     return {
       redraw: extra.redraw,
-      fromPosition: Model.valueToPercent(<number>min, <number>max, <number>value),
-      toPosition: Model.valueToPercent(<number>min, <number>max, <number>value2),
+      fromPosition: Model.valueToPercent(
+        <number>min,
+        <number>max,
+        <number>value,
+      ),
+      toPosition: Model.valueToPercent(
+        <number>min,
+        <number>max,
+        <number>value2,
+      ),
     };
   }
 }
