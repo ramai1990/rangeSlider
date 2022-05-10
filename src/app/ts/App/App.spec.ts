@@ -102,7 +102,7 @@ describe('App', () => {
     expect($handle.css('left')).toEqual('50%');
   });
 
-  it('Правильно обрабатывает щелчок на 1/4 дорожки c двумя ручками', () => {
+  it('правильно обрабатывает щелчок на 1/4 дорожки c двумя ручками', () => {
     const app: App = new App($('input[type="range"]'), defaultOptions);
 
     app.update({ isRange: true });
@@ -130,7 +130,7 @@ describe('App', () => {
     expect($handleTo.css('left')).toEqual('100%');
   });
 
-  it('Правильно обрабатывает щелчок на 3/4 дорожки c двумя ручками', () => {
+  it('правильно обрабатывает щелчок на 3/4 дорожки c двумя ручками', () => {
     const app: App = new App($('input[type="range"]'), defaultOptions);
 
     app.update({ isRange: true });
@@ -158,10 +158,11 @@ describe('App', () => {
     expect($handleTo.css('left')).toEqual('75%');
   });
 
-  it('Правильно обрабатывает щелчок на 1/4 дорожки c двумя ручками', () => {
-    const app: App = new App($('input[type="range"]'), { ...defaultOptions, isRange: true });
-
-    // app.update({ isRange: true });s
+  it('правильно обрабатывает щелчок на 1/4 дорожки c двумя ручками', () => {
+    const app: App = new App($('input[type="range"]'), {
+      ...defaultOptions,
+      isRange: true,
+    });
 
     const $track = $('.js-range-slider .js-range-slider__track');
 
@@ -316,5 +317,21 @@ describe('App', () => {
     });
     expect($(barSelector).css('left')).toEqual('50%');
     expect($(barSelector).css('right')).toEqual('0%');
+  });
+
+  it('правильно пропускает значения сетки', () => {
+    const app: App = new App($('input[type="range"]'), { ...defaultOptions });
+
+    app.update({
+      ...defaultOptions,
+      showGrid: true,
+      showBubble: true,
+      gridDensity: 21,
+    });
+
+    const { tickLabels } = getTicks();
+    expect(tickLabels).toEqual([
+      0, 0, 0, 0, 20, 0, 0, 0, 40, 0, 0, 0, 60, 0, 0, 0, 80, 0, 0, 0, 100,
+    ]);
   });
 });

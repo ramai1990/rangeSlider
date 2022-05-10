@@ -254,10 +254,10 @@ class MainView implements SliderView, LayerObservable {
   ): string {
     const distFrom = Math.abs(target - from);
     const distTo = Math.abs(target - to);
-    const isEqual = distFrom === distTo && from === to;
+    const isEqual = from === to && target > from;
 
-    if (isEqual && target > from) {
-      return 'value2';
+    if (distFrom === distTo) {
+      return isEqual ? 'value2' : 'value';
     }
 
     return distFrom > distTo ? 'value2' : 'value';

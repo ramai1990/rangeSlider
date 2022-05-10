@@ -39,7 +39,9 @@ describe('View', () => {
 
     expect($slider.length).toEqual(1);
     expect($slider.find('.js-range-slider__handle').length).toEqual(1);
-    expect($slider.hasClass('js-range-slider_orientation_vertical')).toBeFalsy();
+    expect(
+      $slider.hasClass('js-range-slider_orientation_vertical'),
+    ).toBeFalsy();
   });
 
   it('правильно представленный с вертикальным вариантом', () => {
@@ -48,17 +50,24 @@ describe('View', () => {
 
     const $slider = $('.js-range-slider');
 
-    expect($slider.hasClass('js-range-slider_orientation_vertical')).toBeTruthy();
+    expect(
+      $slider.hasClass('js-range-slider_orientation_vertical'),
+    ).toBeTruthy();
   });
 
   it('правильно представленный с диапазоном "range"', () => {
-    const options = { ...defaultOptions, isRange: true };
+    const options = {
+      ...defaultOptions,
+      isRange: true,
+    };
     const view = new MainView($('input[type="range"]'), options);
 
     const $slider = $('.js-range-slider');
 
     expect($slider.find('.js-range-slider__handle').length).toEqual(2);
-    expect($slider.find('.js-range-slider__handle_type_from').length).toEqual(1);
+    expect($slider.find('.js-range-slider__handle_type_from').length).toEqual(
+      1,
+    );
     expect($slider.find('.js-range-slider__handle_type_to').length).toEqual(1);
   });
 
@@ -85,18 +94,30 @@ describe('View', () => {
     expect($(bubbleSelector).length).toEqual(3);
 
     const rangeBubble = '.js-range-slider .js-range-slider__bubble_type_range';
-    view.update({
-      ...options, isRange: true, value: 40, value2: 45,
-    }, {
-      redraw: false,
-    });
+    view.update(
+      {
+        ...options,
+        isRange: true,
+        value: 40,
+        value2: 45,
+      },
+      {
+        redraw: false,
+      },
+    );
     expect($(rangeBubble).text()).toEqual('40-45');
 
-    view.update({
-      ...options, isRange: true, value: 40, value2: 40,
-    }, {
-      redraw: false,
-    });
+    view.update(
+      {
+        ...options,
+        isRange: true,
+        value: 40,
+        value2: 40,
+      },
+      {
+        redraw: false,
+      },
+    );
     expect($(rangeBubble).text()).toEqual('40');
   });
 
@@ -110,6 +131,8 @@ describe('View', () => {
     const gridDensity = 5;
     view.update({ ...options, gridDensity }, { redraw: true });
 
-    expect($('.js-range-slider .js-range-slider__grid-point').length).toEqual(gridDensity + 1);
+    expect($('.js-range-slider .js-range-slider__grid-point').length).toEqual(
+      gridDensity + 1,
+    );
   });
 });

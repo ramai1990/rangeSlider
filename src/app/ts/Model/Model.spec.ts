@@ -53,13 +53,13 @@ describe('Model', () => {
 
   it('имеет правильные значения после установки случайного свойства', () => {
     const model = new Model(defaultOptions);
-    const stateProperty = 'value';
-    const stateValue = Math.floor(Math.random() * 100);
-    const state: State = { [stateProperty]: stateValue };
+    const eventProperty = 'value';
+    const eventValue = Math.floor(Math.random() * 100);
+    const state: State = { [eventProperty]: eventValue };
 
     model.update(state);
 
-    expect(model.get(stateProperty)).toEqual(stateValue);
+    expect(model.get(eventProperty)).toEqual(eventValue);
   });
 
   it('имеет правильное значение2 после установки `range` true', () => {
@@ -88,6 +88,11 @@ describe('Model', () => {
 
     expect(model.get('value')).toEqual(30);
     expect(model.get('value2')).toEqual(50);
+
+    model.update({ step: 1.297667 });
+
+    expect(model.get('value')).toEqual(29.9);
+    expect(model.get('value2')).toEqual(49.4);
   });
 
   it('переключать `значение` и `значение2`, если `значение` > `значение2`, когда оно есть.', () => {

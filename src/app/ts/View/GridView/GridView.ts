@@ -33,21 +33,14 @@ class GridView {
   }
 
   protected gridInit(state: State): void {
-    const { max, gridDensity } = state;
+    const { gridDensity } = state;
     const ticks = this.getTicks(state);
     const grid = $('<div class="range-slider__grid js-range-slider__grid" />');
-
-    const hideALabel = (value: number | undefined) => {
-      if (value === max) {
-        return max;
-      }
-      return '';
-    };
 
     this.$element = grid.append(ticks.map(({ position, value }) => $(`<div class="range-slider__grid-point js-range-slider__grid-point" style=${position}>
           <span class="range-slider__grid-tick js-range-slider__grid-tick"></span>
           <span class="range-slider__grid-label js-range-slider__grid-label">
-            ${<number>value % 4 && <number > gridDensity > 20 ? hideALabel(value) : parseFloat(<string>value?.toFixed(1))}
+            ${<number>value % 4 && <number > gridDensity > 20 ? '' : parseFloat(<string>value?.toFixed(1))}
           </span>
         `)));
   }

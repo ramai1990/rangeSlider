@@ -58,7 +58,7 @@ const config = {
   module: {
     rules: [
       {
-        test: /\.tsx?$/,
+        test: /\.ts?$/,
         use: 'ts-loader',
         exclude: /node_modules/,
       },
@@ -81,6 +81,17 @@ const config = {
       {
         test: /\.s[ac]ss$/,
         use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
+      },
+      {
+        test: /\.ts$/,
+        enforce: 'post',
+        exclude: /node_modules|\.spec\.ts?$/,
+        use: {
+          loader: '@jsdevtools/coverage-istanbul-loader',
+          options: {
+            esModules: true,
+          },
+        },
       },
     ],
   },
