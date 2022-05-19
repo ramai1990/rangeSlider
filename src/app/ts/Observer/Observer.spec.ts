@@ -14,7 +14,7 @@ describe('Observer', () => {
 
     expect(counter).toEqual(0);
 
-    observer.trigger('some.event');
+    observer.trigger('some.event', 0);
 
     expect(counter).toEqual(1);
   });
@@ -24,7 +24,9 @@ describe('Observer', () => {
 
     let counter = 0;
     const callback = (delta: number | State | undefined): void => {
-      counter += <number>delta;
+      if (typeof delta !== 'undefined' && typeof delta === 'number') {
+        counter += delta;
+      }
     };
 
     observer.on('some.event', callback);

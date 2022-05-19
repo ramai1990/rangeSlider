@@ -16,7 +16,11 @@ class BubbleView {
   public update(state: Pick<State, 'value' | 'value2'>): void {
     const { value, value2 } = state;
 
-    this.$element.text(this.type === 'from' ? parseFloat(<string>value?.toFixed(1)) : parseFloat(<string>value2?.toFixed(1)));
+    this.$element.text(
+      this.type === 'from'
+        ? parseFloat(<string>value?.toFixed(1))
+        : parseFloat(<string>value2?.toFixed(1)),
+    );
 
     if (this.type !== 'range') {
       this.handleCollision();
@@ -65,14 +69,20 @@ class BubbleView {
 
   protected bubbleElementInit(state: State): void {
     const { value, value2 } = state;
-    const bubbleValue = this.type === 'from' ? parseFloat(<string>value?.toFixed(1)) : parseFloat(<string>value2?.toFixed(1));
+    const bubbleValue = this.type === 'from'
+      ? parseFloat(<string>value?.toFixed(1))
+      : parseFloat(<string>value2?.toFixed(1));
     const bubbleClasses = [
       'range-slider__bubble',
       'js-range-slider__bubble',
       `range-slider__bubble_type_${this.type}`,
       `js-range-slider__bubble_type_${this.type}`,
     ];
-    this.$element = $(`<span class='${bubbleClasses.join(' ')}'>${parseFloat(bubbleValue.toFixed(1))}</span>`);
+    this.$element = $(
+      `<span class='${bubbleClasses.join(' ')}'>${parseFloat(
+        bubbleValue.toFixed(1),
+      )}</span>`,
+    );
   }
 }
 

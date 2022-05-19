@@ -110,6 +110,7 @@ describe('App', () => {
       min: DEFAULT_MIN,
       max: DEFAULT_MAX,
       value: DEFAULT_VALUE,
+      value2: DEFAULT_VALUE_2,
       step: DEFAULT_STEP,
       gridDensity: DEFAULT_GRID_DENSITY,
     });
@@ -145,6 +146,7 @@ describe('App', () => {
       min: DEFAULT_MIN,
       max: DEFAULT_MAX,
       value: DEFAULT_VALUE,
+      value2: DEFAULT_VALUE_2,
       step: DEFAULT_STEP,
       gridDensity: DEFAULT_GRID_DENSITY,
     });

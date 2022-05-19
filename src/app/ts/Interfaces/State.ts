@@ -5,8 +5,8 @@ interface State {
   min: number;
   max: number;
   step: number;
-  value: number | null;
-  value2?: null | number;
+  value: number;
+  value2: null | number;
   isRange?: boolean;
   isVertical?: boolean;
   showBubble?: boolean;
@@ -17,18 +17,32 @@ interface State {
   onChange?: (state: this) => void;
 }
 
-type UpdateValue =
-  | number
-  | boolean
-  | ((state: State) => void)
-  | ((state: State) => void)
-  | null
-  | undefined;
-
-interface Events {
-  type: string;
-  value: UpdateValue;
+interface Min {
+  type: 'min';
+  payload: number;
 }
+interface Max {
+  type: 'max';
+  payload: number;
+}
+interface Step {
+  type: 'step';
+  payload: number;
+}
+interface Value {
+  type: 'value';
+  payload: number | null;
+}
+interface Value2 {
+  type: 'value2';
+  payload: number | null;
+}
+interface GridDensity {
+  type: 'gridDensity';
+  payload: number;
+}
+
+type Events = Min | Max | Step | Value | Value2 | GridDensity;
 
 export { Events };
 export default State;

@@ -54,15 +54,15 @@ class MainView implements SliderView, LayerObservable {
       this.init(state);
     }
 
-    this.handleFromView.update(state, <number>fromPosition);
+    this.handleFromView.update(state, fromPosition);
     if (this.handleToView) {
-      this.handleToView.update(state, <number>toPosition);
+      this.handleToView.update(state, toPosition);
     }
 
     if (this.barView) {
       this.barView.update(
-        this.handleToView ? <number>fromPosition : 0,
-        this.handleToView ? <number>toPosition : <number>fromPosition,
+        this.handleToView ? fromPosition : 0,
+        this.handleToView ? toPosition : fromPosition,
       );
     }
 
@@ -71,8 +71,8 @@ class MainView implements SliderView, LayerObservable {
 
   public onChange(
     callback: (
-      state: number | State | undefined,
-      extra?: SliderViewExtraData | SliderModelExtraData
+      state: number | State,
+      extra?: SliderViewExtraData
     ) => void,
   ): void {
     this.announcer.on('change.view', callback);
@@ -209,7 +209,7 @@ class MainView implements SliderView, LayerObservable {
       : (<number>$track.outerWidth()) / 100;
 
     return (
-      (<number>cursorPositionPx - trackOffsetPx + this.handleCenterOffset)
+      (cursorPositionPx - trackOffsetPx + this.handleCenterOffset)
       / percentUnitPx
     );
   }
@@ -228,7 +228,7 @@ class MainView implements SliderView, LayerObservable {
         : $handle.outerWidth();
 
       this.handleCenterOffset = handleOffsetPx
-        - <number>cursorPositionPx
+        - cursorPositionPx
         + <number>handleDimensionPx / 2;
     }
   }

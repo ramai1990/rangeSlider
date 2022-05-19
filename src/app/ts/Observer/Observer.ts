@@ -7,12 +7,12 @@ class Observer implements Observable {
   callbacks: Record<
     string,
     ((
-      data: number | State | undefined,
+      data: number | State,
       extra?: SliderViewExtraData | SliderModelExtraData
     ) => void)[]
   > = {};
 
-  public on(events: string, fn: (data: number | State | undefined) => void): void {
+  public on(events: string, fn: (data: number | State) => void): void {
     events.replace(/\S+/g, (name): string => {
       this.callbacks[name] = [];
       this.callbacks[name].push(fn);
@@ -22,7 +22,7 @@ class Observer implements Observable {
 
   public trigger(
     name: string,
-    data?: State | number,
+    data: State | number,
     extra?: SliderModelExtraData | SliderViewExtraData,
   ): void {
     const fns = this.callbacks[name] || [];

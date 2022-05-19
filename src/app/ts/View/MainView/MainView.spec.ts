@@ -87,11 +87,17 @@ describe('View', () => {
     expect($(bubbleSelector).text()).toEqual(value.toString());
 
     const updatedValue = 43;
-    view.update({ ...options, value: updatedValue }, { redraw: false });
+    view.update(
+      { ...options, value: updatedValue },
+      { redraw: false, fromPosition: DEFAULT_MIN, toPosition: DEFAULT_MAX },
+    );
 
     expect($(bubbleSelector).text()).toEqual(updatedValue.toString());
 
-    view.update({ ...options, isRange: true }, { redraw: true });
+    view.update(
+      { ...options, isRange: true },
+      { redraw: true, fromPosition: DEFAULT_MIN, toPosition: DEFAULT_MAX },
+    );
 
     expect($(bubbleSelector).length).toEqual(3);
 
@@ -105,6 +111,8 @@ describe('View', () => {
       },
       {
         redraw: false,
+        fromPosition: DEFAULT_MIN,
+        toPosition: DEFAULT_MAX,
       },
     );
     expect($(rangeBubble).text()).toEqual('40-45');
@@ -118,6 +126,8 @@ describe('View', () => {
       },
       {
         redraw: false,
+        fromPosition: DEFAULT_MIN,
+        toPosition: DEFAULT_MAX,
       },
     );
     expect($(rangeBubble).text()).toEqual('40');
@@ -131,7 +141,10 @@ describe('View', () => {
     expect($('.js-range-slider .js-range-slider__grid').length).toEqual(1);
 
     const gridDensity = 5;
-    view.update({ ...options, gridDensity }, { redraw: true });
+    view.update(
+      { ...options, gridDensity },
+      { redraw: true, fromPosition: DEFAULT_MIN, toPosition: DEFAULT_MAX },
+    );
 
     expect($('.js-range-slider .js-range-slider__grid-point').length).toEqual(
       gridDensity + 1,
