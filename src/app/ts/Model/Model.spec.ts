@@ -1,5 +1,5 @@
 import Model from './Model';
-import State from '../Interfaces/State';
+import State, { Events } from '../Interfaces/State';
 
 import {
   DEFAULT_MIN,
@@ -53,13 +53,13 @@ describe('Model', () => {
 
   it('имеет правильные значения после установки случайного свойства', () => {
     const model = new Model(defaultOptions);
-    const eventProperty = 'value';
-    const eventValue = Math.floor(Math.random() * 100);
-    const state: State = { [eventProperty]: eventValue };
+    const type = 'value';
+    const value = Math.floor(Math.random() * 100);
+    const state: Events = { type, value };
 
     model.update(state);
 
-    expect(model.get(eventProperty)).toEqual(eventValue);
+    expect(model.get(type)).toEqual(value);
   });
 
   it('имеет правильное значение2 после установки `range` true', () => {
@@ -67,7 +67,7 @@ describe('Model', () => {
 
     expect(model.get('value2')).toEqual(null);
 
-    const state: State = { isRange: true };
+    const state: Events = { type: 'isRange', value: true };
 
     model.update(state);
 
@@ -80,16 +80,16 @@ describe('Model', () => {
 
     expect(model.get('value')).toEqual(25);
 
-    model.update({ value2: 46 });
+    model.update({ type: 'value2', value: 46 });
 
     expect(model.get('value2')).toEqual(45);
 
-    model.update({ step: 10 });
+    model.update({ type: 'step', value: 10 });
 
     expect(model.get('value')).toEqual(30);
     expect(model.get('value2')).toEqual(50);
 
-    model.update({ step: 1.297667 });
+    model.update({ type: 'step', value: 1.297667 });
 
     expect(model.get('value')).toEqual(29.9);
     expect(model.get('value2')).toEqual(49.4);
@@ -114,7 +114,7 @@ describe('Model', () => {
     expect(model.get('value')).toEqual(12);
     expect(model.get('value2')).toEqual(21);
 
-    model.update({ value: 25 });
+    model.update({ type: 'value', value: 25 });
 
     expect(model.get('value')).toEqual(21);
   });
@@ -128,22 +128,9 @@ describe('Model', () => {
     expect(model.get('value')).toEqual(24);
     expect(model.get('value2')).toEqual(42);
 
-    model.update({ value2: 20 });
+    model.update({ type: 'value2', value: 20 });
 
     expect(model.get('value2')).toEqual(24);
-  });
-
-  it('не может содержать `min` больше `max`', () => {
-    const options = { ...defaultOptions, max: 200, min: 100 };
-    const model = new Model(options);
-
-    expect(model.get('min')).toEqual(100);
-    expect(model.get('max')).toEqual(200);
-
-    model.update({ max: 200, min: 500 });
-
-    expect(model.get('min')).toEqual(100);
-    expect(model.get('max')).toEqual(200);
   });
 
   it('не может содержать значений больше, чем `max`.', () => {
@@ -151,8 +138,7 @@ describe('Model', () => {
     const model = new Model(options);
 
     expect(model.get('value')).toEqual(1234);
-
-    model.update({ value2: 12345 });
+    model.update({ type: 'value2', value: 12345 });
 
     expect(model.get('value2')).toEqual(1234);
   });
@@ -163,7 +149,7 @@ describe('Model', () => {
 
     expect(model.get('value')).toEqual(-1234);
 
-    model.update({ value2: -12345 });
+    model.update({ type: 'value2', value: -12345 });
 
     expect(model.get('value2')).toEqual(-1234);
   });
@@ -172,17 +158,17 @@ describe('Model', () => {
     const options = { ...defaultOptions, min: 1000, max: 2000 };
     const model = new Model(options);
 
-    model.update({ value: null }, { percent: 50 });
+    model.update({ type: 'value', value: null }, { percent: 50 });
 
     expect(model.get('value')).toEqual(1500);
 
-    model.update({ value: null }, { percent: 25 });
-    model.update({ value2: null }, { percent: 75 });
+    model.update({ type: 'value', value: null }, { percent: 25 });
+    model.update({ type: 'value2', value: null }, { percent: 75 });
 
     expect(model.get('value')).toEqual(1250);
     expect(model.get('value2')).toEqual(1750);
 
-    model.update({ value: null }, { percent: 85 });
+    model.update({ type: 'value', value: null }, { percent: 85 });
 
     expect(model.get('value2')).toEqual(1750);
   });
@@ -191,13 +177,13 @@ describe('Model', () => {
     const options = { ...defaultOptions, min: -50, max: 50 };
     const model = new Model(options);
 
-    model.update({ value: null }, { percent: 50 });
+    model.update({ type: 'value', value: null }, { percent: 50 });
     expect(model.get('value')).toEqual(0);
 
-    model.update({ value: null }, { percent: 0 });
+    model.update({ type: 'value', value: null }, { percent: 0 });
     expect(model.get('value')).toEqual(-50);
 
-    model.update({ value: null }, { percent: 100 });
+    model.update({ type: 'value', value: null }, { percent: 100 });
     expect(model.get('value')).toEqual(50);
   });
 
@@ -209,10 +195,10 @@ describe('Model', () => {
 
     expect(model.getState()).toEqual(options);
 
-    model.update({ value: -100 });
+    model.update({ type: 'value', value: -100 });
     expect(model.getState().value).toEqual(min);
 
-    model.update({ value: 100 });
+    model.update({ type: 'value', value: 100 });
     expect(model.getState().value).toEqual(max);
   });
 
@@ -240,7 +226,7 @@ describe('Model', () => {
       callbackAffectedNumber += <number>state.value;
     };
     const model: Model = new Model({ ...defaultOptions, onChange: callback });
-    model.update({ value });
+    model.update({ type: 'value', value });
 
     expect(callbackAffectedNumber).toEqual(value);
   });
@@ -248,23 +234,23 @@ describe('Model', () => {
   it('правильно обновить `gridDensity`', () => {
     const model: Model = new Model({ ...defaultOptions, showGrid: true });
 
-    model.update({ gridDensity: 20 });
+    model.update({ type: 'gridDensity', value: 20 });
     expect(model.getState().gridDensity).toEqual(20);
 
-    model.update({ gridDensity: -10 });
+    model.update({ type: 'gridDensity', value: -10 });
     expect(model.getState().gridDensity).toEqual(GRID_DENSITY_MIN);
 
-    model.update({ gridDensity: 200 });
+    model.update({ type: 'gridDensity', value: 200 });
     expect(model.getState().gridDensity).toEqual(GRID_DENSITY_MAX);
   });
 
   it('правильно обновить `step`', () => {
     const model: Model = new Model(defaultOptions);
 
-    model.update({ step: 20 });
+    model.update({ type: 'step', value: 20 });
     expect(model.getState().step).toEqual(20);
 
-    model.update({ step: 0 });
+    model.update({ type: 'step', value: 0 });
     expect(model.getState().step).toEqual(DEFAULT_STEP);
   });
 
@@ -274,7 +260,7 @@ describe('Model', () => {
     expect(model.getState().value).toEqual(0);
     expect(model.getState().value2).toEqual(100);
 
-    model.update({ value: 999 });
+    model.update({ type: 'value', value: 999 });
 
     expect(model.getState().value).toEqual(100);
     expect(model.getState().value2).toEqual(100);

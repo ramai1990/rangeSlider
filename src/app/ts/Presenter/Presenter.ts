@@ -27,14 +27,16 @@ class Presenter {
     state: number | State | undefined,
     extra?: SliderViewExtraData | SliderModelExtraData,
   ): void {
-    this.model.update(state as State, extra as SliderViewExtraData);
+    const [type, value] = Object.entries(<State>state)[0];
+
+    this.model.update({ type, value }, <SliderViewExtraData>extra);
   }
 
   private updateView(
     state: number | State | undefined,
     extra?: SliderModelExtraData,
   ): void {
-    this.view.update(state as State, <SliderModelExtraData>extra);
+    this.view.update(<State>state, <SliderModelExtraData>extra);
   }
 }
 

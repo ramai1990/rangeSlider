@@ -7,12 +7,12 @@ class Observer implements Observable {
   callbacks: Record<
     string,
     ((
-      data: State | number | undefined,
+      data: number | State | undefined,
       extra?: SliderViewExtraData | SliderModelExtraData
     ) => void)[]
   > = {};
 
-  public on(events: string, fn: (data: State | number | undefined) => void): void {
+  public on(events: string, fn: (data: number | State | undefined) => void): void {
     events.replace(/\S+/g, (name): string => {
       this.callbacks[name] = [];
       this.callbacks[name].push(fn);

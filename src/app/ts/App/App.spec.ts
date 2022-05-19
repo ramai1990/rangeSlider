@@ -105,7 +105,11 @@ describe('App', () => {
   it('правильно обрабатывает щелчок на 1/4 дорожки c двумя ручками', () => {
     const app: App = new App($('input[type="range"]'), defaultOptions);
 
-    app.update({ isRange: true });
+    app.update({
+      isRange: true,
+      min: DEFAULT_MIN,
+      max: DEFAULT_MAX,
+    });
 
     const $track = $('.js-range-slider .js-range-slider__track');
 
@@ -133,7 +137,7 @@ describe('App', () => {
   it('правильно обрабатывает щелчок на 3/4 дорожки c двумя ручками', () => {
     const app: App = new App($('input[type="range"]'), defaultOptions);
 
-    app.update({ isRange: true });
+    app.update({ isRange: true, min: DEFAULT_MIN, max: DEFAULT_MAX });
 
     const $track = $('.js-range-slider .js-range-slider__track');
 

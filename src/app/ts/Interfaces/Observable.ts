@@ -6,7 +6,7 @@ interface Observable {
   on(
     event: string,
     callback: (
-      data: State | number | undefined,
+      data: number | State | undefined,
       extra?: SliderViewExtraData | SliderModelExtraData
     ) => void
   ): void;

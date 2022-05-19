@@ -71,7 +71,7 @@ class MainView implements SliderView, LayerObservable {
 
   public onChange(
     callback: (
-      state: State | number | undefined,
+      state: number | State | undefined,
       extra?: SliderViewExtraData | SliderModelExtraData
     ) => void,
   ): void {

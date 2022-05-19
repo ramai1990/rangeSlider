@@ -1,7 +1,9 @@
 import Observer from '../Observer/Observer';
-import { DEFAULT_STEP, GRID_DENSITY_MIN, GRID_DENSITY_MAX } from '../const';
+import {
+  DEFAULT_STEP, GRID_DENSITY_MIN, GRID_DENSITY_MAX, DEFAULT_MIN, DEFAULT_MAX,
+} from '../const';
 
-import State from '../Interfaces/State';
+import State, { Events } from '../Interfaces/State';
 import SliderViewExtraData from '../Interfaces/SliderViewExtraData';
 import SliderModel from '../Interfaces/SliderModel';
 import SliderModelExtraData from '../Interfaces/SliderModelExtraData';
@@ -35,34 +37,29 @@ class Model extends Observer implements SliderModel {
   }
 
   public update(
-    event: Pick<
-      State,
-      'value' | 'value2' | 'min' | 'max' | 'step' | 'gridDensity'
-    >,
+    { type, value }: Events,
     viewExtra: SliderViewExtraData = {},
   ): this {
-    const [eventProperty, eventValue] = Object.entries(event)[0];
-
     const thisState = { ...this.state };
     const modelExtra: SliderModelExtraData = { redraw: true };
 
     const { percent } = viewExtra;
-    let newValue = eventValue;
+    let newValue = value;
 
-    switch (eventProperty) {
+    switch (type) {
       case 'value':
       case 'value2':
         modelExtra.redraw = false;
         if (typeof percent !== 'undefined') {
           const { min, max } = thisState;
           newValue = Model.percentToValue(
-            min as number,
-            max as number,
+            min,
+            max,
             percent,
           );
         }
-        thisState[eventProperty] = Model.validateValue(
-          eventProperty,
+        thisState[type] = Model.validateValue(
+          type,
           Number(newValue),
           thisState,
         );
@@ -71,10 +68,10 @@ class Model extends Observer implements SliderModel {
       case 'max':
       case 'step':
       case 'gridDensity':
-        thisState[eventProperty] = Number(newValue);
+        thisState[type] = Number(newValue);
         break;
       default:
-        thisState[eventProperty] = newValue;
+        thisState[type] = newValue;
     }
 
     this.state = Model.validateState(thisState);
@@ -101,7 +98,7 @@ class Model extends Observer implements SliderModel {
 
   public onChange(
     callback: (
-      state: State | number | undefined,
+      state: number | State | undefined,
       extra?: SliderModelExtraData
     ) => void,
   ): void {
@@ -164,7 +161,7 @@ class Model extends Observer implements SliderModel {
     } = state;
 
     const autoGridDensity = Math.round(
-      (<number>max - <number>min) / <number>step,
+      (max - min) / <number>step,
     );
 
     const validatedGridDensity = autoGridDensity < <number>gridDensity
@@ -205,6 +202,8 @@ class Model extends Observer implements SliderModel {
     } = state;
     const isValueNull = isRange && value2 === null;
     return {
+      min: DEFAULT_MIN,
+      max: DEFAULT_MAX,
       value: this.validateValue('value', <number>value, state),
       value2: isValueNull
         ? max
@@ -224,22 +223,22 @@ class Model extends Observer implements SliderModel {
     if (valueToValidate === null) return null;
 
     let outValue = Model.snapToStep(
-      <number>min,
-      <number>max,
+      min,
+      max,
       <number>step,
       valueToValidate,
     );
 
     if (isRange) {
       const valueAlignedToStep = Model.snapToStep(
-        <number>min,
-        <number>max,
+        min,
+        max,
         <number>step,
         <number>value,
       );
       const value2AlignedToStep = Model.snapToStep(
-        <number>min,
-        <number>max,
+        min,
+        max,
         <number>step,
         <number>value2,
       );
@@ -249,8 +248,8 @@ class Model extends Observer implements SliderModel {
       if (validateStep2) outValue = valueAlignedToStep;
     }
 
-    outValue = outValue > <number>max ? <number>max : outValue;
-    outValue = outValue < <number>min ? <number>min : outValue;
+    outValue = outValue > max ? max : outValue;
+    outValue = outValue < min ? min : outValue;
 
     return parseFloat(<string>outValue?.toFixed(1));
   }
@@ -284,13 +283,13 @@ class Model extends Observer implements SliderModel {
     return {
       redraw: extra.redraw,
       fromPosition: Model.valueToPercent(
-        <number>min,
-        <number>max,
+        min,
+        max,
         <number>value,
       ),
       toPosition: Model.valueToPercent(
-        <number>min,
-        <number>max,
+        min,
+        max,
         <number>value2,
       ),
     };
