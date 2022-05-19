@@ -1,6 +1,6 @@
 import Observer from '../Observer/Observer';
 import {
-  DEFAULT_STEP, GRID_DENSITY_MIN, GRID_DENSITY_MAX, DEFAULT_MIN, DEFAULT_MAX,
+  DEFAULT_STEP, GRID_DENSITY_MIN, GRID_DENSITY_MAX, DEFAULT_MIN, DEFAULT_MAX, DEFAULT_GRID_DENSITY,
 } from '../const';
 
 import State, { Events } from '../Interfaces/State';
@@ -161,12 +161,12 @@ class Model extends Observer implements SliderModel {
     } = state;
 
     const autoGridDensity = Math.round(
-      (max - min) / <number>step,
+      (max - min) / step,
     );
 
-    const validatedGridDensity = autoGridDensity < <number>gridDensity
+    const validatedGridDensity = autoGridDensity < gridDensity
       ? autoGridDensity
-      : <number>gridDensity;
+      : gridDensity;
 
     if (validatedGridDensity < GRID_DENSITY_MIN) return GRID_DENSITY_MIN;
     if (validatedGridDensity > GRID_DENSITY_MAX) return GRID_DENSITY_MAX;
@@ -178,10 +178,10 @@ class Model extends Observer implements SliderModel {
     const { step } = state;
 
     if (!Number.isInteger(step)) {
-      return parseFloat(<string>step?.toFixed(1));
+      return parseFloat(step.toFixed(1));
     }
 
-    return Number(<number>step) < DEFAULT_STEP ? DEFAULT_STEP : <number>step;
+    return Number(step) < DEFAULT_STEP ? DEFAULT_STEP : step;
   }
 
   private static validateMinMax(state: State): Pick<State, 'max' | 'min'> {
@@ -204,6 +204,8 @@ class Model extends Observer implements SliderModel {
     return {
       min: DEFAULT_MIN,
       max: DEFAULT_MAX,
+      step: DEFAULT_STEP,
+      gridDensity: DEFAULT_GRID_DENSITY,
       value: this.validateValue('value', <number>value, state),
       value2: isValueNull
         ? max
@@ -225,7 +227,7 @@ class Model extends Observer implements SliderModel {
     let outValue = Model.snapToStep(
       min,
       max,
-      <number>step,
+      step,
       valueToValidate,
     );
 
@@ -233,13 +235,13 @@ class Model extends Observer implements SliderModel {
       const valueAlignedToStep = Model.snapToStep(
         min,
         max,
-        <number>step,
+        step,
         <number>value,
       );
       const value2AlignedToStep = Model.snapToStep(
         min,
         max,
-        <number>step,
+        step,
         <number>value2,
       );
       const validateStep = prop === 'value' && outValue > value2AlignedToStep;

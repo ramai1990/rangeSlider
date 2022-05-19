@@ -211,7 +211,7 @@ describe('Model', () => {
   it('вызов обратного вызова " onCreate` при инициализации', () => {
     let callbackAffectedNumber = 0;
     const callback = (state: State) => {
-      callbackAffectedNumber += <number>state.max;
+      callbackAffectedNumber += state.max;
     };
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const model: Model = new Model({ ...defaultOptions, onCreate: callback });

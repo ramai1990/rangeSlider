@@ -11,6 +11,7 @@ import {
   DEFAULT_RANGE,
   DEFAULT_VERTICAL,
   DEFAULT_SHOW_BUBBLE,
+  DEFAULT_GRID_DENSITY,
 } from '../../const';
 
 const defaultOptions: State = {
@@ -22,6 +23,7 @@ const defaultOptions: State = {
   isRange: DEFAULT_RANGE,
   isVertical: DEFAULT_VERTICAL,
   showBubble: DEFAULT_SHOW_BUBBLE,
+  gridDensity: DEFAULT_GRID_DENSITY,
 };
 
 describe('View', () => {

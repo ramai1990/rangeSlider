@@ -85,10 +85,10 @@ describe('App', () => {
 
     const $track = $('.js-range-slider .js-range-slider__track');
 
-    const halfTrackClickX = ($track.outerWidth() as number) / 2
-      + ($track.offset() as JQueryCoordinates).left;
-    const halfTrackClickY = ($track.outerHeight() as number) / 2
-      + ($track.offset() as JQueryCoordinates).top;
+    const halfTrackClickX = (<number>$track.outerWidth()) / 2
+      + (<JQueryCoordinates>$track.offset()).left;
+    const halfTrackClickY = (<number>$track.outerHeight()) / 2
+      + (<JQueryCoordinates>$track.offset()).top;
 
     const event = $.Event('mousedown');
 
@@ -109,14 +109,17 @@ describe('App', () => {
       isRange: true,
       min: DEFAULT_MIN,
       max: DEFAULT_MAX,
+      value: DEFAULT_VALUE,
+      step: DEFAULT_STEP,
+      gridDensity: DEFAULT_GRID_DENSITY,
     });
 
     const $track = $('.js-range-slider .js-range-slider__track');
 
-    const quarterTrackClickX = ($track.outerWidth() as number) / 4
-      + ($track.offset() as JQueryCoordinates).left;
-    const halfTrackClickY = ($track.outerHeight() as number) / 2
-      + ($track.offset() as JQueryCoordinates).top;
+    const quarterTrackClickX = (<number>$track.outerWidth()) / 4
+      + (<JQueryCoordinates>$track.offset()).left;
+    const halfTrackClickY = (<number>$track.outerHeight()) / 2
+      + (<JQueryCoordinates>$track.offset()).top;
 
     const event = $.Event('mousedown');
 
@@ -137,14 +140,21 @@ describe('App', () => {
   it('правильно обрабатывает щелчок на 3/4 дорожки c двумя ручками', () => {
     const app: App = new App($('input[type="range"]'), defaultOptions);
 
-    app.update({ isRange: true, min: DEFAULT_MIN, max: DEFAULT_MAX });
+    app.update({
+      isRange: true,
+      min: DEFAULT_MIN,
+      max: DEFAULT_MAX,
+      value: DEFAULT_VALUE,
+      step: DEFAULT_STEP,
+      gridDensity: DEFAULT_GRID_DENSITY,
+    });
 
     const $track = $('.js-range-slider .js-range-slider__track');
 
-    const threeQuartersTrackClickX = (($track.outerWidth() as number) / 4) * 3
-      + ($track.offset() as JQueryCoordinates).left;
-    const halfTrackClickY = ($track.outerHeight() as number) / 2
-      + ($track.offset() as JQueryCoordinates).top;
+    const threeQuartersTrackClickX = ((<number>$track.outerWidth()) / 4) * 3
+      + (<JQueryCoordinates>$track.offset()).left;
+    const halfTrackClickY = (<number>$track.outerHeight()) / 2
+      + (<JQueryCoordinates>$track.offset()).top;
 
     const event = $.Event('mousedown');
 
@@ -170,10 +180,10 @@ describe('App', () => {
 
     const $track = $('.js-range-slider .js-range-slider__track');
 
-    const halfTrackClickX = ($track.outerWidth() as number) / 2
-      + ($track.offset() as JQueryCoordinates).left;
-    const halfTrackClickY = ($track.outerHeight() as number) / 2
-      + ($track.offset() as JQueryCoordinates).top;
+    const halfTrackClickX = (<number>$track.outerWidth()) / 2
+      + (<JQueryCoordinates>$track.offset()).left;
+    const halfTrackClickY = (<number>$track.outerHeight()) / 2
+      + (<JQueryCoordinates>$track.offset()).top;
 
     const event = $.Event('mousedown');
 
@@ -196,8 +206,8 @@ describe('App', () => {
       $(handleFrom).hasClass('js-range-slider__handle_active'),
     ).toBeTruthy();
 
-    event.pageX = (($track.outerWidth() as number) / 4) * 3
-      + ($track.offset() as JQueryCoordinates).left;
+    event.pageX = ((<number>$track.outerWidth()) / 4) * 3
+      + (<JQueryCoordinates>$track.offset()).left;
     event.pageY = halfTrackClickY;
 
     $track.trigger(event);

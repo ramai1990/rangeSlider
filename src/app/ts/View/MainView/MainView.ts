@@ -121,8 +121,8 @@ class MainView implements SliderView, LayerObservable {
   }
 
   private announceJump(e: MouseEvent | JQuery.Event): void {
-    this.setHandleCenterOffset(e as MouseEvent);
-    const cursorPosition = this.getCursorPosition(e as MouseEvent);
+    this.setHandleCenterOffset(<MouseEvent>e);
+    const cursorPosition = this.getCursorPosition(<MouseEvent>e);
 
     let statePropName = 'value';
 
@@ -152,7 +152,7 @@ class MainView implements SliderView, LayerObservable {
 
     const extra: SliderViewExtraData = { percent: cursorPosition };
 
-    this.announcer.trigger('change.view', state as State, extra);
+    this.announcer.trigger('change.view', <State>state, extra);
   }
 
   private announceDrag(
@@ -170,10 +170,10 @@ class MainView implements SliderView, LayerObservable {
         [statePropName]: null,
       };
       const extra: SliderViewExtraData = {
-        percent: this.getCursorPosition(e as MouseEvent),
+        percent: this.getCursorPosition(<MouseEvent>e),
       };
 
-      this.announcer.trigger('change.view', state as State, extra);
+      this.announcer.trigger('change.view', <State>state, extra);
     }
   }
 
@@ -186,7 +186,7 @@ class MainView implements SliderView, LayerObservable {
       )
       : 'value';
     const state: Partial<State> = { [statePropName]: value };
-    this.announcer.trigger('change.view', state as State);
+    this.announcer.trigger('change.view', <State>state);
   }
 
   private dragEnd(e: JQuery.Event | MouseEvent): void {
@@ -202,11 +202,11 @@ class MainView implements SliderView, LayerObservable {
 
     const cursorPositionPx = this.isVertical() ? e.pageY : e.pageX;
     const trackOffsetPx = this.isVertical()
-      ? ($track.offset() as JQueryCoordinates).top
-      : ($track.offset() as JQueryCoordinates).left;
+      ? (<JQueryCoordinates>$track.offset()).top
+      : (<JQueryCoordinates>$track.offset()).left;
     const percentUnitPx = this.isVertical()
-      ? ($track.outerHeight() as number) / 100
-      : ($track.outerWidth() as number) / 100;
+      ? (<number>$track.outerHeight()) / 100
+      : (<number>$track.outerWidth()) / 100;
 
     return (
       (<number>cursorPositionPx - trackOffsetPx + this.handleCenterOffset)
@@ -215,14 +215,14 @@ class MainView implements SliderView, LayerObservable {
   }
 
   private setHandleCenterOffset(e: MouseEvent): void {
-    const $handle = $(e.target as EventTarget).closest(
+    const $handle = $(<EventTarget>e.target).closest(
       '.js-range-slider__handle',
     );
     if ($handle.length === 1) {
       const cursorPositionPx = this.isVertical() ? e.pageY : e.pageX;
       const handleOffsetPx = this.isVertical()
-        ? ($handle.offset() as JQueryCoordinates).top
-        : ($handle.offset() as JQueryCoordinates).left;
+        ? (<JQueryCoordinates>$handle.offset()).top
+        : (<JQueryCoordinates>$handle.offset()).left;
       const handleDimensionPx = this.isVertical()
         ? $handle.outerHeight()
         : $handle.outerWidth();

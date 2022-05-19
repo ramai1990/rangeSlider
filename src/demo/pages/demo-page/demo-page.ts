@@ -39,7 +39,7 @@ class DemoPage {
       const $textInputs = $form.find('.js-slider-config__input_type_text');
       $textInputs.each((_, configInput) => {
         const name: string = this.toCamelCase($(configInput).attr('name'));
-        $(configInput).val(state[name] as keyof State);
+        $(configInput).val(<keyof State>state[name]);
       });
     };
 

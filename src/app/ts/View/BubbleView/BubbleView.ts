@@ -72,7 +72,7 @@ class BubbleView {
       `range-slider__bubble_type_${this.type}`,
       `js-range-slider__bubble_type_${this.type}`,
     ];
-    this.$element = $(`<span class='${bubbleClasses.join(' ')}'>${parseFloat(<string>bubbleValue?.toFixed(1))}</span>`);
+    this.$element = $(`<span class='${bubbleClasses.join(' ')}'>${parseFloat(bubbleValue.toFixed(1))}</span>`);
   }
 }
 

@@ -82,7 +82,7 @@ class HandleView {
   private updateDataset(state: State): void {
     const { value, value2 } = state;
 
-    this.$element.attr('data-value', this.type === 'from' ? <number>value : <number>value2);
+    this.$element.attr('data-value', this.type === 'from' ? value : <number>value2);
   }
 
   private isVertical(): boolean {

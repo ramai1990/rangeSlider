@@ -4,7 +4,7 @@ import Observable from '../../Interfaces/Observable';
 
 interface Tick {
   position: string;
-  value: number | undefined;
+  value: number;
 }
 
 class GridView {
@@ -40,7 +40,7 @@ class GridView {
     this.$element = grid.append(ticks.map(({ position, value }) => $(`<div class="range-slider__grid-point js-range-slider__grid-point" style=${position}>
           <span class="range-slider__grid-tick js-range-slider__grid-tick"></span>
           <span class="range-slider__grid-label js-range-slider__grid-label">
-            ${<number>value % 4 && <number > gridDensity > 20 ? '' : parseFloat(<string>value?.toFixed(1))}
+            ${value % 4 && <number > gridDensity > 20 ? '' : parseFloat(value.toFixed(1))}
           </span>
         `)));
   }
@@ -62,16 +62,16 @@ class GridView {
     } = state;
     const ticks = [];
     const delta = Math.round(
-      (<number>max - <number>min) / (<number>gridDensity * <number>step),
+      (max - min) / (gridDensity * step),
     );
     const cssProp = this.isVertical() ? 'top' : 'left';
 
     for (
       let currentValue = min;
-      <number>currentValue < <number>max;
-      (<number>currentValue) += delta * <number>step
+      currentValue < max;
+      currentValue += delta * step
     ) {
-      const position = GridView.valueToPercent(<number>min, <number>max, <number>currentValue);
+      const position = GridView.valueToPercent(min, max, currentValue);
       ticks.push({
         position: `${cssProp}:${position}%`,
         value: currentValue,
