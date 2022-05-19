@@ -17,7 +17,7 @@ import '../styles/jquery.range.scss';
 
 declare global {
   interface JQuery {
-    range(options?: State): JQuery;
+    range(options?: Omit<State, 'min'|'max'>): JQuery;
   }
 }
 
