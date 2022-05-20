@@ -1,5 +1,5 @@
 import Model from './Model';
-import State, { Events } from '../Interfaces/State';
+import State, { ModelEvents } from '../Interfaces/State';
 
 import {
   DEFAULT_MIN,
@@ -55,7 +55,7 @@ describe('Model', () => {
     const model = new Model(defaultOptions);
     const type = 'value';
     const value = Math.floor(Math.random() * 100);
-    const state: Events = { type, payload: value };
+    const state: ModelEvents = { type, payload: value };
 
     model.update(state);
 

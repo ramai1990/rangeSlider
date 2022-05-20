@@ -9,6 +9,9 @@ import SliderModelExtraData from '../../Interfaces/SliderModelExtraData';
 import HandleView from '../HandleView/HandleView';
 import BarView from '../BarView/BarView';
 import GridView from '../GridView/GridView';
+import {
+  DEFAULT_GRID_DENSITY, DEFAULT_MAX, DEFAULT_MIN, DEFAULT_STEP, DEFAULT_VALUE,
+} from '../../const';
 
 class MainView implements SliderView, LayerObservable {
   announcer: Observable;
@@ -47,7 +50,13 @@ class MainView implements SliderView, LayerObservable {
     this.init(state);
   }
 
-  public update(state: State, extra: SliderModelExtraData): this {
+  public update(state: State|number, extra: SliderModelExtraData|undefined): this {
+    if (extra === undefined) {
+      return this;
+    }
+    if (typeof state === 'number') {
+      return this;
+    }
     const { redraw, fromPosition, toPosition } = extra;
 
     if (redraw === true) {
@@ -71,7 +80,7 @@ class MainView implements SliderView, LayerObservable {
 
   public onChange(
     callback: (
-      state: number | State,
+      state: State|number,
       extra?: SliderViewExtraData
     ) => void,
   ): void {
@@ -146,13 +155,19 @@ class MainView implements SliderView, LayerObservable {
       'range-slider__handle_active js-range-slider__handle_active',
     );
 
-    const state: Omit<State, 'value' | 'value2'> | number = {
+    const state: State = {
       [statePropName]: null,
+      min: DEFAULT_MIN,
+      max: DEFAULT_MAX,
+      step: DEFAULT_STEP,
+      value: DEFAULT_VALUE,
+      value2: null,
+      gridDensity: DEFAULT_GRID_DENSITY,
     };
 
     const extra: SliderViewExtraData = { percent: cursorPosition };
 
-    this.announcer.trigger('change.view', <State>state, extra);
+    this.announcer.trigger('change.view', state, extra);
   }
 
   private announceDrag(

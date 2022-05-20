@@ -7,7 +7,7 @@ interface LayerObservable {
   announcer: Observable;
   onChange: (
     callback: (
-      state: State | number | undefined,
+      state: State|number,
       extra?: SliderModelExtraData | SliderViewExtraData
     ) => void
   ) => void;

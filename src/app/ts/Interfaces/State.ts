@@ -41,8 +41,50 @@ interface GridDensity {
   type: 'gridDensity';
   payload: number;
 }
+interface IsRange {
+  type: 'isRange';
+  payload: boolean | undefined;
+}
+interface IsVertical {
+  type: 'isVertical';
+  payload: boolean | undefined;
+}
+interface ShowBubble {
+  type: 'showBubble';
+  payload: boolean | undefined;
+}
+interface ShowGrid {
+  type: 'showGrid';
+  payload: boolean | undefined;
+}
+interface ShowBar {
+  type: 'showBar';
+  payload: boolean | undefined;
+}
+interface OnCreate {
+  type: 'onCreate';
+  payload: (state: this) => void | undefined;
+}
+interface OnChange {
+  type: 'onChange';
+  payload: (state: this) => void | undefined;
+}
 
-type Events = Min | Max | Step | Value | Value2 | GridDensity;
+type ModelEvents = Min | Max | Step | Value | Value2 | GridDensity;
+type ViewEvents =
+  | Min
+  | Max
+  | Step
+  | Value
+  | Value2
+  | GridDensity
+  | IsRange
+  | IsVertical
+  | ShowBubble
+  | ShowGrid
+  | ShowBar
+  | OnCreate
+  | OnChange;
 
-export { Events };
+export { ModelEvents, ViewEvents };
 export default State;

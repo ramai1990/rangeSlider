@@ -6,13 +6,13 @@ interface Observable {
   on(
     event: string,
     callback: (
-      data: number | State,
+      data: State|number,
       extra?: SliderViewExtraData
     ) => void
   ): void;
   trigger(
     event: string,
-    data: State | number,
+    data: State|number,
     extra?: SliderViewExtraData | SliderModelExtraData
   ): void;
 }

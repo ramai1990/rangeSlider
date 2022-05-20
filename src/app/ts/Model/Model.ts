@@ -8,7 +8,7 @@ import {
   DEFAULT_GRID_DENSITY,
 } from '../const';
 
-import State, { Events } from '../Interfaces/State';
+import State, { ModelEvents } from '../Interfaces/State';
 import SliderViewExtraData from '../Interfaces/SliderViewExtraData';
 import SliderModel from '../Interfaces/SliderModel';
 import SliderModelExtraData from '../Interfaces/SliderModelExtraData';
@@ -46,7 +46,7 @@ class Model extends Observer implements SliderModel {
   }
 
   public update(
-    { type, payload }: Events,
+    { type, payload }: ModelEvents,
     viewExtra: SliderViewExtraData = {},
   ): this {
     const thisState = { ...this.state };
@@ -110,7 +110,7 @@ class Model extends Observer implements SliderModel {
   }
 
   public onChange(
-    callback: (state: number | State, extra?: SliderModelExtraData) => void,
+    callback: (state: State|number, extra?: SliderModelExtraData) => void,
   ): void {
     this.on('change.state', callback);
   }

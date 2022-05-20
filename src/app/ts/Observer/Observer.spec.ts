@@ -14,7 +14,7 @@ describe('Observer', () => {
 
     expect(counter).toEqual(0);
 
-    observer.trigger('some.event', 0);
+    observer.trigger('some.event', 1);
 
     expect(counter).toEqual(1);
   });
