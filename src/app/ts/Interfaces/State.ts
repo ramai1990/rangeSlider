@@ -19,15 +19,15 @@ interface State {
 
 interface Min {
   type: 'min';
-  payload: number | null;
+  payload: number;
 }
 interface Max {
   type: 'max';
-  payload: number | null;
+  payload: number;
 }
 interface Step {
   type: 'step';
-  payload: number | null;
+  payload: number;
 }
 interface Value {
   type: 'value';
@@ -39,52 +39,10 @@ interface Value2 {
 }
 interface GridDensity {
   type: 'gridDensity';
-  payload: number | null;
-}
-interface IsRange {
-  type: 'isRange';
-  payload: boolean | undefined;
-}
-interface IsVertical {
-  type: 'isVertical';
-  payload: boolean | undefined;
-}
-interface ShowBubble {
-  type: 'showBubble';
-  payload: boolean | undefined;
-}
-interface ShowGrid {
-  type: 'showGrid';
-  payload: boolean | undefined;
-}
-interface ShowBar {
-  type: 'showBar';
-  payload: boolean | undefined;
-}
-interface OnCreate {
-  type: 'onCreate';
-  payload: (state: this) => void | undefined;
-}
-interface OnChange {
-  type: 'onChange';
-  payload: (state: this) => void | undefined;
+  payload: number;
 }
 
 type ModelEvents = Min | Max | Step | Value | Value2 | GridDensity;
-type ViewEvents =
-  | Min
-  | Max
-  | Step
-  | Value
-  | Value2
-  | GridDensity
-  | IsRange
-  | IsVertical
-  | ShowBubble
-  | ShowGrid
-  | ShowBar
-  | OnCreate
-  | OnChange;
 
-export { ModelEvents, ViewEvents };
+export { ModelEvents };
 export default State;
