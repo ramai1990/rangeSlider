@@ -3,6 +3,19 @@ import Model from '../Model/Model';
 import State, { ModelEvents } from '../Interfaces/State';
 import SliderViewExtraData from '../Interfaces/SliderViewExtraData';
 import SliderModelExtraData from '../Interfaces/SliderModelExtraData';
+import {
+  updateMin,
+  updateMax,
+  updateStep,
+  updateValue,
+  updateValue2,
+  updateGridDensity,
+} from '../actions';
+
+interface PossibleEvent {
+  type: string;
+  payload: number;
+}
 
 class Presenter {
   private view: SliderView;
@@ -13,7 +26,7 @@ class Presenter {
     this.view = view;
     this.model = model;
 
-    this.view.onChange((state, extra) => (typeof state !== 'number' ? this.updateState(state, extra) : state));
+    this.view.onChange((state, extra) => this.updateState(state, extra));
     this.model.onChange((state, extra) => this.updateView(state, extra));
 
     this.model.emitChangeState();
@@ -24,78 +37,60 @@ class Presenter {
   }
 
   private updateState(
-    state: Pick<
-      State,
-      'min' | 'max' | 'step' | 'value' | 'value2' | 'gridDensity'
-    >,
+    state: State | number,
     extra?: SliderViewExtraData,
   ): void {
-    const [type, payload] = Object.entries(state)[0];
+    this.updateModel(state, extra);
+  }
+
+  private updateModel(
+    state: State | number,
+    extra: SliderViewExtraData | undefined,
+  ): void {
+    const [type, payload]: [string, number] = Object.entries(state)[0];
 
     const possibleEvent = {
       type,
       payload,
     };
-
-    const value: ModelEvents = {
-      type: 'value',
-      payload,
-    };
-    const value2: ModelEvents = {
-      type: 'value2',
-      payload,
-    };
-    const min: ModelEvents = {
-      type: 'min',
-      payload,
-    };
-    const max: ModelEvents = {
-      type: 'max',
-      payload,
-    };
-    const step: ModelEvents = {
-      type: 'step',
-      payload,
-    };
-    const gridDensity: ModelEvents = {
-      type: 'gridDensity',
-      payload,
-    };
-
     switch (possibleEvent.type) {
       case 'min': {
-        const event = Object.assign(possibleEvent, min);
-        this.model.update(event, extra);
+        this.updateEvent(possibleEvent, extra, updateMin);
         break;
       }
       case 'max': {
-        const event = Object.assign(possibleEvent, max);
-        this.model.update(event, extra);
+        this.updateEvent(possibleEvent, extra, updateMax);
         break;
       }
       case 'step': {
-        const event = Object.assign(possibleEvent, step);
-        this.model.update(event, extra);
+        this.updateEvent(possibleEvent, extra, updateStep);
         break;
       }
       case 'value': {
-        const event = Object.assign(possibleEvent, value);
-        this.model.update(event, extra);
+        this.updateEvent(possibleEvent, extra, updateValue);
         break;
       }
       case 'value2': {
-        const event = Object.assign(possibleEvent, value2);
-        this.model.update(event, extra);
+        this.updateEvent(possibleEvent, extra, updateValue2);
         break;
       }
       case 'gridDensity': {
-        const event = Object.assign(possibleEvent, gridDensity);
-        this.model.update(event, extra);
+        this.updateEvent(possibleEvent, extra, updateGridDensity);
         break;
       }
       default:
-        this.model.update(value, extra);
+        this.model.update(updateValue(payload), extra);
     }
+  }
+
+  private updateEvent(
+    possibleEvent: PossibleEvent,
+    extra: SliderViewExtraData | undefined,
+    callback: (payload: number) => ModelEvents,
+  ): void {
+    const { payload } = possibleEvent;
+    const event = Object.assign(possibleEvent, callback(payload));
+    this.model.update(event, extra);
   }
 
   private updateView(
