@@ -19,15 +19,15 @@ interface State {
 
 interface Min {
   type: 'min';
-  payload: number;
+  payload: number | null;
 }
 interface Max {
   type: 'max';
-  payload: number;
+  payload: number | null;
 }
 interface Step {
   type: 'step';
-  payload: number;
+  payload: number | null;
 }
 interface Value {
   type: 'value';
@@ -39,7 +39,7 @@ interface Value2 {
 }
 interface GridDensity {
   type: 'gridDensity';
-  payload: number;
+  payload: number | null;
 }
 interface IsRange {
   type: 'isRange';

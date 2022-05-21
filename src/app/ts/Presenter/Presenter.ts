@@ -24,22 +24,78 @@ class Presenter {
   }
 
   private updateState(
-    state:
-      | keyof State
-      | Pick<
-          State,
-          'min' | 'max' | 'step' | 'value' | 'value2' | 'gridDensity'
-        >,
+    state: Pick<
+      State,
+      'min' | 'max' | 'step' | 'value' | 'value2' | 'gridDensity'
+    >,
     extra?: SliderViewExtraData,
   ): void {
     const [type, payload] = Object.entries(state)[0];
 
-    const event: ModelEvents = <ModelEvents>{
+    const possibleEvent = {
       type,
       payload,
     };
 
-    this.model.update(event, extra);
+    const value: ModelEvents = {
+      type: 'value',
+      payload,
+    };
+    const value2: ModelEvents = {
+      type: 'value2',
+      payload,
+    };
+    const min: ModelEvents = {
+      type: 'min',
+      payload,
+    };
+    const max: ModelEvents = {
+      type: 'max',
+      payload,
+    };
+    const step: ModelEvents = {
+      type: 'step',
+      payload,
+    };
+    const gridDensity: ModelEvents = {
+      type: 'gridDensity',
+      payload,
+    };
+
+    switch (possibleEvent.type) {
+      case 'min': {
+        const event = Object.assign(possibleEvent, min);
+        this.model.update(event, extra);
+        break;
+      }
+      case 'max': {
+        const event = Object.assign(possibleEvent, max);
+        this.model.update(event, extra);
+        break;
+      }
+      case 'step': {
+        const event = Object.assign(possibleEvent, step);
+        this.model.update(event, extra);
+        break;
+      }
+      case 'value': {
+        const event = Object.assign(possibleEvent, value);
+        this.model.update(event, extra);
+        break;
+      }
+      case 'value2': {
+        const event = Object.assign(possibleEvent, value2);
+        this.model.update(event, extra);
+        break;
+      }
+      case 'gridDensity': {
+        const event = Object.assign(possibleEvent, gridDensity);
+        this.model.update(event, extra);
+        break;
+      }
+      default:
+        this.model.update(value, extra);
+    }
   }
 
   private updateView(
